@@ -1,13 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FiSun, FiMoon, FiMenu, FiX, FiShoppingCart, FiUser, FiHome, FiSmartphone, FiSearch } from 'react-icons/fi';
+import { 
+  FiSun, 
+  FiMoon, 
+  FiMenu, 
+  FiX, 
+  FiShoppingCart, 
+  FiUser, 
+  FiHome, 
+  FiSmartphone, 
+  FiSearch 
+} from 'react-icons/fi';
 import { RiShoppingBag3Line } from 'react-icons/ri';
 import { useAuth } from '../context/AuthContext';
 import { toast } from 'react-hot-toast';
 import logo from "../assets/img/snapmob-logo.png";
 
 export default function Navbar() {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => {
+    // Check for saved theme preference
+    return localStorage.getItem('darkMode') === 'true';
+  });
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [cartItems] = useState(3);
   const [scrolled, setScrolled] = useState(false);
@@ -15,10 +28,10 @@ export default function Navbar() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
-  // Apply dark mode class to body
+  // Apply dark mode class to body and save preference
   useEffect(() => {
     document.body.classList.toggle('dark', darkMode);
-    return () => document.body.classList.remove('dark');
+    localStorage.setItem('darkMode', darkMode);
   }, [darkMode]);
 
   // Add scroll effect
@@ -35,51 +48,60 @@ export default function Navbar() {
     navigate('/login');
   };
 
-  return (
-    <nav className={`sticky top-0 z-40 transition-all duration-500 ${
-      scrolled ? 'shadow-lg' : 'shadow-md'
-    } ${
-      darkMode ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-100'
-    } border-b`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
-          
-          {/* Logo Section - Left */}
-          <Link to="/" className="flex items-center group">
-            <img 
-              src={logo} 
-              alt="SnapMob Logo" 
-              style={{ height: "50px", width: "auto" }}
-              className="transition-transform duration-300 group-hover:scale-105"
-            />
-            <span className={`ml-3 text-2xl font-bold tracking-tight bg-gradient-to-r ${
-              darkMode ? 'from-orange-400 to-orange-300' : 'from-orange-600 to-orange-500'
-            } bg-clip-text text-transparent hidden sm:inline-block`}>
-              SnapMob
-            </span>
-          </Link>
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+  };
 
-          {/* Desktop Navigation - Center */}
-          <div className="hidden md:flex items-center space-x-1 mx-6">
-            <LuxuryNavLink to="/" darkMode={darkMode} icon={<FiHome className="mr-2" />}>
-              Home
-            </LuxuryNavLink>
-            <LuxuryNavLink to="/products" darkMode={darkMode} icon={<FiSmartphone className="mr-2" />}>
-              Phones
-            </LuxuryNavLink>
-            <LuxuryNavLink to="/search" darkMode={darkMode} icon={<FiSearch className="mr-2" />}>
-              Search
-            </LuxuryNavLink>
+  const closeMobileMenu = () => {
+    setMobileMenuOpen(false);
+  };
+
+  return (
+    <nav className={`sticky top-0 z-50 transition-all duration-300 ${
+      scrolled ? 'shadow-lg' : 'shadow-sm'
+    } ${
+      darkMode ? 'bg-gray-900' : 'bg-white'
+    }`}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
+          
+          {/* Logo Section */}
+          <div className="flex items-center flex-shrink-0">
+            <Link to="/" className="flex items-center group">
+              <img 
+                src={logo} 
+                alt="SnapMob Logo" 
+                className="h-10 transition-transform duration-300 group-hover:scale-105"
+              />
+              <span className={`ml-3 text-xl font-bold tracking-tight bg-gradient-to-r ${
+                darkMode ? 'from-orange-400 to-orange-300' : 'from-orange-600 to-orange-500'
+              } bg-clip-text text-transparent hidden sm:inline-block`}>
+                SnapMob
+              </span>
+            </Link>
           </div>
 
-          {/* Action Buttons - Right */}
-          <div className="flex items-center space-x-4">
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-2 ml-10">
+            <NavLink to="/" darkMode={darkMode} icon={<FiHome className="mr-1.5" />}>
+              Home
+            </NavLink>
+            <NavLink to="/products" darkMode={darkMode} icon={<FiSmartphone className="mr-1.5" />}>
+              Phones
+            </NavLink>
+            <NavLink to="/search" darkMode={darkMode} icon={<FiSearch className="mr-1.5" />}>
+              Search
+            </NavLink>
+          </div>
+
+          {/* Right Side Actions */}
+          <div className="flex items-center space-x-3">
             <button 
-              onClick={() => setDarkMode(!darkMode)}
-              className={`p-2 rounded-full transition-all duration-300 ${
+              onClick={toggleDarkMode}
+              className={`p-2 rounded-full transition-colors ${
                 darkMode 
-                  ? 'bg-gray-800 text-orange-400 hover:bg-gray-700' 
-                  : 'bg-orange-50 text-orange-600 hover:bg-orange-100'
+                  ? 'text-orange-400 hover:bg-gray-800' 
+                  : 'text-orange-600 hover:bg-orange-50'
               }`}
               aria-label={`Switch to ${darkMode ? 'light' : 'dark'} mode`}
             >
@@ -88,10 +110,10 @@ export default function Navbar() {
             
             <Link 
               to="/cart" 
-              className={`relative p-2 rounded-full transition-all duration-300 ${
+              className={`p-2 rounded-full relative transition-colors ${
                 darkMode 
-                  ? 'bg-gray-800 text-gray-300 hover:bg-gray-700' 
-                  : 'bg-orange-50 text-gray-700 hover:bg-orange-100'
+                  ? 'text-gray-300 hover:bg-gray-800' 
+                  : 'text-gray-700 hover:bg-orange-50'
               }`}
             >
               <RiShoppingBag3Line className="h-5 w-5" />
@@ -105,16 +127,16 @@ export default function Navbar() {
             </Link>
             
             {user ? (
-              <div className="flex items-center space-x-4">
+              <div className="hidden md:flex items-center space-x-3">
                 <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                   Hi, {user.name.split(' ')[0]}
                 </span>
                 <button
                   onClick={handleLogout}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                  className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
                     darkMode 
                       ? 'bg-gray-700 hover:bg-gray-600 text-white' 
-                      : 'bg-gray-200 hover:bg-gray-300 text-gray-700'
+                      : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
                   }`}
                 >
                   Logout
@@ -123,13 +145,13 @@ export default function Navbar() {
             ) : (
               <Link 
                 to="/login" 
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 flex items-center space-x-2 ${
+                className={`hidden md:flex items-center px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
                   darkMode 
-                    ? 'bg-orange-600 hover:bg-orange-700 text-white shadow-orange-900/50' 
-                    : 'bg-orange-500 hover:bg-orange-600 text-white shadow-orange-500/50'
-                } shadow-lg hover:shadow-xl`}
+                    ? 'bg-orange-600 hover:bg-orange-700 text-white' 
+                    : 'bg-orange-500 hover:bg-orange-600 text-white'
+                }`}
               >
-                <FiUser className="h-4 w-4" />
+                <FiUser className="mr-1.5 h-4 w-4" />
                 <span>Login</span>
               </Link>
             )}
@@ -137,86 +159,93 @@ export default function Navbar() {
             {/* Mobile Menu Button */}
             <button 
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 rounded-full hover:bg-orange-50 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 transition-all duration-300"
+              className={`md:hidden p-2 rounded-full transition-colors ${
+                darkMode 
+                  ? 'text-gray-300 hover:bg-gray-800' 
+                  : 'text-gray-700 hover:bg-gray-100'
+              }`}
               aria-label="Toggle menu"
             >
               {mobileMenuOpen ? <FiX className="h-6 w-6" /> : <FiMenu className="h-6 w-6" />}
             </button>
           </div>
         </div>
+      </div>
 
-        {/* Mobile Menu */}
-        <div className={`md:hidden overflow-hidden transition-all duration-500 ease-in-out ${
-          mobileMenuOpen ? 'max-h-96 py-4' : 'max-h-0 py-0'
-        } ${darkMode ? 'bg-gray-900' : 'bg-white'} shadow-inner`}>
-          <MobileLuxuryLink to="/" darkMode={darkMode} icon={<FiHome className="mr-3" />} onClick={() => setMobileMenuOpen(false)}>
-            Home
-          </MobileLuxuryLink>
-          <MobileLuxuryLink to="/products" darkMode={darkMode} icon={<FiSmartphone className="mr-3" />} onClick={() => setMobileMenuOpen(false)}>
-            Phones
-          </MobileLuxuryLink>
-          <MobileLuxuryLink to="/search" darkMode={darkMode} icon={<FiSearch className="mr-3" />} onClick={() => setMobileMenuOpen(false)}>
-            Search
-          </MobileLuxuryLink>
-          <MobileLuxuryLink to="/cart" darkMode={darkMode} icon={<RiShoppingBag3Line className="mr-3" />} badge={cartItems} onClick={() => setMobileMenuOpen(false)}>
-            Cart
-          </MobileLuxuryLink>
-          {user ? (
-            <MobileLuxuryLink 
-              to="#" 
-              darkMode={darkMode} 
-              icon={<FiUser className="mr-3" />} 
-              onClick={handleLogout}
-            >
-              Logout
-            </MobileLuxuryLink>
-          ) : (
-            <MobileLuxuryLink 
-              to="/login" 
-              darkMode={darkMode} 
-              icon={<FiUser className="mr-3" />} 
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Login
-            </MobileLuxuryLink>
-          )}
-        </div>
+      {/* Mobile Menu */}
+      <div className={`md:hidden transition-all duration-300 ease-in-out ${
+        mobileMenuOpen ? 'max-h-screen py-2' : 'max-h-0 overflow-hidden'
+      } ${darkMode ? 'bg-gray-900' : 'bg-white'}`}>
+        <MobileNavLink to="/" darkMode={darkMode} icon={<FiHome />} onClick={closeMobileMenu}>
+          Home
+        </MobileNavLink>
+        <MobileNavLink to="/products" darkMode={darkMode} icon={<FiSmartphone />} onClick={closeMobileMenu}>
+          Phones
+        </MobileNavLink>
+        <MobileNavLink to="/search" darkMode={darkMode} icon={<FiSearch />} onClick={closeMobileMenu}>
+          Search
+        </MobileNavLink>
+        <MobileNavLink to="/cart" darkMode={darkMode} icon={<RiShoppingBag3Line />} badge={cartItems} onClick={closeMobileMenu}>
+          Cart
+        </MobileNavLink>
+        {user ? (
+          <MobileNavLink 
+            to="#" 
+            darkMode={darkMode} 
+            icon={<FiUser />} 
+            onClick={() => {
+              closeMobileMenu();
+              handleLogout();
+            }}
+          >
+            Logout
+          </MobileNavLink>
+        ) : (
+          <MobileNavLink 
+            to="/login" 
+            darkMode={darkMode} 
+            icon={<FiUser />} 
+            onClick={closeMobileMenu}
+          >
+            Login
+          </MobileNavLink>
+        )}
       </div>
     </nav>
   );
 }
 
-// Luxury NavLink Component
-function LuxuryNavLink({ to, children, darkMode, icon }) {
+// Desktop NavLink Component
+function NavLink({ to, children, darkMode, icon }) {
   return (
     <Link 
       to={to} 
-      className={`px-5 py-2.5 mx-1 rounded-full text-sm font-medium flex items-center transition-all duration-300 ${
+      className={`px-4 py-2 rounded-full text-sm font-medium flex items-center transition-colors ${
         darkMode 
           ? 'text-gray-300 hover:bg-gray-800 hover:text-orange-400' 
           : 'text-gray-700 hover:bg-orange-50 hover:text-orange-600'
       }`}
     >
       {icon}
-      <span>{children}</span>
+      <span className="ml-1.5">{children}</span>
     </Link>
   );
 }
 
-// Mobile Luxury Link Component
-function MobileLuxuryLink({ to, children, darkMode, onClick, icon, badge }) {
+// Mobile NavLink Component
+function MobileNavLink({ to, children, darkMode, onClick, icon, badge }) {
   return (
     <Link 
       to={to} 
       onClick={onClick}
-      className={`flex items-center justify-between px-6 py-3 mx-2 rounded-lg text-base font-medium transition-all duration-300 ${
+      className={`flex items-center justify-between px-5 py-3 mx-2 rounded-lg text-base font-medium transition-colors ${
         darkMode 
           ? 'text-gray-300 hover:bg-gray-800 hover:text-orange-400' 
           : 'text-gray-700 hover:bg-orange-50 hover:text-orange-600'
       }`}
     >
       <div className="flex items-center">
-        {icon}
+        <span className="mr-3">{icon}</span>
         <span>{children}</span>
       </div>
       {badge && (

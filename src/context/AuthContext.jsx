@@ -26,7 +26,7 @@ export function AuthProvider({ children }) {
         toast.success('Login successful!');
         return true;
       } else {
-        toast.error('Invalid credentials');
+        toast.error('Invalid user');
         return false;
       }
     } catch (error) {

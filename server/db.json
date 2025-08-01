@@ -31,6 +31,17 @@
       "cart": [],
       "wishlist": [],
       "createdAt": "2025-08-01T06:16:41.553Z"
+    },
+    {
+      "id": "be8f",
+      "name": "anshif",
+      "email": "anshif@gmail.com",
+      "password": "anshif@123",
+      "confirmPassword": "anshif@123",
+      "role": "user",
+      "cart": [],
+      "wishlist": [],
+      "createdAt": "2025-08-01T09:49:01.360Z"
     }
   ],
   "products": [
