@@ -2,13 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FiSun, FiMoon, FiMenu, FiX, FiShoppingCart, FiUser, FiHome, FiSmartphone, FiSearch } from 'react-icons/fi';
 import { RiShoppingBag3Line } from 'react-icons/ri';
-import logo from "../assets/img/snapmob-logo.png"
+import { useAuth } from '../context/AuthContext';
+import logo from "../assets/img/snapmob-logo.png";
+import { toast } from 'react-hot-toast';
 
 export default function Navbar() {
   const [darkMode, setDarkMode] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [cartItems] = useState(3); // Example cart count
   const [scrolled, setScrolled] = useState(false);
+  const { user, logout } = useAuth();
+  
 
   // Apply dark mode class to body
   useEffect(() => {
@@ -25,6 +29,11 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleLogout = () => {
+    logout();
+    setMobileMenuOpen(false);
+  };
+
   return (
     <nav className={`sticky top-0 z-50 transition-all duration-500 ${
       scrolled ? 'shadow-lg' : 'shadow-md'
@@ -39,7 +48,7 @@ export default function Navbar() {
             <img 
               src={logo} 
               alt="SnapMob Logo" 
-              style={{ height: "32px", width: "auto" }}
+              style={{ height: "50px", width: "auto" }}
               className="transition-transform duration-300 group-hover:scale-105"
             />
             <span className={`ml-3 text-2xl font-bold tracking-tight bg-gradient-to-r ${
@@ -94,17 +103,35 @@ export default function Navbar() {
               )}
             </Link>
             
-            <Link 
-              to="/login" 
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 flex items-center space-x-2 ${
-                darkMode 
-                  ? 'bg-orange-600 hover:bg-orange-700 text-white shadow-orange-900/50' 
-                  : 'bg-orange-500 hover:bg-orange-600 text-white shadow-orange-500/50'
-              } shadow-lg hover:shadow-xl`}
-            >
-              <FiUser className="h-4 w-4" />
-              <span>Login</span>
-            </Link>
+            {user ? (
+              <div className="flex items-center space-x-4">
+                <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                  Hi, {user.name.split(' ')[0]}
+                </span>
+                <button
+                  onClick={handleLogout}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                    darkMode 
+                      ? 'bg-gray-700 hover:bg-gray-600 text-white' 
+                      : 'bg-gray-200 hover:bg-gray-300 text-gray-700'
+                  }`}
+                >
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <Link 
+                to="/login" 
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 flex items-center space-x-2 ${
+                  darkMode 
+                    ? 'bg-orange-600 hover:bg-orange-700 text-white shadow-orange-900/50' 
+                    : 'bg-orange-500 hover:bg-orange-600 text-white shadow-orange-500/50'
+                } shadow-lg hover:shadow-xl`}
+              >
+                <FiUser className="h-4 w-4" />
+                <span>Login</span>
+              </Link>
+            )}
 
             {/* Mobile Menu Button */}
             <button 
@@ -133,6 +160,25 @@ export default function Navbar() {
           <MobileLuxuryLink to="/cart" darkMode={darkMode} icon={<RiShoppingBag3Line className="mr-3" />} badge={cartItems} onClick={() => setMobileMenuOpen(false)}>
             Cart
           </MobileLuxuryLink>
+          {user ? (
+            <MobileLuxuryLink 
+              to="#" 
+              darkMode={darkMode} 
+              icon={<FiUser className="mr-3" />} 
+              onClick={handleLogout}
+            >
+              Logout
+            </MobileLuxuryLink>
+          ) : (
+            <MobileLuxuryLink 
+              to="/login" 
+              darkMode={darkMode} 
+              icon={<FiUser className="mr-3" />} 
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Login
+            </MobileLuxuryLink>
+          )}
         </div>
       </div>
     </nav>

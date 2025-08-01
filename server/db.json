@@ -1,0 +1,56 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "Admin User",
+      "email": "admin@snapmob.com",
+      "password": "admin123",
+      "role": "admin",
+      "cart": [],
+      "wishlist": [],
+      "createdAt": "2023-07-20T10:00:00Z"
+    },
+    {
+      "id": "7f9c",
+      "name": "fasil ahammed",
+      "email": "ahamedahamed1883@gmail.com",
+      "password": "fasilkm@123",
+      "confirmPassword": "fasilkm@123",
+      "role": "user",
+      "cart": [],
+      "wishlist": [],
+      "createdAt": "2025-08-01T05:30:33.132Z"
+    },
+    {
+      "id": "56cc",
+      "name": "aflah km",
+      "email": "aflahkm1883@gmail.com",
+      "password": "aflahkm@123",
+      "confirmPassword": "aflahkm@123",
+      "role": "user",
+      "cart": [],
+      "wishlist": [],
+      "createdAt": "2025-08-01T06:16:41.553Z"
+    }
+  ],
+  "products": [
+    {
+      "id": "1",
+      "name": "iPhone 15 Pro",
+      "price": 999,
+      "category": "smartphones",
+      "image": "/images/iphone15.jpg",
+      "stock": 50,
+      "description": "The latest iPhone with advanced camera system"
+    },
+    {
+      "id": "2",
+      "name": "Samsung Galaxy S23",
+      "price": 799,
+      "category": "smartphones",
+      "image": "/images/s23.jpg",
+      "stock": 30,
+      "description": "Powerful Android smartphone with great camera"
+    }
+  ]
+}
