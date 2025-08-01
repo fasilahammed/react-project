@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar";
 import Products from "./pages/Products";
 import Register from './pages/auth/Register';
 import Login from './pages/auth/login';
+import { Toaster } from 'react-hot-toast';
 
 // Create a layout component that handles navbar visibility
 function Layout() {
@@ -16,7 +17,28 @@ function Layout() {
   const shouldShowNavbar = !hideNavbarPaths.includes(location.pathname);
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
+      <Toaster 
+        position="top-center"
+        toastOptions={{
+          style: {
+            background: '#fff',
+            color: '#333',
+          },
+          success: {
+            style: {
+              background: '#4BB543',
+              color: '#fff',
+            },
+          },
+          error: {
+            style: {
+              background: '#FF3333',
+              color: '#fff',
+            },
+          },
+        }}
+      />
       {shouldShowNavbar && <Navbar />}
       <Routes>
         {/* Public routes */}

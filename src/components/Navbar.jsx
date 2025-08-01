@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FiSun, FiMoon, FiMenu, FiX, FiShoppingCart, FiUser, FiHome, FiSmartphone, FiSearch } from 'react-icons/fi';
 import { RiShoppingBag3Line } from 'react-icons/ri';
 import { useAuth } from '../context/AuthContext';
-import logo from "../assets/img/snapmob-logo.png";
 import { toast } from 'react-hot-toast';
+import logo from "../assets/img/snapmob-logo.png";
 
 export default function Navbar() {
   const [darkMode, setDarkMode] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [cartItems] = useState(3); // Example cart count
+  const [cartItems] = useState(3);
   const [scrolled, setScrolled] = useState(false);
-  const { user, logout } = useAuth();
   
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
   // Apply dark mode class to body
   useEffect(() => {
@@ -22,20 +23,20 @@ export default function Navbar() {
 
   // Add scroll effect
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 10);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const handleLogout = () => {
     logout();
+    toast.success('Logged out successfully!');
     setMobileMenuOpen(false);
+    navigate('/login');
   };
 
   return (
-    <nav className={`sticky top-0 z-50 transition-all duration-500 ${
+    <nav className={`sticky top-0 z-40 transition-all duration-500 ${
       scrolled ? 'shadow-lg' : 'shadow-md'
     } ${
       darkMode ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-100'
