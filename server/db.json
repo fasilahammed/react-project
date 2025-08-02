@@ -42,26 +42,158 @@
       "cart": [],
       "wishlist": [],
       "createdAt": "2025-08-01T09:49:01.360Z"
+    },
+    {
+      "id": "f4df",
+      "name": "hanana v",
+      "email": "hanana1883@gmail.com",
+      "password": "hanana@123",
+      "confirmPassword": "hanana@123",
+      "role": "user",
+      "cart": [],
+      "wishlist": [],
+      "createdAt": "2025-08-01T16:18:06.909Z"
     }
   ],
   "products": [
     {
-      "id": "1",
-      "name": "iPhone 15 Pro",
-      "price": 999,
+      "id": "p1",
+      "name": "iPhone 11 64GB",
+      "brand": "Apple",
+      "price": 42900,
       "category": "smartphones",
-      "image": "/images/iphone15.jpg",
-      "stock": 50,
-      "description": "The latest iPhone with advanced camera system"
+      "images": [
+        "https://imgs.search.brave.com/pEXklLaEBfBuDZjg_ktZtvSJ5GZem4X7WizoAalOQaQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2M0LzIy/LzJkL2M0MjIyZGMy/MDBmMGRjNDc5NjM0/OTZlOGE1NmE1OWUz/LmpwZw"
+      ],
+      "stock": 25,
+      "description": "6.1-inch Liquid Retina display, A13 Bionic chip, dual-camera system.",
+      "specifications": {
+        "display": "6.1-inch LCD",
+        "storage": "64GB",
+        "camera": "12MP + 12MP",
+        "battery": "3110mAh"
+      },
+      "rating": null,
+      "reviews": [],
+      "isActive": true
     },
     {
-      "id": "2",
-      "name": "Samsung Galaxy S23",
-      "price": 799,
+      "id": "p2",
+      "name": "Samsung Galaxy S23 Ultra",
+      "brand": "Samsung",
+      "price": 124999,
       "category": "smartphones",
-      "image": "/images/s23.jpg",
-      "stock": 30,
-      "description": "Powerful Android smartphone with great camera"
+      "images": [
+        "https://images.samsung.com/us/smartphones/galaxy-s23-ultra/images/galaxy-s23-ultra-highlights-kv.jpg"
+      ],
+      "stock": 15,
+      "description": "200MP camera, S Pen, Snapdragon 8 Gen 2.",
+      "specifications": {
+        "display": "6.8-inch AMOLED",
+        "storage": "256GB",
+        "camera": "200MP + 12MP + 10MP",
+        "battery": "5000mAh"
+      },
+      "rating": null,
+      "reviews": [],
+      "isActive": true
+    },
+
+   
+    {
+      "id": "p3",
+      "name": "iPhone X 10",
+      "brand": "Apple",
+      "price": 35900,
+      "category": "smartphones",
+      "images": [
+        "https://imgs.search.brave.com/DakOOdht2EGgbFhkNw4qdFTKDwdUUu-HTeUckCcbfjI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzAyLzk0LzE3Lzkw/LzM2MF9GXzI5NDE3/OTAyN183NTlwd242/ZXo3dVYyUXRDcTdE/Q0JyaGtpWE5USlZu/Ry5qcGc"
+      ],
+      "stock": 8,
+      "description": "5.8-inch Super Retina OLED, Face ID, A11 Bionic chip.",
+      "specifications": {
+        "display": "5.8-inch OLED",
+        "storage": "64GB",
+        "camera": "12MP dual",
+        "battery": "2716mAh"
+      },
+      "isActive": true
+    },
+    {
+      "id": "p4",
+      "name": "iPhone 8 Plus",
+      "brand": "Apple",
+      "price": 29900,
+      "category": "smartphones",
+      "images": [
+        "https://imgs.search.brave.com/pJVGG0MJ0asO3xUviKFm6XPoP3rCy0HWFuLs8TBQrCM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zaW1p/bGFycG5nLmNvbS9f/bmV4dC9pbWFnZT91/cmw9aHR0cHM6Ly9p/bWFnZS5zaW1pbGFy/cG5nLmNvbS9maWxl/L3NpbWlsYXJwbmcv/dmVyeS10aHVtYm5h/aWwvMjAyMC8wOS9B/cHBsZS1JUGhvbmUt/OC1QbHVzLW9uLXRy/YW5zcGFyZW50LWJh/Y2tncm91bmQtUE5H/LnBuZyZ3PTM4NDAm/cT03NQ"
+      ],
+      "stock": 5,
+      "description": "5.5-inch Retina HD, Touch ID, single camera with portrait mode.",
+      "specifications": {
+        "display": "5.5-inch LCD",
+        "storage": "64GB",
+        "camera": "12MP",
+        "battery": "2691mAh"
+      },
+      "isActive": true
+    },
+    {
+      "id": "p5",
+      "name": "iPhone 13",
+      "brand": "Apple",
+      "price": 69900,
+      "category": "smartphones",
+      "images": [
+        "https://imgs.search.brave.com/Q2w9Mf-dJIWLVQFUpfPV8Q_7nF5FKOKAFqnHKc5nFWk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9wbmdp/bWcuY29tL3VwbG9h/ZHMvaXBob25lXzEz/L3NtYWxsL2lwaG9u/ZV8xM19QTkcyLnBu/Zw"
+      ],
+      "stock": 18,
+      "description": "6.1-inch Super Retina XDR, A15 Bionic, Cinematic mode.",
+      "specifications": {
+        "display": "6.1-inch OLED",
+        "storage": "128GB",
+        "camera": "12MP dual",
+        "battery": "3240mAh"
+      },
+      "isActive": true
+    },
+    {
+      "id": "p6",
+      "name": "iPhone 15 Pro Max",
+      "brand": "Apple",
+      "price": 159900,
+      "category": "smartphones",
+      "images": [
+        "https://imgs.search.brave.com/GR6ZU4OgPLORo113-SoA2PiEw8arOhe3_--EljWWihc/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/cG5nYWxsLmNvbS93/cC1jb250ZW50L3Vw/bG9hZHMvMTgvQXJ0/aXN0aWMtV2hpdGUt/aVBob25lLUZyYW1l/ZC1CeS1OYXR1cmFs/LUVsZW1lbnQtUE5H/LXRodW1iLnBuZw"
+      ],
+      "stock": 12,
+      "description": "6.7-inch Super Retina XDR, A17 Pro chip, titanium design.",
+      "specifications": {
+        "display": "6.7-inch OLED",
+        "storage": "256GB",
+        "camera": "48MP triple",
+        "battery": "4422mAh"
+      },
+      "isActive": true
+    },
+    {
+      "id": "p7",
+      "name": "iPhone 16 Pro",
+      "brand": "Apple",
+      "price": 174900,
+      "category": "smartphones",
+      "images": [
+        "https://imgs.search.brave.com/nto_bBEYdevoKpCgf-PwU-H9iw5HPNc8_OrZ_4yaT2s/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/cG5nYWxsLmNvbS93/cC1jb250ZW50L3Vw/bG9hZHMvMTgvQmx1/ZS1pUGhvbmUtRGlz/cGxheWluZy1TdHls/aXNoLUxvb2stUE5H/LXRodW1iLnBuZw"
+      ],
+      "stock": 0,
+      "description": "6.9-inch ProMotion OLED, A18 Pro chip, under-display Face ID.",
+      "specifications": {
+        "display": "6.9-inch OLED",
+        "storage": "512GB",
+        "camera": "50MP quad",
+        "battery": "5000mAh"
+      },
+      "isActive": false
     }
   ]
 }
