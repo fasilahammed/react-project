@@ -5,27 +5,29 @@ import {
   FiMoon, 
   FiMenu, 
   FiX, 
-  FiShoppingCart, 
   FiUser, 
   FiHome, 
   FiSmartphone, 
-  FiSearch 
+  FiSearch,
+  FiHeart
 } from 'react-icons/fi';
 import { RiShoppingBag3Line } from 'react-icons/ri';
 import { useAuth } from '../context/AuthContext';
+import { useWishlist } from '../context/WishlistContext';
 import { toast } from 'react-hot-toast';
+import { useCart } from '../context/CartContext';
 import logo from "../assets/img/snapmob-logo.png";
 
 export default function Navbar() {
   const [darkMode, setDarkMode] = useState(() => {
-    // Check for saved theme preference
     return localStorage.getItem('darkMode') === 'true';
   });
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [cartItems] = useState(3);
   const [scrolled, setScrolled] = useState(false);
   
   const { user, logout } = useAuth();
+  const { cartCount } = useCart();
+  const { wishlistCount } = useWishlist();
   const navigate = useNavigate();
 
   // Apply dark mode class to body and save preference
@@ -108,20 +110,40 @@ export default function Navbar() {
               {darkMode ? <FiSun className="h-5 w-5" /> : <FiMoon className="h-5 w-5" />}
             </button>
             
+            {/* Wishlist Icon */}
+            <Link 
+              to="/wishlist" 
+              className={`p-2 rounded-full relative transition-colors ${
+                darkMode 
+                  ? 'text-gray-300 hover:bg-gray-800' 
+                  : 'text-gray-700 hover:bg-gray-100'
+              }`}
+            >
+              <FiHeart className="h-5 w-5" />
+              {wishlistCount > 0 && (
+                <span className={`absolute -top-1 -right-1 text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center ${
+                  darkMode ? 'bg-orange-500 text-white' : 'bg-orange-600 text-white'
+                }`}>
+                  {wishlistCount}
+                </span>
+              )}
+            </Link>
+            
+            {/* Cart Icon */}
             <Link 
               to="/cart" 
               className={`p-2 rounded-full relative transition-colors ${
                 darkMode 
                   ? 'text-gray-300 hover:bg-gray-800' 
-                  : 'text-gray-700 hover:bg-orange-50'
+                  : 'text-gray-700 hover:bg-gray-100'
               }`}
             >
               <RiShoppingBag3Line className="h-5 w-5" />
-              {cartItems > 0 && (
+              {cartCount > 0 && (
                 <span className={`absolute -top-1 -right-1 text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center ${
                   darkMode ? 'bg-orange-500 text-white' : 'bg-orange-600 text-white'
                 }`}>
-                  {cartItems}
+                  {cartCount}
                 </span>
               )}
             </Link>
@@ -185,7 +207,10 @@ export default function Navbar() {
         <MobileNavLink to="/search" darkMode={darkMode} icon={<FiSearch />} onClick={closeMobileMenu}>
           Search
         </MobileNavLink>
-        <MobileNavLink to="/cart" darkMode={darkMode} icon={<RiShoppingBag3Line />} badge={cartItems} onClick={closeMobileMenu}>
+        <MobileNavLink to="/wishlist" darkMode={darkMode} icon={<FiHeart />} badge={wishlistCount} onClick={closeMobileMenu}>
+          Wishlist
+        </MobileNavLink>
+        <MobileNavLink to="/cart" darkMode={darkMode} icon={<RiShoppingBag3Line />} badge={cartCount} onClick={closeMobileMenu}>
           Cart
         </MobileNavLink>
         {user ? (
@@ -248,7 +273,7 @@ function MobileNavLink({ to, children, darkMode, onClick, icon, badge }) {
         <span className="mr-3">{icon}</span>
         <span>{children}</span>
       </div>
-      {badge && (
+      {badge > 0 && (
         <span className={`text-xs px-2 py-1 rounded-full ${
           darkMode ? 'bg-orange-600 text-white' : 'bg-orange-100 text-orange-800'
         }`}>

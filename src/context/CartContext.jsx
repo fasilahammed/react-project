@@ -1,44 +1,80 @@
-import React, { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
 
 const CartContext = createContext();
 
 export function CartProvider({ children }) {
-  const [cartItems, setCartItems] = useState([]);
+  const [cart, setCart] = useState([]);
+  const [cartCount, setCartCount] = useState(0);
+
+  useEffect(() => {
+    const storedCart = localStorage.getItem('snapmob-cart');
+    if (storedCart) {
+      setCart(JSON.parse(storedCart));
+      setCartCount(JSON.parse(storedCart).length);
+    }
+  }, []);
 
   const addToCart = (product) => {
-    setCartItems(prevItems => {
-      const existingItem = prevItems.find(item => item.id === product.id);
-      if (existingItem) {
-        return prevItems.map(item =>
-          item.id === product.id 
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        );
-      }
-      return [...prevItems, { ...product, quantity: 1 }];
-    });
+    const existingItem = cart.find(item => item.id === product.id);
+    
+    let updatedCart;
+    if (existingItem) {
+      updatedCart = cart.map(item =>
+        item.id === product.id 
+          ? { ...item, quantity: item.quantity + 1 } 
+          : item
+      );
+    } else {
+      updatedCart = [...cart, { ...product, quantity: 1 }];
+    }
+    
+    setCart(updatedCart);
+    setCartCount(updatedCart.length);
+    localStorage.setItem('snapmob-cart', JSON.stringify(updatedCart));
   };
 
   const removeFromCart = (productId) => {
-    setCartItems(prevItems => prevItems.filter(item => item.id !== productId));
+    const updatedCart = cart.filter(item => item.id !== productId);
+    setCart(updatedCart);
+    setCartCount(updatedCart.length);
+    localStorage.setItem('snapmob-cart', JSON.stringify(updatedCart));
   };
 
   const updateQuantity = (productId, newQuantity) => {
     if (newQuantity < 1) return;
-    setCartItems(prevItems =>
-      prevItems.map(item =>
-        item.id === productId ? { ...item, quantity: newQuantity } : item
-      )
+    
+    const updatedCart = cart.map(item =>
+      item.id === productId 
+        ? { ...item, quantity: newQuantity } 
+        : item
     );
+    
+    setCart(updatedCart);
+    localStorage.setItem('snapmob-cart', JSON.stringify(updatedCart));
   };
 
-  const cartTotal = cartItems.reduce(
-    (total, item) => total + (item.price * item.quantity), 0
+  const clearCart = () => {
+    setCart([]);
+    setCartCount(0);
+    localStorage.removeItem('snapmob-cart');
+  };
+
+  const totalPrice = cart.reduce(
+    (total, item) => total + (item.price * item.quantity), 
+    0
   );
 
   return (
     <CartContext.Provider 
-      value={{ cartItems, addToCart, removeFromCart, updateQuantity, cartTotal }}
+      value={{ 
+        cart, 
+        cartCount,
+        addToCart, 
+        removeFromCart, 
+        updateQuantity,
+        clearCart,
+        totalPrice
+      }}
     >
       {children}
     </CartContext.Provider>

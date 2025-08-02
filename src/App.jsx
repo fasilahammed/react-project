@@ -1,16 +1,19 @@
+// App.jsx
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { AuthProvider } from './context/AuthContext';
-import PrivateRoute from './components/PrivateRoute';
+import { CartProvider } from './context/CartContext';
+import { WishlistProvider } from './context/WishlistContext';
+import PrivateRoute from './routes/PrivateRoute';
 import Home from "./pages/Home";
 import Cart from "./pages/Cart";
+import Wishlist from './pages/WishList';
 import Navbar from "./components/Navbar";
 import Products from "./pages/Products";
 import Register from './pages/auth/Register';
 import Login from './pages/auth/login';
 import { Toaster } from 'react-hot-toast';
 
-// Create a layout component that handles navbar visibility
 function Layout() {
   const location = useLocation();
   const hideNavbarPaths = ['/login', '/register'];
@@ -50,6 +53,7 @@ function Layout() {
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products />} />
           <Route path="/cart" element={<Cart />} />
+           <Route path="/wishlist" element={<Wishlist />} />
         </Route>
       </Routes>
     </div>
@@ -59,9 +63,13 @@ function Layout() {
 export default function App() {
   return (
     <AuthProvider>
-      <Router>
-        <Layout />
-      </Router>
+      <CartProvider>
+        <WishlistProvider>
+          <Router>
+            <Layout />
+          </Router>
+        </WishlistProvider>
+      </CartProvider>
     </AuthProvider>
   );
 }
