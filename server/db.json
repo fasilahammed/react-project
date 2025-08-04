@@ -84,7 +84,7 @@
       "price": 124999,
       "category": "smartphones",
       "images": [
-        "https://imgs.search.brave.com/YXZ8dDs-TaTPyZlufw4scRupsfErISdv10mAFG34ACY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMxLmFucG9pbWFn/ZXMuY29tL3dvcmRw/cmVzcy93cC1jb250/ZW50L3VwbG9hZHMv/MjAyNC8wNS9tb3Rv/LWctc3R5bHVzLTVn/LTIwMjQtMS5qcGc"
+        "https://m.media-amazon.com/images/I/61YJz8J0xRL._AC_UL480_FMwebp_QL65_.jpg"
       ],
       "stock": 15,
       "description": "200MP camera, S Pen, Snapdragon 8 Gen 2.",
@@ -98,102 +98,1055 @@
       "reviews": [],
       "isActive": true
     },
-
-   
     {
       "id": "p3",
-      "name": "iPhone X 10",
+      "name": "iPhone X",
       "brand": "Apple",
-      "price": 35900,
+      "price": 39900,
       "category": "smartphones",
       "images": [
         "https://imgs.search.brave.com/DakOOdht2EGgbFhkNw4qdFTKDwdUUu-HTeUckCcbfjI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzAyLzk0LzE3Lzkw/LzM2MF9GXzI5NDE3/OTAyN183NTlwd242/ZXo3dVYyUXRDcTdE/Q0JyaGtpWE5USlZu/Ry5qcGc"
       ],
-      "stock": 8,
-      "description": "5.8-inch Super Retina OLED, Face ID, A11 Bionic chip.",
+      "stock": 20,
+      "description": "5.8-inch Super Retina display, Face ID, A11 Bionic chip.",
       "specifications": {
         "display": "5.8-inch OLED",
         "storage": "64GB",
-        "camera": "12MP dual",
+        "camera": "12MP + 12MP",
         "battery": "2716mAh"
       },
+      "rating": null,
+      "reviews": [],
       "isActive": true
     },
     {
       "id": "p4",
-      "name": "iPhone 8 Plus",
+      "name": "Apple iPhone 8 Plus",
       "brand": "Apple",
-      "price": 29900,
+      "price": 35900,
       "category": "smartphones",
       "images": [
         "https://imgs.search.brave.com/pJVGG0MJ0asO3xUviKFm6XPoP3rCy0HWFuLs8TBQrCM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zaW1p/bGFycG5nLmNvbS9f/bmV4dC9pbWFnZT91/cmw9aHR0cHM6Ly9p/bWFnZS5zaW1pbGFy/cG5nLmNvbS9maWxl/L3NpbWlsYXJwbmcv/dmVyeS10aHVtYm5h/aWwvMjAyMC8wOS9B/cHBsZS1JUGhvbmUt/OC1QbHVzLW9uLXRy/YW5zcGFyZW50LWJh/Y2tncm91bmQtUE5H/LnBuZyZ3PTM4NDAm/cT03NQ"
       ],
-      "stock": 5,
-      "description": "5.5-inch Retina HD, Touch ID, single camera with portrait mode.",
+      "stock": 15,
+      "description": "5.5-inch Retina HD display, Touch ID, A11 Bionic chip.",
       "specifications": {
         "display": "5.5-inch LCD",
         "storage": "64GB",
-        "camera": "12MP",
+        "camera": "12MP + 12MP",
         "battery": "2691mAh"
       },
+      "rating": null,
+      "reviews": [],
       "isActive": true
     },
     {
       "id": "p5",
+      "name": "Apple iPhone 11",
+      "brand": "Apple",
+      "price": 44900,
+      "category": "smartphones",
+      "images": [
+        "https://imgs.search.brave.com/Q2w9Mf-dJIWLVQFUpfPV8Q_7nF5FKOKAFqnHKc5nFWk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9wbmdp/bWcuY29tL3VwbG9h/ZHMvaXBob25lXzEx/L3NtYWxsL2lwaG9u/ZV8xMV9QTkczOC5w/bmc"
+      ],
+      "stock": 30,
+      "description": "6.1-inch Liquid Retina display, dual-camera system, A13 Bionic chip.",
+      "specifications": {
+        "display": "6.1-inch LCD",
+        "storage": "64GB",
+        "camera": "12MP + 12MP",
+        "battery": "3110mAh"
+      },
+      "rating": null,
+      "reviews": [],
+      "isActive": true
+    },
+    {
+      "id": "p6",
       "name": "iPhone 13",
       "brand": "Apple",
       "price": 69900,
       "category": "smartphones",
       "images": [
-        "https://imgs.search.brave.com/Q2w9Mf-dJIWLVQFUpfPV8Q_7nF5FKOKAFqnHKc5nFWk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9wbmdp/bWcuY29tL3VwbG9h/ZHMvaXBob25lXzEz/L3NtYWxsL2lwaG9u/ZV8xM19QTkcyLnBu/Zw"
+        "https://imgs.search.brave.com/zEPG7Nu_Y_eEpsAIbFwEyMgDZXyu3SMvuLO-sXiR87s/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9wbmdp/bWcuY29tL3VwbG9h/ZHMvaXBob25lXzEz/L3NtYWxsL2lwaG9u/ZV8xM19QTkc5LnBu/Zw"
       ],
-      "stock": 18,
-      "description": "6.1-inch Super Retina XDR, A15 Bionic, Cinematic mode.",
+      "stock": 25,
+      "description": "6.1-inch Super Retina XDR display, A15 Bionic chip, advanced dual-camera system.",
       "specifications": {
         "display": "6.1-inch OLED",
         "storage": "128GB",
-        "camera": "12MP dual",
-        "battery": "3240mAh"
+        "camera": "12MP + 12MP",
+        "battery": "3227mAh"
       },
-      "isActive": true
-    },
-    {
-      "id": "p6",
-      "name": "iPhone 15 Pro Max",
-      "brand": "Apple",
-      "price": 159900,
-      "category": "smartphones",
-      "images": [
-        "https://imgs.search.brave.com/GR6ZU4OgPLORo113-SoA2PiEw8arOhe3_--EljWWihc/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/cG5nYWxsLmNvbS93/cC1jb250ZW50L3Vw/bG9hZHMvMTgvQXJ0/aXN0aWMtV2hpdGUt/aVBob25lLUZyYW1l/ZC1CeS1OYXR1cmFs/LUVsZW1lbnQtUE5H/LXRodW1iLnBuZw"
-      ],
-      "stock": 12,
-      "description": "6.7-inch Super Retina XDR, A17 Pro chip, titanium design.",
-      "specifications": {
-        "display": "6.7-inch OLED",
-        "storage": "256GB",
-        "camera": "48MP triple",
-        "battery": "4422mAh"
-      },
+      "rating": null,
+      "reviews": [],
       "isActive": true
     },
     {
       "id": "p7",
+      "name": "iPhone 16",
+      "brand": "Apple",
+      "price": 79900,
+      "category": "smartphones",
+      "images": [
+        "https://imgs.search.brave.com/HGRf7Mmmt6aXniKOkGe3W3KyU49tFLh93KnInkvnsi0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9wbmdp/bWcuY29tL3VwbG9h/ZHMvaXBob25lMTYv/c21hbGwvaXBob25l/MTZfUE5HMy5wbmc"
+      ],
+      "stock": 10,
+      "description": "Latest iPhone model with advanced features and performance.",
+      "specifications": {
+        "display": "6.7-inch OLED",
+        "storage": "256GB",
+        "camera": "48MP + 12MP + 12MP",
+        "battery": "4323mAh"
+      },
+      "rating": null,
+      "reviews": [],
+      "isActive": true
+    },
+    {
+      "id": "p8",
+      "name": "iPhone 13",
+      "brand": "Apple",
+      "price": 69900,
+      "category": "smartphones",
+      "images": [
+        "https://imgs.search.brave.com/amsWDdY4fkpIqnmo9XHMCGCDCSbA6TueAYGOyGgVxpo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9wbmdp/bWcuY29tL3VwbG9h/ZHMvaXBob25lXzEz/L3NtYWxsL2lwaG9u/ZV8xM19QTkcyLnBu/Zw"
+      ],
+      "stock": 20,
+      "description": "6.1-inch Super Retina XDR display, A15 Bionic chip, advanced dual-camera system.",
+      "specifications": {
+        "display": "6.1-inch OLED",
+        "storage": "128GB",
+        "camera": "12MP + 12MP",
+        "battery": "3227mAh"
+      },
+      "rating": null,
+      "reviews": [],
+      "isActive": true
+    },
+    {
+      "id": "p9",
+      "name": "iPhone 13 Pro",
+      "brand": "Apple",
+      "price": 89900,
+      "category": "smartphones",
+      "images": [
+        "https://m.media-amazon.com/images/I/61LzJQkk+RL._AC_UL480_FMwebp_QL65_.jpg"
+      ],
+      "stock": 15,
+      "description": "6.1-inch Super Retina XDR display with ProMotion, A15 Bionic chip, pro camera system.",
+      "specifications": {
+        "display": "6.1-inch OLED",
+        "storage": "128GB",
+        "camera": "12MP + 12MP + 12MP",
+        "battery": "3095mAh"
+      },
+      "rating": null,
+      "reviews": [],
+      "isActive": true
+    },
+    {
+      "id": "p10",
+      "name": "Apple iPhone",
+      "brand": "Apple",
+      "price": 49900,
+      "category": "smartphones",
+      "images": [
+        "https://imgs.search.brave.com/1yXr-xcC-FVNZctorI3UnqJytBh6M9p_3uVpScYrRNU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9wbmdp/bWcuY29tL3VwbG9h/ZHMvaXBob25lXzEx/L3NtYWxsL2lwaG9u/ZV8xMV9QTkcyMS5w/bmc"
+      ],
+      "stock": 18,
+      "description": "Classic iPhone model with premium features and performance.",
+      "specifications": {
+        "display": "6.1-inch LCD",
+        "storage": "64GB",
+        "camera": "12MP",
+        "battery": "3110mAh"
+      },
+      "rating": null,
+      "reviews": [],
+      "isActive": true
+    },
+    {
+      "id": "p11",
+      "name": "Green Apple iPhone 15",
+      "brand": "Apple",
+      "price": 79900,
+      "category": "smartphones",
+      "images": [
+        "https://imgs.search.brave.com/5BHIvoVc_3nXkr1bdRLJVoTGQQ7UgvTG787n9AvGTAA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/Y2l0eXBuZy5jb20v/cHVibGljL3VwbG9h/ZHMvcHJldmlldy9o/ZC1ncmVlbi1hcHBs/ZS1pcGhvbmUtMTUt/dHJhbnNwYXJlbnQt/cG5nLTczNTgxMTY5/NjI0MjM0MjhoeW02/YzZrcWUucG5nP3Y9/MjAyNTA3MTgxOA"
+      ],
+      "stock": 12,
+      "description": "Latest iPhone model in green color with advanced features.",
+      "specifications": {
+        "display": "6.1-inch OLED",
+        "storage": "128GB",
+        "camera": "48MP + 12MP",
+        "battery": "3349mAh"
+      },
+      "rating": null,
+      "reviews": [],
+      "isActive": true
+    },
+    {
+      "id": "p12",
+      "name": "Apple iPhone 15 Pro Max",
+      "brand": "Apple",
+      "price": 129900,
+      "category": "smartphones",
+      "images": [
+        "https://imgs.search.brave.com/GR6ZU4OgPLORo113-SoA2PiEw8arOhe3_--EljWWihc/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/cG5nYWxsLmNvbS93/cC1jb250ZW50L3Vw/bG9hZHMvMTgvQXJ0/aXN0aWMtV2hpdGUt/aVBob25lLUZyYW1l/ZC1CeS1OYXR1cmFs/LUVsZW1lbnQtUE5H/LXRodW1iLnBuZw"
+      ],
+      "stock": 8,
+      "description": "Premium iPhone model with Pro features and large display.",
+      "specifications": {
+        "display": "6.7-inch OLED",
+        "storage": "256GB",
+        "camera": "48MP + 12MP + 12MP",
+        "battery": "4422mAh"
+      },
+      "rating": null,
+      "reviews": [],
+      "isActive": true
+    },
+    {
+      "id": "p13",
+      "name": "White iPhone 12",
+      "brand": "Apple",
+      "price": 59900,
+      "category": "smartphones",
+      "images": [
+        "https://imgs.search.brave.com/U4ne6qZPuWf5__7aJg9lyhWXUwDg0nbLLBePjZLkLsY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/cG5nYWxsLmNvbS93/cC1jb250ZW50L3Vw/bG9hZHMvMTgvV2hp/dGUtaVBob25lLVNo/b3djYXNpbmctVXNl/ci1GcmllbmRseS1J/bnRlcmZhY2UtUE5H/LTE4MHgxODAucG5n"
+      ],
+      "stock": 15,
+      "description": "iPhone 12 in white color with Super Retina XDR display.",
+      "specifications": {
+        "display": "6.1-inch OLED",
+        "storage": "64GB",
+        "camera": "12MP + 12MP",
+        "battery": "2815mAh"
+      },
+      "rating": null,
+      "reviews": [],
+      "isActive": true
+    },
+    {
+      "id": "p14",
       "name": "iPhone 16 Pro",
       "brand": "Apple",
-      "price": 174900,
+      "price": 119900,
       "category": "smartphones",
       "images": [
         "https://imgs.search.brave.com/nto_bBEYdevoKpCgf-PwU-H9iw5HPNc8_OrZ_4yaT2s/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/cG5nYWxsLmNvbS93/cC1jb250ZW50L3Vw/bG9hZHMvMTgvQmx1/ZS1pUGhvbmUtRGlz/cGxheWluZy1TdHls/aXNoLUxvb2stUE5H/LXRodW1iLnBuZw"
       ],
-      "stock": 0,
-      "description": "6.9-inch ProMotion OLED, A18 Pro chip, under-display Face ID.",
+      "stock": 10,
+      "description": "Latest Pro model iPhone with advanced camera system and performance.",
       "specifications": {
-        "display": "6.9-inch OLED",
-        "storage": "512GB",
-        "camera": "50MP quad",
+        "display": "6.7-inch OLED",
+        "storage": "256GB",
+        "camera": "48MP + 12MP + 12MP",
+        "battery": "4422mAh"
+      },
+      "rating": null,
+      "reviews": [],
+      "isActive": true
+    },
+    {
+      "id": "p15",
+      "name": "iPhone 15 pro",
+      "brand": "Apple",
+      "price": 109900,
+      "category": "smartphones",
+      "images": [
+        "https://imgs.search.brave.com/xen6ZgWJz0lRQWir5d8YlYMB-kDM6OkPkcLeUXFTT-k/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/Y2l0eXBuZy5jb20v/cHVibGljL3VwbG9h/ZHMvcHJldmlldy9w/aW5rLWFwcGxlLWlw/aG9uZS0xNS1mcm9u/dC1hbmQtYmFjay1o/ZC1wbmctNzM1ODEx/Njk2MjQyMzU5OGk4/bWJ5dWlpNi5wbmc_/dj0yMDI1MDcxODE4"
+      ],
+      "stock": 12,
+      "description": "Premium iPhone model with Pro features and advanced camera system.",
+      "specifications": {
+        "display": "6.1-inch OLED",
+        "storage": "128GB",
+        "camera": "48MP + 12MP + 12MP",
+        "battery": "3274mAh"
+      },
+      "rating": null,
+      "reviews": [],
+      "isActive": true
+    },
+    {
+      "id": "p16",
+      "name": "Xiaomi Redmi A5 4G LTE",
+      "brand": "Xiaomi",
+      "price": 8999,
+      "category": "smartphones",
+      "images": [
+        "https://m.media-amazon.com/images/I/51qU8st5hhL._AC_SY355_.jpg"
+      ],
+      "stock": 30,
+      "description": "Budget smartphone with 4G LTE connectivity.",
+      "specifications": {
+        "display": "6.5-inch LCD",
+        "storage": "32GB",
+        "camera": "13MP",
         "battery": "5000mAh"
       },
-      "isActive": false
+      "rating": null,
+      "reviews": [],
+      "isActive": true
+    },
+    {
+      "id": "p17",
+      "name": "Xiaomi Redmi Note 14 Pro 4G LTE",
+      "brand": "Xiaomi",
+      "price": 17999,
+      "category": "smartphones",
+      "images": [
+        "https://m.media-amazon.com/images/I/51qUI0Fm3sL._AC_SY355_.jpg"
+      ],
+      "stock": 25,
+      "description": "Mid-range smartphone with pro features and 4G LTE.",
+      "specifications": {
+        "display": "6.67-inch AMOLED",
+        "storage": "128GB",
+        "camera": "108MP + 8MP + 2MP",
+        "battery": "5000mAh"
+      },
+      "rating": null,
+      "reviews": [],
+      "isActive": true
+    },
+    {
+      "id": "p18",
+      "name": "Xiaomi Redmi Note 14 Pro+ Plus",
+      "brand": "Xiaomi",
+      "price": 21999,
+      "category": "smartphones",
+      "images": [
+        "https://m.media-amazon.com/images/I/51t7ub4exXL._AC_SY355_.jpg"
+      ],
+      "stock": 20,
+      "description": "Premium mid-range smartphone with enhanced features.",
+      "specifications": {
+        "display": "6.67-inch AMOLED",
+        "storage": "256GB",
+        "camera": "200MP + 8MP + 2MP",
+        "battery": "5000mAh"
+      },
+      "rating": null,
+      "reviews": [],
+      "isActive": true
+    },
+    {
+      "id": "p19",
+      "name": "Redmi Xiaomi 13X 4G LTE",
+      "brand": "Xiaomi",
+      "price": 24999,
+      "category": "smartphones",
+      "images": [
+        "https://m.media-amazon.com/images/I/514LixsbylL.__AC_SX300_SY300_QL70_ML2_.jpg"
+      ],
+      "stock": 15,
+      "description": "Premium smartphone with flagship features.",
+      "specifications": {
+        "display": "6.36-inch AMOLED",
+        "storage": "256GB",
+        "camera": "50MP + 13MP + 5MP",
+        "battery": "4500mAh"
+      },
+      "rating": null,
+      "reviews": [],
+      "isActive": true
+    },
+    {
+      "id": "p20",
+      "name": "Xiaomi Redmi A3X 4G LTE",
+      "brand": "Xiaomi",
+      "price": 7999,
+      "category": "smartphones",
+      "images": [
+        "https://m.media-amazon.com/images/I/41l9rjEWOuL.__AC_SX300_SY300_QL70_ML2_.jpg"
+      ],
+      "stock": 35,
+      "description": "Entry-level smartphone with 4G connectivity.",
+      "specifications": {
+        "display": "6.5-inch LCD",
+        "storage": "32GB",
+        "camera": "8MP",
+        "battery": "5000mAh"
+      },
+      "rating": null,
+      "reviews": [],
+      "isActive": true
+    },
+    {
+      "id": "p21",
+      "name": "Redmi Xiaomi 13 4G LTE",
+      "brand": "Xiaomi",
+      "price": 25999,
+      "category": "smartphones",
+      "images": [
+        "https://m.media-amazon.com/images/I/518JjArhvDL._AC_SY355_.jpg"
+      ],
+      "stock": 18,
+      "description": "Flagship smartphone with premium features.",
+      "specifications": {
+        "display": "6.36-inch AMOLED",
+        "storage": "256GB",
+        "camera": "50MP + 13MP + 5MP",
+        "battery": "4500mAh"
+      },
+      "rating": null,
+      "reviews": [],
+      "isActive": true
+    },
+    {
+      "id": "p22",
+      "name": "Xiaomi Redmi Note 14 Pro+ Plus",
+      "brand": "Xiaomi",
+      "price": 22999,
+      "category": "smartphones",
+      "images": [
+        "https://m.media-amazon.com/images/I/81FpAyMYiBL.__AC_SX300_SY300_QL70_ML2_.jpg"
+      ],
+      "stock": 15,
+      "description": "Premium mid-range smartphone with enhanced features.",
+      "specifications": {
+        "display": "6.67-inch AMOLED",
+        "storage": "256GB",
+        "camera": "200MP + 8MP + 2MP",
+        "battery": "5000mAh"
+      },
+      "rating": null,
+      "reviews": [],
+      "isActive": true
+    },
+    {
+      "id": "p23",
+      "name": "Samsung Galaxy S24 FE",
+      "brand": "Samsung",
+      "price": 49999,
+      "category": "smartphones",
+      "images": [
+        "https://m.media-amazon.com/images/I/513NjwDrXwL.__AC_SX300_SY300_QL70_ML2_.jpg"
+      ],
+      "stock": 20,
+      "description": "Fan Edition of the flagship S24 with premium features.",
+      "specifications": {
+        "display": "6.4-inch AMOLED",
+        "storage": "128GB",
+        "camera": "50MP + 12MP + 8MP",
+        "battery": "4500mAh"
+      },
+      "rating": null,
+      "reviews": [],
+      "isActive": true
+    },
+    {
+      "id": "p24",
+      "name": "Samsung Galaxy S21 FE",
+      "brand": "Samsung",
+      "price": 39999,
+      "category": "smartphones",
+      "images": [
+        "https://m.media-amazon.com/images/I/51BoLCWiGpL._AC_SY355_.jpg"
+      ],
+      "stock": 15,
+      "description": "Fan Edition of the flagship S21 with premium features.",
+      "specifications": {
+        "display": "6.4-inch AMOLED",
+        "storage": "128GB",
+        "camera": "12MP + 12MP + 8MP",
+        "battery": "4500mAh"
+      },
+      "rating": null,
+      "reviews": [],
+      "isActive": true
+    },
+    {
+      "id": "p25",
+      "name": "S24 Ultra",
+      "brand": "Samsung",
+      "price": 129999,
+      "category": "smartphones",
+      "images": [
+        "https://m.media-amazon.com/images/I/61OWVSwdZ8L.__AC_SX300_SY300_QL70_ML2_.jpg"
+      ],
+      "stock": 10,
+      "description": "Flagship Samsung smartphone with S Pen and advanced camera system.",
+      "specifications": {
+        "display": "6.8-inch AMOLED",
+        "storage": "256GB",
+        "camera": "200MP + 50MP + 12MP + 10MP",
+        "battery": "5000mAh"
+      },
+      "rating": null,
+      "reviews": [],
+      "isActive": true
+    },
+    {
+      "id": "p26",
+      "name": "Motorola Moto G15",
+      "brand": "Motorola",
+      "price": 12999,
+      "category": "smartphones",
+      "images": [
+        "https://m.media-amazon.com/images/I/81r8AO1BRCL.__AC_SX300_SY300_QL70_ML2_.jpg"
+      ],
+      "stock": 25,
+      "description": "Budget smartphone with clean Android experience.",
+      "specifications": {
+        "display": "6.5-inch LCD",
+        "storage": "64GB",
+        "camera": "48MP + 8MP + 2MP",
+        "battery": "5000mAh"
+      },
+      "rating": null,
+      "reviews": [],
+      "isActive": true
+    },
+    {
+      "id": "p27",
+      "name": "Motorola Moto G Play",
+      "brand": "Motorola",
+      "price": 9999,
+      "category": "smartphones",
+      "images": [
+        "https://m.media-amazon.com/images/I/61omq7WKOzL.__AC_SX300_SY300_QL70_ML2_.jpg"
+      ],
+      "stock": 30,
+      "description": "Entry-level smartphone with long battery life.",
+      "specifications": {
+        "display": "6.5-inch LCD",
+        "storage": "32GB",
+        "camera": "16MP",
+        "battery": "5000mAh"
+      },
+      "rating": null,
+      "reviews": [],
+      "isActive": true
+    },
+    {
+      "id": "p28",
+      "name": "Moto G Play",
+      "brand": "Motorola",
+      "price": 10999,
+      "category": "smartphones",
+      "images": [
+        "https://m.media-amazon.com/images/I/61VEzL77UBL._AC_SY355_.jpg"
+      ],
+      "stock": 20,
+      "description": "Entry-level smartphone with long battery life.",
+      "specifications": {
+        "display": "6.5-inch LCD",
+        "storage": "32GB",
+        "camera": "16MP",
+        "battery": "5000mAh"
+      },
+      "rating": null,
+      "reviews": [],
+      "isActive": true
+    },
+    {
+      "id": "p29",
+      "name": "Motorola Moto G 5G",
+      "brand": "Motorola",
+      "price": 17999,
+      "category": "smartphones",
+      "images": [
+        "https://m.media-amazon.com/images/I/51iFMfKzTvL.__AC_SX300_SY300_QL70_ML2_.jpg"
+      ],
+      "stock": 18,
+      "description": "Affordable 5G smartphone with clean Android experience.",
+      "specifications": {
+        "display": "6.5-inch LCD",
+        "storage": "128GB",
+        "camera": "48MP + 8MP + 2MP",
+        "battery": "5000mAh"
+      },
+      "rating": null,
+      "reviews": [],
+      "isActive": true
+    },
+    {
+      "id": "p30",
+      "name": "Motorola Moto G85 5G",
+      "brand": "Motorola",
+      "price": 22999,
+      "category": "smartphones",
+      "images": [
+        "https://m.media-amazon.com/images/I/511QT-SpzoL.__AC_SX300_SY300_QL70_ML2_.jpg"
+      ],
+      "stock": 15,
+      "description": "Mid-range 5G smartphone with premium features.",
+      "specifications": {
+        "display": "6.67-inch AMOLED",
+        "storage": "256GB",
+        "camera": "50MP + 8MP",
+        "battery": "5000mAh"
+      },
+      "rating": null,
+      "reviews": [],
+      "isActive": true
+    },
+    {
+      "id": "p31",
+      "name": "Motorola Moto G54 Power",
+      "brand": "Motorola",
+      "price": 15999,
+      "category": "smartphones",
+      "images": [
+        "https://m.media-amazon.com/images/I/514qy6rCBlL.__AC_SX300_SY300_QL70_ML2_.jpg"
+      ],
+      "stock": 20,
+      "description": "Smartphone with powerful battery and performance.",
+      "specifications": {
+        "display": "6.5-inch LCD",
+        "storage": "128GB",
+        "camera": "50MP + 8MP",
+        "battery": "6000mAh"
+      },
+      "rating": null,
+      "reviews": [],
+      "isActive": true
+    },
+    {
+      "id": "p32",
+      "name": "Motorola Moto G Play",
+      "brand": "Motorola",
+      "price": 9999,
+      "category": "smartphones",
+      "images": [
+        "https://m.media-amazon.com/images/I/51+l3ErHpiL._AC_SY300_SX300_.jpg"
+      ],
+      "stock": 25,
+      "description": "Entry-level smartphone with long battery life.",
+      "specifications": {
+        "display": "6.5-inch LCD",
+        "storage": "32GB",
+        "camera": "16MP",
+        "battery": "5000mAh"
+      },
+      "rating": null,
+      "reviews": [],
+      "isActive": true
+    },
+    {
+      "id": "p33",
+      "name": "Google Pixel",
+      "brand": "Google",
+      "price": 29999,
+      "category": "smartphones",
+      "images": [
+        "https://m.media-amazon.com/images/I/61jNlUYC3mL.__AC_SX300_SY300_QL70_ML2_.jpg"
+      ],
+      "stock": 15,
+      "description": "Google's flagship smartphone with pure Android experience.",
+      "specifications": {
+        "display": "6.0-inch OLED",
+        "storage": "128GB",
+        "camera": "12.2MP",
+        "battery": "2770mAh"
+      },
+      "rating": null,
+      "reviews": [],
+      "isActive": true
+    },
+    {
+      "id": "p34",
+      "name": "Google Pixel 9A",
+      "brand": "Google",
+      "price": 34999,
+      "category": "smartphones",
+      "images": [
+        "https://m.media-amazon.com/images/I/51Pjm7ZQUXL._AC_SX355_.jpg"
+      ],
+      "stock": 18,
+      "description": "Affordable Pixel smartphone with flagship camera.",
+      "specifications": {
+        "display": "6.1-inch OLED",
+        "storage": "128GB",
+        "camera": "12.2MP",
+        "battery": "4410mAh"
+      },
+      "rating": null,
+      "reviews": [],
+      "isActive": true
+    },
+    {
+      "id": "p35",
+      "name": "Google Pixel 8-256GB",
+      "brand": "Google",
+      "price": 59999,
+      "category": "smartphones",
+      "images": [
+        "https://m.media-amazon.com/images/I/71aTjTMFiJL.__AC_SX300_SY300_QL70_ML2_.jpg"
+      ],
+      "stock": 12,
+      "description": "Flagship Pixel smartphone with advanced AI features.",
+      "specifications": {
+        "display": "6.2-inch OLED",
+        "storage": "256GB",
+        "camera": "50MP + 12MP",
+        "battery": "4575mAh"
+      },
+      "rating": null,
+      "reviews": [],
+      "isActive": true
+    },
+    {
+      "id": "p36",
+      "name": "Google Pixel 7",
+      "brand": "Google",
+      "price": 49999,
+      "category": "smartphones",
+      "images": [
+        "https://m.media-amazon.com/images/I/7173p0j-mbL.__AC_SX300_SY300_QL70_ML2_.jpg"
+      ],
+      "stock": 15,
+      "description": "Previous generation flagship Pixel smartphone.",
+      "specifications": {
+        "display": "6.3-inch OLED",
+        "storage": "128GB",
+        "camera": "50MP + 12MP",
+        "battery": "4355mAh"
+      },
+      "rating": null,
+      "reviews": [],
+      "isActive": true
+    },
+    {
+      "id": "p37",
+      "name": "Google Pixel 6 5G",
+      "brand": "Google",
+      "price": 39999,
+      "category": "smartphones",
+      "images": [
+        "https://m.media-amazon.com/images/I/61Txip5YAFL._AC_SY355_.jpg"
+      ],
+      "stock": 10,
+      "description": "5G enabled Pixel smartphone with Tensor chip.",
+      "specifications": {
+        "display": "6.4-inch OLED",
+        "storage": "128GB",
+        "camera": "50MP + 12MP",
+        "battery": "4614mAh"
+      },
+      "rating": null,
+      "reviews": [],
+      "isActive": true
+    },
+    {
+      "id": "p38",
+      "name": "Google Pixel 9 Pro XL",
+      "brand": "Google",
+      "price": 89999,
+      "category": "smartphones",
+      "images": [
+        "https://m.media-amazon.com/images/I/517PU4qalEL.__AC_SY300_SX300_QL70_ML2_.jpg"
+      ],
+      "stock": 8,
+      "description": "Premium Pixel smartphone with large display and advanced features.",
+      "specifications": {
+        "display": "6.7-inch OLED",
+        "storage": "256GB",
+        "camera": "50MP + 48MP + 12MP",
+        "battery": "5000mAh"
+      },
+      "rating": null,
+      "reviews": [],
+      "isActive": true
+    },
+    {
+      "id": "p39",
+      "name": "Google Pixel 4a",
+      "brand": "Google",
+      "price": 29999,
+      "category": "smartphones",
+      "images": [
+        "https://m.media-amazon.com/images/I/71C0OH4WfpL.__AC_SX300_SY300_QL70_ML2_.jpg"
+      ],
+      "stock": 5,
+      "description": "Compact Pixel smartphone with great camera.",
+      "specifications": {
+        "display": "5.8-inch OLED",
+        "storage": "128GB",
+        "camera": "12.2MP",
+        "battery": "3140mAh"
+      },
+      "rating": null,
+      "reviews": [],
+      "isActive": true
+    },
+    {
+      "id": "p40",
+      "name": "Google Pixel 4",
+      "brand": "Google",
+      "price": 34999,
+      "category": "smartphones",
+      "images": [
+        "https://m.media-amazon.com/images/I/7199N-Uz2AL.__AC_SX300_SY300_QL70_ML2_.jpg"
+      ],
+      "stock": 3,
+      "description": "Previous generation Pixel smartphone with Motion Sense.",
+      "specifications": {
+        "display": "5.7-inch OLED",
+        "storage": "64GB",
+        "camera": "12.2MP + 16MP",
+        "battery": "2800mAh"
+      },
+      "rating": null,
+      "reviews": [],
+      "isActive": true
+    },
+    {
+      "id": "p41",
+      "name": "Google Pixel 5a",
+      "brand": "Google",
+      "price": 34999,
+      "category": "smartphones",
+      "images": [
+        "https://m.media-amazon.com/images/I/81Uho2XBxQL._AC_SY355_.jpg"
+      ],
+      "stock": 7,
+      "description": "Affordable Pixel smartphone with great battery life.",
+      "specifications": {
+        "display": "6.34-inch OLED",
+        "storage": "128GB",
+        "camera": "12.2MP + 16MP",
+        "battery": "4680mAh"
+      },
+      "rating": null,
+      "reviews": [],
+      "isActive": true
+    },
+    {
+      "id": "p42",
+      "name": "Google Pixel 2 XL",
+      "brand": "Google",
+      "price": 19999,
+      "category": "smartphones",
+      "images": [
+        "https://m.media-amazon.com/images/I/61UIeMfECBL.__AC_SX300_SY300_QL70_ML2_.jpg"
+      ],
+      "stock": 2,
+      "description": "Older generation Pixel smartphone with great display.",
+      "specifications": {
+        "display": "6.0-inch OLED",
+        "storage": "64GB",
+        "camera": "12.2MP",
+        "battery": "3520mAh"
+      },
+      "rating": null,
+      "reviews": [],
+      "isActive": true
+    },
+    {
+      "id": "p43",
+      "name": "Apple iPhone 13",
+      "brand": "Apple",
+      "price": 69900,
+      "category": "smartphones",
+      "images": [
+        "https://m.media-amazon.com/images/I/713UBcQGDCL.__AC_SY445_SX342_QL70_ML2_.jpg"
+      ],
+      "stock": 25,
+      "description": "6.1-inch Super Retina XDR display, A15 Bionic chip, advanced dual-camera system.",
+      "specifications": {
+        "display": "6.1-inch OLED",
+        "storage": "128GB",
+        "camera": "12MP + 12MP",
+        "battery": "3227mAh"
+      },
+      "rating": null,
+      "reviews": [],
+      "isActive": true
+    },
+    {
+      "id": "p44",
+      "name": "Apple iPhone 14",
+      "brand": "Apple",
+      "price": 79900,
+      "category": "smartphones",
+      "images": [
+        "https://m.media-amazon.com/images/I/61PVtvf4OOL._AC_SY355_.jpg"
+      ],
+      "stock": 20,
+      "description": "6.1-inch Super Retina XDR display, A15 Bionic chip, advanced camera system.",
+      "specifications": {
+        "display": "6.1-inch OLED",
+        "storage": "128GB",
+        "camera": "12MP + 12MP",
+        "battery": "3279mAh"
+      },
+      "rating": null,
+      "reviews": [],
+      "isActive": true
+    },
+    {
+      "id": "p45",
+      "name": "Apple iPhone 12",
+      "brand": "Apple",
+      "price": 59900,
+      "category": "smartphones",
+      "images": [
+        "https://m.media-amazon.com/images/I/61qPJLxRcwL.__AC_SX300_SY300_QL70_ML2_.jpg"
+      ],
+      "stock": 15,
+      "description": "6.1-inch Super Retina XDR display, A14 Bionic chip, dual-camera system.",
+      "specifications": {
+        "display": "6.1-inch OLED",
+        "storage": "64GB",
+        "camera": "12MP + 12MP",
+        "battery": "2815mAh"
+      },
+      "rating": null,
+      "reviews": [],
+      "isActive": true
+    },
+    {
+      "id": "p46",
+      "name": "Apple iPhone 12 Pro",
+      "brand": "Apple",
+      "price": 99900,
+      "category": "smartphones",
+      "images": [
+        "https://m.media-amazon.com/images/I/51q3qjXRz2L.__AC_SX300_SY300_QL70_ML2_.jpg"
+      ],
+      "stock": 10,
+      "description": "6.1-inch Super Retina XDR display, A14 Bionic chip, pro camera system.",
+      "specifications": {
+        "display": "6.1-inch OLED",
+        "storage": "128GB",
+        "camera": "12MP + 12MP + 12MP",
+        "battery": "2815mAh"
+      },
+      "rating": null,
+      "reviews": [],
+      "isActive": true
+    },
+    {
+      "id": "p47",
+      "name": "Apple iPhone SE 3rd Gen",
+      "brand": "Apple",
+      "price": 42900,
+      "category": "smartphones",
+      "images": [
+        "https://m.media-amazon.com/images/I/511tZTsZESL.__AC_SX300_SY300_QL70_ML2_.jpg"
+      ],
+      "stock": 20,
+      "description": "Compact iPhone with A15 Bionic chip and Touch ID.",
+      "specifications": {
+        "display": "4.7-inch LCD",
+        "storage": "64GB",
+        "camera": "12MP",
+        "battery": "2018mAh"
+      },
+      "rating": null,
+      "reviews": [],
+      "isActive": true
+    },
+    {
+      "id": "p48",
+      "name": "Apple iPhone 14 Pro Max",
+      "brand": "Apple",
+      "price": 139900,
+      "category": "smartphones",
+      "images": [
+        "https://m.media-amazon.com/images/I/514qx+0Do8L._AC_SY300_SX300_.jpg"
+      ],
+      "stock": 8,
+      "description": "6.7-inch Super Retina XDR display with ProMotion, A16 Bionic chip, pro camera system.",
+      "specifications": {
+        "display": "6.7-inch OLED",
+        "storage": "128GB",
+        "camera": "48MP + 12MP + 12MP",
+        "battery": "4323mAh"
+      },
+      "rating": null,
+      "reviews": [],
+      "isActive": true
+    },
+    {
+      "id": "p49",
+      "name": "Apple iPhone 15 Pro Max",
+      "brand": "Apple",
+      "price": 159900,
+      "category": "smartphones",
+      "images": [
+        "https://m.media-amazon.com/images/I/616mZZm8-7L.__AC_SX300_SY300_QL70_ML2_.jpg"
+      ],
+      "stock": 5,
+      "description": "Premium iPhone model with Pro features and large display.",
+      "specifications": {
+        "display": "6.7-inch OLED",
+        "storage": "256GB",
+        "camera": "48MP + 12MP + 12MP",
+        "battery": "4422mAh"
+      },
+      "rating": null,
+      "reviews": [],
+      "isActive": true
+    },
+    {
+      "id": "p50",
+      "name": "Apple iPhone 16 Pro",
+      "brand": "Apple",
+      "price": 149900,
+      "category": "smartphones",
+      "images": [
+        "https://m.media-amazon.com/images/I/41Vt4AQ8kwL.__AC_SX300_SY300_QL70_ML2_.jpg"
+      ],
+      "stock": 10,
+      "description": "Latest Pro model iPhone with advanced camera system and performance.",
+      "specifications": {
+        "display": "6.7-inch OLED",
+        "storage": "256GB",
+        "camera": "48MP + 12MP + 12MP",
+        "battery": "4422mAh"
+      },
+      "rating": null,
+      "reviews": [],
+      "isActive": true
+    },
+    {
+      "id": "p51",
+      "name": "Apple iPhone 16",
+      "brand": "Apple",
+      "price": 89900,
+      "category": "smartphones",
+      "images": [
+        "https://m.media-amazon.com/images/I/71GKsOTQeNL.__AC_SX300_SY300_QL70_ML2_.jpg"
+      ],
+      "stock": 15,
+      "description": "Latest iPhone model with advanced features and performance.",
+      "specifications": {
+        "display": "6.7-inch OLED",
+        "storage": "256GB",
+        "camera": "48MP + 12MP",
+        "battery": "4323mAh"
+      },
+      "rating": null,
+      "reviews": [],
+      "isActive": true
+    },
+    {
+      "id": "p52",
+      "name": "Apple iPhone 8 Plus",
+      "brand": "Apple",
+      "price": 35900,
+      "category": "smartphones",
+      "images": [
+        "https://m.media-amazon.com/images/I/71KUdDbAaKL.__AC_SX300_SY300_QL70_ML2_.jpg"
+      ],
+      "stock": 10,
+      "description": "5.5-inch Retina HD display, Touch ID, A11 Bionic chip.",
+      "specifications": {
+        "display": "5.5-inch LCD",
+        "storage": "64GB",
+        "camera": "12MP + 12MP",
+        "battery": "2691mAh"
+      },
+      "rating": null,
+      "reviews": [],
+      "isActive": true
     }
   ]
 }
