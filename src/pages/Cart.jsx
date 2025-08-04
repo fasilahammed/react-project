@@ -1,7 +1,7 @@
 import React from 'react';
 import { useCart } from '../context/CartContext';
 import { FiTrash2, FiPlus, FiMinus } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import emptyCart from '../assets/img/empty-cart.svg';
 
 export default function Cart() {
@@ -13,6 +13,7 @@ export default function Cart() {
     totalPrice,
     clearCart 
   } = useCart();
+  const navigate = useNavigate();
 
   if (cartCount === 0) {
     return (
@@ -107,7 +108,7 @@ export default function Cart() {
         </div>
 
         {/* Order Summary */}
-        <div className="lg:w-1/3">
+              <div className="lg:w-1/3">
           <div className="bg-white rounded-lg shadow-sm p-6 sticky top-4">
             <h2 className="text-xl font-bold text-gray-800 mb-4">Order Summary</h2>
             
@@ -126,7 +127,10 @@ export default function Cart() {
               </div>
             </div>
 
-            <button className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-lg font-medium transition-colors">
+            <button 
+              onClick={() => navigate('/checkout')}
+              className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-lg font-medium transition-colors"
+            >
               Proceed to Checkout
             </button>
 

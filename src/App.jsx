@@ -13,6 +13,7 @@ import Products from "./pages/Products";
 import Register from './pages/auth/Register';
 import Login from './pages/auth/login';
 import { Toaster } from 'react-hot-toast';
+import Checkout from './pages/Checkout';
 
 function Layout() {
   const location = useLocation();
@@ -53,6 +54,7 @@ function Layout() {
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
            <Route path="/wishlist" element={<Wishlist />} />
         </Route>
       </Routes>

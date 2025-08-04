@@ -1,13 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useWishlist } from '../context/WishlistContext';
 import { useCart } from '../context/CartContext';
 import { FiHeart, FiShoppingCart, FiTrash2 } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import emptyWishlist from '../assets/img/empty-wishlist.svg';
 
 export default function WishList() {
   const { wishlist, wishlistCount, removeFromWishlist } = useWishlist();
-  const { addToCart } = useCart();
+  const { addToCart, cart } = useCart();
+  const navigate = useNavigate();
+  const [addedItems, setAddedItems] = useState({});
+
+  const handleAddToCart = (product) => {
+    addToCart(product);
+    setAddedItems(prev => ({ ...prev, [product.id]: true }));
+  };
+
+  const handleBuyNow = (product) => {
+    addToCart(product);
+    navigate('/checkout');
+  };
 
   if (wishlistCount === 0) {
     return (
@@ -23,7 +35,7 @@ export default function WishList() {
         </p>
         <Link
           to="/products"
-          className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 px-6 rounded-lg transition-colors"
+          className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 px-6 rounded-lg"
         >
           Browse Products
         </Link>
@@ -41,13 +53,13 @@ export default function WishList() {
         {wishlist.map((product) => (
           <div 
             key={product.id} 
-            className="bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-md transition-shadow"
+            className="bg-white rounded-lg border border-gray-200 overflow-hidden"
           >
-            <div className="relative pt-[100%] overflow-hidden">
+            <div className="relative pt-[100%]">
               <img
                 src={product.images[0]}
                 alt={product.name}
-                className="absolute top-0 left-0 w-full h-full object-contain"
+                className="absolute top-0 left-0 w-full h-full object-contain p-4"
               />
             </div>
 
@@ -67,21 +79,23 @@ export default function WishList() {
 
               <p className="text-lg font-bold mb-4">₹{product.price.toLocaleString()}</p>
 
-              <div className="flex space-x-2">
+              <div className="flex flex-col space-y-2">
                 <button
-                  onClick={() => {
-                    addToCart(product);
-                    removeFromWishlist(product.id);
-                  }}
-                  className="flex-1 bg-orange-500 hover:bg-orange-600 text-white py-2 px-3 rounded-lg text-sm flex items-center justify-center gap-1"
+                  onClick={() => handleAddToCart(product)}
+                  className={`py-2 px-3 rounded-lg text-sm flex items-center justify-center gap-1 ${
+                    addedItems[product.id] || cart.some(item => item.id === product.id)
+                      ? 'bg-green-100 text-green-700 border border-green-200'
+                      : 'bg-orange-500 hover:bg-orange-600 text-white'
+                  }`}
                 >
-                  <FiShoppingCart /> Add to Cart
+                  <FiShoppingCart />
+                  {addedItems[product.id] || cart.some(item => item.id === product.id) ? 'Added' : 'Add to Cart'}
                 </button>
-                <button onClick={() => {
-                    addToCart(product);
-                    removeFromWishlist(product.id);
-                  }} className="p-2 text-red-500 border border-red-500 hover:bg-red-50 rounded-lg">
-                  <FiHeart />
+                <button
+                  onClick={() => handleBuyNow(product)}
+                  className="py-2 px-3 rounded-lg border border-orange-500 text-orange-500 hover:bg-orange-50 text-sm"
+                >
+                  Buy Now
                 </button>
               </div>
             </div>
