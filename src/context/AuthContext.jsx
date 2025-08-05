@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import { loginUser, registerUser } from '../services/api';
+import { loginUser, registerUser, updateUser } from '../services/api';
 import { toast } from 'react-hot-toast';
 
 const AuthContext = createContext();
@@ -9,27 +9,32 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const storedUser = localStorage.getItem('snapmob-user');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
+    try {
+      const storedUser = localStorage.getItem('snapmob-user');
+      if (storedUser && storedUser !== 'undefined') {
+        setUser(JSON.parse(storedUser));
+      }
+    } catch (error) {
+      console.error('Failed to parse user data:', error);
+      localStorage.removeItem('snapmob-user');
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   }, []);
 
   const login = async (email, password) => {
     try {
-      const { data } = await loginUser(email, password);
+      const response = await loginUser(email, password);
       
-      if (data.length > 0) {
-        const userData = data[0];
+      if (response.data && response.data.length > 0) {
+        const userData = response.data[0];
         setUser(userData);
         localStorage.setItem('snapmob-user', JSON.stringify(userData));
         toast.success('Login successful!');
         return true;
-      } else {
-        toast.error('Invalid user');
-        return false;
       }
+      toast.error('Invalid email or password');
+      return false;
     } catch (error) {
       toast.error('Login failed. Please try again.');
       return false;
@@ -38,23 +43,23 @@ export function AuthProvider({ children }) {
 
   const register = async (userData) => {
     try {
-      // Check if email already exists
-      const { data: existingUsers } = await loginUser(userData.email, '');
-      if (existingUsers.length > 0) {
+      const existingUsers = await loginUser(userData.email, '');
+      if (existingUsers.data.length > 0) {
         toast.error('Email already registered');
         return false;
       }
 
-      const { data } = await registerUser({
+      const newUser = {
         ...userData,
         role: 'user',
         cart: [],
         wishlist: [],
         createdAt: new Date().toISOString()
-      });
-      
-      setUser(data);
-      localStorage.setItem('snapmob-user', JSON.stringify(data));
+      };
+
+      const response = await registerUser(newUser);
+      setUser(response.data);
+      localStorage.setItem('snapmob-user', JSON.stringify(response.data));
       toast.success('Registration successful!');
       return true;
     } catch (error) {
@@ -63,16 +68,35 @@ export function AuthProvider({ children }) {
     }
   };
 
+  const updateUserData = async (updatedData) => {
+    if (!user) return false;
+    
+    try {
+      const response = await updateUser(user.id, updatedData);
+      setUser(response.data);
+      localStorage.setItem('snapmob-user', JSON.stringify(response.data));
+      return true;
+    } catch (error) {
+      toast.error('Failed to update user data');
+      return false;
+    }
+  };
+
   const logout = () => {
+    localStorage.removeItem("snapmob-user")
     setUser(null);
-    localStorage.removeItem('snapmob-user');
-    localStorage.removeItem('snapmob-cart');
-    localStorage.removeItem('snapmob-wishlist');
-    toast.success('Logged out successfully');
+   
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout }}>
+    <AuthContext.Provider value={{ 
+      user, 
+      loading, 
+      login, 
+      register, 
+      logout,
+      updateUserData
+    }}>
       {children}
     </AuthContext.Provider>
   );

@@ -5,51 +5,43 @@ import { useAuth } from './AuthContext';
 const CartContext = createContext();
 
 export function CartProvider({ children }) {
-  const { user } = useAuth();
+  const { user, updateUserData } = useAuth();
   const [cart, setCart] = useState([]);
   const [cartCount, setCartCount] = useState(0);
   const [orders, setOrders] = useState([]);
 
-  // Load cart and orders from localStorage
+  // Load cart from user data
   useEffect(() => {
-    const loadCartData = () => {
-      if (user) {
-        // For logged-in users, use their cart from user data
-        setCart(user.cart || []);
-        setCartCount(user.cart?.reduce((total, item) => total + item.quantity, 0) || 0);
-      } else {
-        // For guests, use localStorage
-        const storedCart = localStorage.getItem('snapmob-cart');
-        if (storedCart) {
-          setCart(JSON.parse(storedCart));
-          setCartCount(JSON.parse(storedCart).reduce((total, item) => total + item.quantity, 0));
-        }
-      }
-      
-      const storedOrders = localStorage.getItem('snapmob-orders');
-      if (storedOrders) {
-        setOrders(JSON.parse(storedOrders));
-      }
-    };
+    if (user) {
+      setCart(user.cart || []);
+      setCartCount(user.cart?.reduce((total, item) => total + item.quantity, 0) || 0);
+    } else {
+      setCart([]);
+      setCartCount(0);
+    }
 
-    loadCartData();
+    // Load orders from localStorage
+    const storedOrders = localStorage.getItem('snapmob-orders');
+    if (storedOrders) {
+      setOrders(JSON.parse(storedOrders));
+    }
   }, [user]);
 
-  const updateCart = (newCart) => {
+  const updateCart = async (newCart) => {
     setCart(newCart);
     setCartCount(newCart.reduce((total, item) => total + item.quantity, 0));
     
     if (user) {
-      // Update user's cart in localStorage
-      const updatedUser = { ...user, cart: newCart };
-      localStorage.setItem('snapmob-user', JSON.stringify(updatedUser));
-    } else {
-      // For guests, store in separate localStorage key
-      localStorage.setItem('snapmob-cart', JSON.stringify(newCart));
+      await updateUserData({ ...user, cart: newCart });
     }
   };
 
-  const addToCart = (product) => {
+  const addToCart = async (product) => {
+    if (!user) {
+      toast.error('Please login to add items to cart');
+      return false;
+    }
+
     const existingItem = cart.find(item => item.id === product.id);
     const maxQuantity = 5;
     
@@ -58,7 +50,7 @@ export function CartProvider({ children }) {
     if (existingItem) {
       if (existingItem.quantity >= maxQuantity) {
         toast.error(`You can only add ${maxQuantity} of this item to your cart`);
-        return;
+        return false;
       }
       
       updatedCart = cart.map(item =>
@@ -70,59 +62,117 @@ export function CartProvider({ children }) {
       updatedCart = [...cart, { ...product, quantity: 1 }];
     }
     
-    updateCart(updatedCart);
+    await updateCart(updatedCart);
     toast.success(`${product.name} added to cart!`);
+    return true;
   };
 
-  const removeFromCart = (productId) => {
+  const removeFromCart = async (productId) => {
     const updatedCart = cart.filter(item => item.id !== productId);
-    updateCart(updatedCart);
-    toast.success('Item removed from cart');
+    await updateCart(updatedCart);
   };
 
-  const updateQuantity = (productId, newQuantity) => {
-    if (newQuantity < 1) return;
-    if (newQuantity > 5) {
-      toast.error('Maximum 5 items per product');
+  const updateQuantity = async (productId, newQuantity) => {
+    if (newQuantity < 1) {
+      await removeFromCart(productId);
       return;
     }
-    
+
+    const maxQuantity = 5;
+    if (newQuantity > maxQuantity) {
+      toast.error(`You can only add ${maxQuantity} of this item to your cart`);
+      return;
+    }
+
     const updatedCart = cart.map(item =>
       item.id === productId 
         ? { ...item, quantity: newQuantity } 
         : item
     );
     
-    updateCart(updatedCart);
+    await updateCart(updatedCart);
   };
 
-  const clearCart = () => {
-    updateCart([]);
-    toast.success('Cart cleared');
+  const clearCart = async () => {
+    await updateCart([]);
   };
 
-  const checkout = (orderDetails) => {
+  const totalPrice = cart.reduce(
+    (total, item) => total + (item.price * item.quantity),
+    0
+  );
+
+  const checkout = async (orderData) => {
+    if (cart.length === 0) {
+      toast.error('Your cart is empty');
+      return null;
+    }
+
     const newOrder = {
       id: Date.now(),
       date: new Date().toISOString(),
       items: [...cart],
       total: totalPrice,
       status: 'processing',
-      ...orderDetails
+      ...orderData
     };
-    
+
     const updatedOrders = [...orders, newOrder];
     setOrders(updatedOrders);
     localStorage.setItem('snapmob-orders', JSON.stringify(updatedOrders));
-    clearCart();
+    
+    await clearCart();
     
     return newOrder;
   };
 
-  const totalPrice = cart.reduce(
-    (total, item) => total + (item.price * item.quantity), 
-    0
-  );
+  const cancelOrder = async (orderId) => {
+    try {
+      // In a real app, you would call your API here first
+      // await api.cancelOrder(orderId);
+      
+      // Update local state
+      setOrders(prevOrders => 
+        prevOrders.map(order => 
+          order.id === orderId 
+            ? { ...order, status: 'cancelled' } 
+            : order
+        )
+      );
+      
+      // Update localStorage
+      const updatedOrders = orders.map(order => 
+        order.id === orderId 
+          ? { ...order, status: 'cancelled' } 
+          : order
+      );
+      localStorage.setItem('snapmob-orders', JSON.stringify(updatedOrders));
+      
+      return true;
+    } catch (error) {
+      console.error('Error cancelling order:', error);
+      throw error;
+    }
+  };
+
+  const removeOrder = async (orderId) => {
+    try {
+      // In a real app, you would call your API here first
+      // await api.deleteOrder(orderId);
+      
+      // Update local state
+      setOrders(prevOrders => prevOrders.filter(order => order.id !== orderId));
+      
+      // Update localStorage
+      const updatedOrders = orders.filter(order => order.id !== orderId);
+      localStorage.setItem('snapmob-orders', JSON.stringify(updatedOrders));
+      
+      return true;
+    } catch (error) {
+      console.error('Error deleting order:', error);
+      throw error;
+    }
+  };
 
   return (
     <CartContext.Provider 
@@ -135,7 +185,9 @@ export function CartProvider({ children }) {
         updateQuantity,
         clearCart,
         totalPrice,
-        checkout
+        checkout,
+        cancelOrder,
+        removeOrder
       }}
     >
       {children}

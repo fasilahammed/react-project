@@ -17,9 +17,100 @@
       "password": "fasilkm@123",
       "confirmPassword": "fasilkm@123",
       "role": "user",
-      "cart": [],
-      "wishlist": [],
-      "createdAt": "2025-08-01T05:30:33.132Z"
+      "cart": [
+        {
+          "id": "p2",
+          "name": "Samsung Galaxy S23 Ultra",
+          "brand": "Samsung",
+          "price": 124999,
+          "category": "smartphones",
+          "images": [
+            "https://m.media-amazon.com/images/I/61YJz8J0xRL._AC_UL480_FMwebp_QL65_.jpg"
+          ],
+          "stock": 15,
+          "description": "200MP camera, S Pen, Snapdragon 8 Gen 2.",
+          "specifications": {
+            "display": "6.8-inch AMOLED",
+            "storage": "256GB",
+            "camera": "200MP + 12MP + 10MP",
+            "battery": "5000mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true,
+          "quantity": 1
+        },
+        {
+          "id": "p6",
+          "name": "iPhone 13",
+          "brand": "Apple",
+          "price": 69900,
+          "category": "smartphones",
+          "images": [
+            "https://imgs.search.brave.com/zEPG7Nu_Y_eEpsAIbFwEyMgDZXyu3SMvuLO-sXiR87s/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9wbmdp/bWcuY29tL3VwbG9h/ZHMvaXBob25lXzEz/L3NtYWxsL2lwaG9u/ZV8xM19QTkc5LnBu/Zw"
+          ],
+          "stock": 25,
+          "description": "6.1-inch Super Retina XDR display, A15 Bionic chip, advanced dual-camera system.",
+          "specifications": {
+            "display": "6.1-inch OLED",
+            "storage": "128GB",
+            "camera": "12MP + 12MP",
+            "battery": "3227mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true,
+          "quantity": 1
+        },
+        {
+          "id": "p5",
+          "name": "Apple iPhone 11",
+          "brand": "Apple",
+          "price": 44900,
+          "category": "smartphones",
+          "images": [
+            "https://imgs.search.brave.com/Q2w9Mf-dJIWLVQFUpfPV8Q_7nF5FKOKAFqnHKc5nFWk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9wbmdp/bWcuY29tL3VwbG9h/ZHMvaXBob25lXzEx/L3NtYWxsL2lwaG9u/ZV8xMV9QTkczOC5w/bmc"
+          ],
+          "stock": 30,
+          "description": "6.1-inch Liquid Retina display, dual-camera system, A13 Bionic chip.",
+          "specifications": {
+            "display": "6.1-inch LCD",
+            "storage": "64GB",
+            "camera": "12MP + 12MP",
+            "battery": "3110mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true,
+          "quantity": 1
+        }
+      ],
+      "wishlist": [
+        {
+          "id": "p1",
+          "name": "iPhone 11 64GB",
+          "brand": "Apple",
+          "price": 42900,
+          "category": "smartphones",
+          "images": [
+            "https://imgs.search.brave.com/pEXklLaEBfBuDZjg_ktZtvSJ5GZem4X7WizoAalOQaQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2M0LzIy/LzJkL2M0MjIyZGMy/MDBmMGRjNDc5NjM0/OTZlOGE1NmE1OWUz/LmpwZw"
+          ],
+          "stock": 25,
+          "description": "6.1-inch Liquid Retina display, A13 Bionic chip, dual-camera system.",
+          "specifications": {
+            "display": "6.1-inch LCD",
+            "storage": "64GB",
+            "camera": "12MP + 12MP",
+            "battery": "3110mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true
+        }
+      ],
+      "createdAt": "2025-08-01T05:30:33.132Z",
+      "phone": "9946811493",
+      "address": "kayal masdathil"
     },
     {
       "id": "56cc",
@@ -29,7 +120,155 @@
       "confirmPassword": "aflahkm@123",
       "role": "user",
       "cart": [],
-      "wishlist": [],
+      "wishlist": [
+        {
+          "id": "p1",
+          "name": "iPhone 11 64GB",
+          "brand": "Apple",
+          "price": 42900,
+          "category": "smartphones",
+          "images": [
+            "https://imgs.search.brave.com/pEXklLaEBfBuDZjg_ktZtvSJ5GZem4X7WizoAalOQaQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2M0LzIy/LzJkL2M0MjIyZGMy/MDBmMGRjNDc5NjM0/OTZlOGE1NmE1OWUz/LmpwZw"
+          ],
+          "stock": 25,
+          "description": "6.1-inch Liquid Retina display, A13 Bionic chip, dual-camera system.",
+          "specifications": {
+            "display": "6.1-inch LCD",
+            "storage": "64GB",
+            "camera": "12MP + 12MP",
+            "battery": "3110mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true
+        },
+        {
+          "id": "p6",
+          "name": "iPhone 13",
+          "brand": "Apple",
+          "price": 69900,
+          "category": "smartphones",
+          "images": [
+            "https://imgs.search.brave.com/zEPG7Nu_Y_eEpsAIbFwEyMgDZXyu3SMvuLO-sXiR87s/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9wbmdp/bWcuY29tL3VwbG9h/ZHMvaXBob25lXzEz/L3NtYWxsL2lwaG9u/ZV8xM19QTkc5LnBu/Zw"
+          ],
+          "stock": 25,
+          "description": "6.1-inch Super Retina XDR display, A15 Bionic chip, advanced dual-camera system.",
+          "specifications": {
+            "display": "6.1-inch OLED",
+            "storage": "128GB",
+            "camera": "12MP + 12MP",
+            "battery": "3227mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true
+        },
+        {
+          "id": "p5",
+          "name": "Apple iPhone 11",
+          "brand": "Apple",
+          "price": 44900,
+          "category": "smartphones",
+          "images": [
+            "https://imgs.search.brave.com/Q2w9Mf-dJIWLVQFUpfPV8Q_7nF5FKOKAFqnHKc5nFWk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9wbmdp/bWcuY29tL3VwbG9h/ZHMvaXBob25lXzEx/L3NtYWxsL2lwaG9u/ZV8xMV9QTkczOC5w/bmc"
+          ],
+          "stock": 30,
+          "description": "6.1-inch Liquid Retina display, dual-camera system, A13 Bionic chip.",
+          "specifications": {
+            "display": "6.1-inch LCD",
+            "storage": "64GB",
+            "camera": "12MP + 12MP",
+            "battery": "3110mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true
+        },
+        {
+          "id": "p4",
+          "name": "Apple iPhone 8 Plus",
+          "brand": "Apple",
+          "price": 35900,
+          "category": "smartphones",
+          "images": [
+            "https://imgs.search.brave.com/pJVGG0MJ0asO3xUviKFm6XPoP3rCy0HWFuLs8TBQrCM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zaW1p/bGFycG5nLmNvbS9f/bmV4dC9pbWFnZT91/cmw9aHR0cHM6Ly9p/bWFnZS5zaW1pbGFy/cG5nLmNvbS9maWxl/L3NpbWlsYXJwbmcv/dmVyeS10aHVtYm5h/aWwvMjAyMC8wOS9B/cHBsZS1JUGhvbmUt/OC1QbHVzLW9uLXRy/YW5zcGFyZW50LWJh/Y2tncm91bmQtUE5H/LnBuZyZ3PTM4NDAm/cT03NQ"
+          ],
+          "stock": 15,
+          "description": "5.5-inch Retina HD display, Touch ID, A11 Bionic chip.",
+          "specifications": {
+            "display": "5.5-inch LCD",
+            "storage": "64GB",
+            "camera": "12MP + 12MP",
+            "battery": "2691mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true
+        },
+        {
+          "id": "p23",
+          "name": "Samsung Galaxy S24 FE",
+          "brand": "Samsung",
+          "price": 49999,
+          "category": "smartphones",
+          "images": [
+            "https://m.media-amazon.com/images/I/513NjwDrXwL.__AC_SX300_SY300_QL70_ML2_.jpg"
+          ],
+          "stock": 20,
+          "description": "Fan Edition of the flagship S24 with premium features.",
+          "specifications": {
+            "display": "6.4-inch AMOLED",
+            "storage": "128GB",
+            "camera": "50MP + 12MP + 8MP",
+            "battery": "4500mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true
+        },
+        {
+          "id": "p41",
+          "name": "Google Pixel 5a",
+          "brand": "Google",
+          "price": 34999,
+          "category": "smartphones",
+          "images": [
+            "https://m.media-amazon.com/images/I/81Uho2XBxQL._AC_SY355_.jpg"
+          ],
+          "stock": 7,
+          "description": "Affordable Pixel smartphone with great battery life.",
+          "specifications": {
+            "display": "6.34-inch OLED",
+            "storage": "128GB",
+            "camera": "12.2MP + 16MP",
+            "battery": "4680mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true
+        },
+        {
+          "id": "p24",
+          "name": "Samsung Galaxy S21 FE",
+          "brand": "Samsung",
+          "price": 39999,
+          "category": "smartphones",
+          "images": [
+            "https://m.media-amazon.com/images/I/51BoLCWiGpL._AC_SY355_.jpg"
+          ],
+          "stock": 15,
+          "description": "Fan Edition of the flagship S21 with premium features.",
+          "specifications": {
+            "display": "6.4-inch AMOLED",
+            "storage": "128GB",
+            "camera": "12MP + 12MP + 8MP",
+            "battery": "4500mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true
+        }
+      ],
       "createdAt": "2025-08-01T06:16:41.553Z"
     },
     {
@@ -39,8 +278,96 @@
       "password": "anshif@123",
       "confirmPassword": "anshif@123",
       "role": "user",
-      "cart": [],
-      "wishlist": [],
+      "cart": [
+        {
+          "id": "p3",
+          "name": "iPhone X",
+          "brand": "Apple",
+          "price": 39900,
+          "category": "smartphones",
+          "images": [
+            "https://imgs.search.brave.com/DakOOdht2EGgbFhkNw4qdFTKDwdUUu-HTeUckCcbfjI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzAyLzk0LzE3Lzkw/LzM2MF9GXzI5NDE3/OTAyN183NTlwd242/ZXo3dVYyUXRDcTdE/Q0JyaGtpWE5USlZu/Ry5qcGc"
+          ],
+          "stock": 20,
+          "description": "5.8-inch Super Retina display, Face ID, A11 Bionic chip.",
+          "specifications": {
+            "display": "5.8-inch OLED",
+            "storage": "64GB",
+            "camera": "12MP + 12MP",
+            "battery": "2716mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true,
+          "quantity": 1
+        },
+        {
+          "id": "p2",
+          "name": "Samsung Galaxy S23 Ultra",
+          "brand": "Samsung",
+          "price": 124999,
+          "category": "smartphones",
+          "images": [
+            "https://m.media-amazon.com/images/I/61YJz8J0xRL._AC_UL480_FMwebp_QL65_.jpg"
+          ],
+          "stock": 15,
+          "description": "200MP camera, S Pen, Snapdragon 8 Gen 2.",
+          "specifications": {
+            "display": "6.8-inch AMOLED",
+            "storage": "256GB",
+            "camera": "200MP + 12MP + 10MP",
+            "battery": "5000mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true,
+          "quantity": 1
+        }
+      ],
+      "wishlist": [
+        {
+          "id": "p2",
+          "name": "Samsung Galaxy S23 Ultra",
+          "brand": "Samsung",
+          "price": 124999,
+          "category": "smartphones",
+          "images": [
+            "https://m.media-amazon.com/images/I/61YJz8J0xRL._AC_UL480_FMwebp_QL65_.jpg"
+          ],
+          "stock": 15,
+          "description": "200MP camera, S Pen, Snapdragon 8 Gen 2.",
+          "specifications": {
+            "display": "6.8-inch AMOLED",
+            "storage": "256GB",
+            "camera": "200MP + 12MP + 10MP",
+            "battery": "5000mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true
+        },
+        {
+          "id": "p3",
+          "name": "iPhone X",
+          "brand": "Apple",
+          "price": 39900,
+          "category": "smartphones",
+          "images": [
+            "https://imgs.search.brave.com/DakOOdht2EGgbFhkNw4qdFTKDwdUUu-HTeUckCcbfjI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzAyLzk0LzE3Lzkw/LzM2MF9GXzI5NDE3/OTAyN183NTlwd242/ZXo3dVYyUXRDcTdE/Q0JyaGtpWE5USlZu/Ry5qcGc"
+          ],
+          "stock": 20,
+          "description": "5.8-inch Super Retina display, Face ID, A11 Bionic chip.",
+          "specifications": {
+            "display": "5.8-inch OLED",
+            "storage": "64GB",
+            "camera": "12MP + 12MP",
+            "battery": "2716mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true
+        }
+      ],
       "createdAt": "2025-08-01T09:49:01.360Z"
     },
     {

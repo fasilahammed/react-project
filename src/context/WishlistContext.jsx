@@ -1,47 +1,39 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { useAuth } from './AuthContext';
+import { toast } from 'react-hot-toast';
 
 const WishlistContext = createContext();
 
 export function WishlistProvider({ children }) {
-  const { user } = useAuth();
+  const { user, updateUserData } = useAuth();
   const [wishlist, setWishlist] = useState([]);
   const [wishlistCount, setWishlistCount] = useState(0);
 
   useEffect(() => {
-    const loadWishlistData = () => {
-      if (user) {
-        // For logged-in users, use their wishlist from user data
-        setWishlist(user.wishlist || []);
-        setWishlistCount(user.wishlist?.length || 0);
-      } else {
-        // For guests, use localStorage
-        const storedWishlist = localStorage.getItem('snapmob-wishlist');
-        if (storedWishlist) {
-          setWishlist(JSON.parse(storedWishlist));
-          setWishlistCount(JSON.parse(storedWishlist).length);
-        }
-      }
-    };
-
-    loadWishlistData();
+    if (user) {
+      setWishlist(user.wishlist || []);
+      setWishlistCount(user.wishlist?.length || 0);
+    } else {
+      setWishlist([]);
+      setWishlistCount(0);
+    }
   }, [user]);
 
-  const updateWishlist = (newWishlist) => {
+  const updateWishlist = async (newWishlist) => {
     setWishlist(newWishlist);
     setWishlistCount(newWishlist.length);
     
     if (user) {
-      // Update user's wishlist in localStorage
-      const updatedUser = { ...user, wishlist: newWishlist };
-      localStorage.setItem('snapmob-user', JSON.stringify(updatedUser));
-    } else {
-      // For guests, store in separate localStorage key
-      localStorage.setItem('snapmob-wishlist', JSON.stringify(newWishlist));
+      await updateUserData({ ...user, wishlist: newWishlist });
     }
   };
 
-  const toggleWishlist = (product) => {
+  const toggleWishlist = async (product) => {
+    if (!user) {
+      toast.error('Please login to manage wishlist');
+      return false;
+    }
+
     const isInWishlist = wishlist.some(item => item.id === product.id);
     
     let updatedWishlist;
@@ -51,13 +43,40 @@ export function WishlistProvider({ children }) {
       updatedWishlist = [...wishlist, product];
     }
     
-    updateWishlist(updatedWishlist);
+    await updateWishlist(updatedWishlist);
+    toast.success(
+      isInWishlist 
+        ? `${product.name} removed from wishlist` 
+        : `${product.name} added to wishlist`
+    );
     return !isInWishlist;
   };
 
-  const removeFromWishlist = (productId) => {
+  const removeFromWishlist = async (productId) => {
+    if (!user) {
+      toast.error('Please login to manage wishlist');
+      return false;
+    }
+
     const updatedWishlist = wishlist.filter(item => item.id !== productId);
-    updateWishlist(updatedWishlist);
+    await updateWishlist(updatedWishlist);
+    toast.success('Item removed from wishlist');
+    return true;
+  };
+
+  const isInWishlist = (productId) => {
+    return wishlist.some(item => item.id === productId);
+  };
+
+  const clearWishlist = async () => {
+    if (!user) {
+      toast.error('Please login to manage wishlist');
+      return false;
+    }
+
+    await updateWishlist([]);
+    toast.success('Wishlist cleared');
+    return true;
   };
 
   return (
@@ -66,7 +85,9 @@ export function WishlistProvider({ children }) {
         wishlist, 
         wishlistCount,
         toggleWishlist, 
-        removeFromWishlist 
+        removeFromWishlist,
+        isInWishlist,
+        clearWishlist
       }}
     >
       {children}

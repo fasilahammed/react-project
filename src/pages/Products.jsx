@@ -14,11 +14,19 @@ import {
 import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
 import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import Loading from "../components/Loading";
 
 // Components
 const ProductCard = ({ product, onAddToCart, onAddToWishlist, onViewDetails, cart, wishlist }) => {
+  const navigate = useNavigate();
   const isInCart = cart.some(item => item.id === product.id);
   const isInWishlist = wishlist.some(item => item.id === product.id);
+
+  const handleBuyNow = () => {
+    onAddToCart(product);
+    navigate('/checkout');
+  };
 
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden flex flex-col hover:shadow-md transition-shadow">
@@ -108,6 +116,19 @@ const ProductCard = ({ product, onAddToCart, onAddToWishlist, onViewDetails, car
             {isInCart ? 'Added' : 'Add'}
           </button>
         </div>
+        
+        {/* Buy Now Button */}
+        <button
+          onClick={handleBuyNow}
+          disabled={product.stock <= 0}
+          className={`mt-2 w-full py-2 px-4 rounded-lg transition-colors text-sm font-medium ${
+            product.stock <= 0
+              ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
+              : 'bg-blue-500 hover:bg-blue-600 text-white'
+          }`}
+        >
+          Buy Now
+        </button>
       </div>
     </div>
   );
@@ -268,10 +289,18 @@ const SearchBar = ({ value, onChange, onClear }) => {
 };
 
 const ProductDetailsModal = ({ product, onClose, onAddToCart, onAddToWishlist, cart, wishlist }) => {
+  const navigate = useNavigate();
+  
   if (!product) return null;
 
   const isInCart = cart.some(item => item.id === product.id);
   const isInWishlist = wishlist.some(item => item.id === product.id);
+
+  const handleBuyNow = () => {
+    onAddToCart(product);
+    onClose();
+    navigate('/checkout');
+  };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
@@ -315,7 +344,15 @@ const ProductDetailsModal = ({ product, onClose, onAddToCart, onAddToWishlist, c
               <div className="flex justify-between items-start mb-4">
                 <div>
                   <span className="text-sm text-orange-600">{product.brand}</span>
-                  <ProductRating rating={product.rating} />
+                  <div className="flex items-center mt-1">
+                    {[...Array(5)].map((_, i) => (
+                      <FaStar 
+                        key={i} 
+                        className={i < Math.floor(product.rating || 4) ? "text-yellow-400" : "text-gray-300"} 
+                      />
+                    ))}
+                    <span className="text-sm text-gray-500 ml-1">({product.reviews?.length || 0})</span>
+                  </div>
                 </div>
                 <div className="text-right">
                   <p className="text-2xl font-bold">₹{product.price.toLocaleString()}</p>
@@ -375,6 +412,19 @@ const ProductDetailsModal = ({ product, onClose, onAddToCart, onAddToWishlist, c
                   {isInWishlist ? 'In Wishlist' : 'Wishlist'}
                 </button>
               </div>
+              
+              {/* Buy Now Button */}
+              <button
+                onClick={handleBuyNow}
+                disabled={product.stock <= 0}
+                className={`mt-3 w-full py-2 px-4 rounded-lg ${
+                  product.stock <= 0
+                    ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
+                    : 'bg-blue-500 hover:bg-blue-600 text-white'
+                }`}
+              >
+                Buy Now
+              </button>
             </div>
           </div>
         </div>
@@ -393,6 +443,7 @@ export default function Products() {
   const [categories, setCategories] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [showFilters, setShowFilters] = useState(false);
   const { addToCart, cart } = useCart();
   const { wishlist, toggleWishlist } = useWishlist();
 
@@ -489,9 +540,7 @@ export default function Products() {
   };
 
   if (loading) return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-orange-500"></div>
-    </div>
+    <Loading/>
   );
 
   return (
@@ -506,7 +555,17 @@ export default function Products() {
       />
 
       <div className="flex flex-col lg:flex-row gap-6">
-        <div className="lg:w-1/5">
+        {/* Mobile filter toggle button */}
+        <button 
+          onClick={() => setShowFilters(!showFilters)}
+          className="lg:hidden flex items-center justify-center gap-2 py-2 px-4 bg-orange-500 text-white rounded-lg mb-4"
+        >
+          <FaFilter />
+          {showFilters ? 'Hide Filters' : 'Show Filters'}
+        </button>
+
+        {/* Filters - hidden on mobile unless showFilters is true */}
+        <div className={`${showFilters ? 'block' : 'hidden'} lg:block lg:w-1/5`}>
           <Filters 
             brands={brands}
             priceRanges={priceRanges}

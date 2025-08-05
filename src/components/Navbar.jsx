@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { 
-  FiSun, 
-  FiMoon, 
-  FiMenu, 
-  FiX, 
-  FiUser, 
-  FiHome, 
-  FiSmartphone, 
-  FiSearch,
-  FiHeart
+import {
+  FiMenu,
+  FiX,
+  FiUser,
+  FiHome,
+  FiSmartphone,
+  FiHeart,
+  FiShoppingCart,
+  FiChevronDown,
+  FiChevronUp,
+  FiLogOut,
+  FiPackage
 } from 'react-icons/fi';
-import { RiShoppingBag3Line } from 'react-icons/ri';
 import { useAuth } from '../context/AuthContext';
 import { useWishlist } from '../context/WishlistContext';
 import { toast } from 'react-hot-toast';
@@ -19,22 +20,14 @@ import { useCart } from '../context/CartContext';
 import logo from "../assets/img/snapmob-logo.png";
 
 export default function Navbar() {
-  const [darkMode, setDarkMode] = useState(() => {
-    return localStorage.getItem('darkMode') === 'true';
-  });
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  
+  const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
+
   const { user, logout } = useAuth();
   const { cartCount } = useCart();
   const { wishlistCount } = useWishlist();
   const navigate = useNavigate();
-
-  // Apply dark mode class to body and save preference
-  useEffect(() => {
-    document.body.classList.toggle('dark', darkMode);
-    localStorage.setItem('darkMode', darkMode);
-  }, [darkMode]);
 
   // Add scroll effect
   useEffect(() => {
@@ -47,37 +40,36 @@ export default function Navbar() {
     logout();
     toast.success('Logged out successfully!');
     setMobileMenuOpen(false);
-    navigate('/login');
-  };
-
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
+    navigate('/');
   };
 
   const closeMobileMenu = () => {
     setMobileMenuOpen(false);
   };
 
+  const toggleProfileDropdown = () => {
+    setProfileDropdownOpen(!profileDropdownOpen);
+  };
+
   return (
     <nav className={`sticky top-0 z-50 transition-all duration-300 ${
-      scrolled ? 'shadow-lg' : 'shadow-sm'
-    } ${
-      darkMode ? 'bg-gray-900' : 'bg-white'
+      scrolled ? 'shadow-lg bg-white' : 'shadow-sm bg-white'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           
           {/* Logo Section */}
           <div className="flex items-center flex-shrink-0">
-            <Link to="/" className="flex items-center group">
-              <img 
-                src={logo} 
-                alt="SnapMob Logo" 
+            <Link 
+              to="/" 
+              className="flex items-center group focus:outline-none  rounded-lg"
+            >
+              <img
+                src={logo}
+                alt="SnapMob Logo"
                 className="h-10 transition-transform duration-300 group-hover:scale-105"
               />
-              <span className={`ml-3 text-xl font-bold tracking-tight bg-gradient-to-r ${
-                darkMode ? 'from-orange-400 to-orange-300' : 'from-orange-600 to-orange-500'
-              } bg-clip-text text-transparent hidden sm:inline-block`}>
+              <span className="ml-3 text-xl font-bold tracking-tight bg-gradient-to-r from-orange-600 to-orange-500 bg-clip-text text-transparent hidden sm:inline-block">
                 SnapMob
               </span>
             </Link>
@@ -85,93 +77,86 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-2 ml-10">
-            <NavLink to="/" darkMode={darkMode} icon={<FiHome className="mr-1.5" />}>
+            <NavLink to="/" icon={<FiHome className="mr-1.5" />}>
               Home
             </NavLink>
-            <NavLink to="/products" darkMode={darkMode} icon={<FiSmartphone className="mr-1.5" />}>
+            <NavLink to="/products" icon={<FiSmartphone className="mr-1.5" />}>
               Phones
-            </NavLink>
-            <NavLink to="/search" darkMode={darkMode} icon={<FiSearch className="mr-1.5" />}>
-              Search
             </NavLink>
           </div>
 
           {/* Right Side Actions */}
           <div className="flex items-center space-x-3">
-            <button 
-              onClick={toggleDarkMode}
-              className={`p-2 rounded-full transition-colors ${
-                darkMode 
-                  ? 'text-orange-400 hover:bg-gray-800' 
-                  : 'text-orange-600 hover:bg-orange-50'
-              }`}
-              aria-label={`Switch to ${darkMode ? 'light' : 'dark'} mode`}
-            >
-              {darkMode ? <FiSun className="h-5 w-5" /> : <FiMoon className="h-5 w-5" />}
-            </button>
-            
             {/* Wishlist Icon */}
-            <Link 
-              to="/wishlist" 
-              className={`p-2 rounded-full relative transition-colors ${
-                darkMode 
-                  ? 'text-gray-300 hover:bg-gray-800' 
-                  : 'text-gray-700 hover:bg-gray-100'
-              }`}
+            <Link
+              to="/wishlist"
+              className="p-2 rounded-full relative transition-colors text-gray-700 hover:bg-gray-100 focus:outline-none "
+              aria-label="Wishlist"
             >
               <FiHeart className="h-5 w-5" />
               {wishlistCount > 0 && (
-                <span className={`absolute -top-1 -right-1 text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center ${
-                  darkMode ? 'bg-orange-500 text-white' : 'bg-orange-600 text-white'
-                }`}>
+                <span className="absolute -top-1 -right-1 text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center bg-orange-600 text-white">
                   {wishlistCount}
                 </span>
               )}
             </Link>
             
             {/* Cart Icon */}
-            <Link 
-              to="/cart" 
-              className={`p-2 rounded-full relative transition-colors ${
-                darkMode 
-                  ? 'text-gray-300 hover:bg-gray-800' 
-                  : 'text-gray-700 hover:bg-gray-100'
-              }`}
+            <Link
+              to="/cart"
+              className="p-2 rounded-full relative transition-colors text-gray-700 hover:bg-gray-100 "
+              aria-label="Cart"
             >
-              <RiShoppingBag3Line className="h-5 w-5" />
+              <FiShoppingCart className="h-5 w-5" />
               {cartCount > 0 && (
-                <span className={`absolute -top-1 -right-1 text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center ${
-                  darkMode ? 'bg-orange-500 text-white' : 'bg-orange-600 text-white'
-                }`}>
+                <span className="absolute -top-1 -right-1 text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center bg-orange-600 text-white">
                   {cartCount}
                 </span>
               )}
             </Link>
             
             {user ? (
-              <div className="hidden md:flex items-center space-x-3">
-                <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                  Hi, {user.name.split(' ')[0]}
-                </span>
+              <div className="hidden md:flex items-center space-x-3 relative">
                 <button
-                  onClick={handleLogout}
-                  className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
-                    darkMode 
-                      ? 'bg-gray-700 hover:bg-gray-600 text-white' 
-                      : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
-                  }`}
+                  onClick={toggleProfileDropdown}
+                  className="flex items-center space-x-1 px-3 py-1.5 rounded-full text-sm font-medium transition-colors bg-orange-100 hover:bg-orange-200 text-orange-800 "
+                  aria-label="Profile menu"
+                  aria-expanded={profileDropdownOpen}
                 >
-                  Logout
+                  <span>Hi, {user.name.split(' ')[0]}</span>
+                  {profileDropdownOpen ? <FiChevronUp /> : <FiChevronDown />}
                 </button>
+                
+                {/* Profile Dropdown */}
+                {profileDropdownOpen && (
+                  <div className="absolute right-0 top-12 w-48 bg-white rounded-md shadow-lg py-1 z-50 border border-gray-200">
+                    <Link
+                      to="/profile"
+                      onClick={() => setProfileDropdownOpen(false)}
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-50 hover:text-orange-600 flex items-center"
+                    >
+                      <FiUser className="mr-2" /> Profile
+                    </Link>
+                    <Link
+                      to="/orders"
+                      onClick={() => setProfileDropdownOpen(false)}
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-50 hover:text-orange-600 flex items-center"
+                    >
+                      <FiPackage className="mr-2" /> My Orders
+                    </Link>
+                    <button
+                      onClick={handleLogout}
+                      className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-orange-50 hover:text-orange-600 flex items-center"
+                    >
+                      <FiLogOut className="mr-2" /> Logout
+                    </button>
+                  </div>
+                )}
               </div>
             ) : (
-              <Link 
-                to="/login" 
-                className={`hidden md:flex items-center px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
-                  darkMode 
-                    ? 'bg-orange-600 hover:bg-orange-700 text-white' 
-                    : 'bg-orange-500 hover:bg-orange-600 text-white'
-                }`}
+              <Link
+                to="/login"
+                className="hidden md:flex items-center px-3 py-1.5 rounded-full text-sm font-medium transition-colors bg-orange-500 hover:bg-orange-600 text-white focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
               >
                 <FiUser className="mr-1.5 h-4 w-4" />
                 <span>Login</span>
@@ -179,14 +164,11 @@ export default function Navbar() {
             )}
 
             {/* Mobile Menu Button */}
-            <button 
+            <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className={`md:hidden p-2 rounded-full transition-colors ${
-                darkMode 
-                  ? 'text-gray-300 hover:bg-gray-800' 
-                  : 'text-gray-700 hover:bg-gray-100'
-              }`}
+              className="md:hidden p-2 rounded-full transition-colors text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
               aria-label="Toggle menu"
+              aria-expanded={mobileMenuOpen}
             >
               {mobileMenuOpen ? <FiX className="h-6 w-6" /> : <FiMenu className="h-6 w-6" />}
             </button>
@@ -195,41 +177,55 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Menu */}
-      <div className={`md:hidden transition-all duration-300 ease-in-out ${
-        mobileMenuOpen ? 'max-h-screen py-2' : 'max-h-0 overflow-hidden'
-      } ${darkMode ? 'bg-gray-900' : 'bg-white'}`}>
-        <MobileNavLink to="/" darkMode={darkMode} icon={<FiHome />} onClick={closeMobileMenu}>
+      <div 
+        className={`md:hidden transition-all duration-300 ease-in-out ${
+          mobileMenuOpen ? 'max-h-screen py-2' : 'max-h-0 overflow-hidden'
+        } bg-white`}
+        aria-hidden={!mobileMenuOpen}
+      >
+        <MobileNavLink to="/" icon={<FiHome />} onClick={closeMobileMenu}>
           Home
         </MobileNavLink>
-        <MobileNavLink to="/products" darkMode={darkMode} icon={<FiSmartphone />} onClick={closeMobileMenu}>
+        <MobileNavLink to="/products" icon={<FiSmartphone />} onClick={closeMobileMenu}>
           Phones
         </MobileNavLink>
-        <MobileNavLink to="/search" darkMode={darkMode} icon={<FiSearch />} onClick={closeMobileMenu}>
-          Search
-        </MobileNavLink>
-        <MobileNavLink to="/wishlist" darkMode={darkMode} icon={<FiHeart />} badge={wishlistCount} onClick={closeMobileMenu}>
+        <MobileNavLink to="/wishlist" icon={<FiHeart />} badge={wishlistCount} onClick={closeMobileMenu}>
           Wishlist
         </MobileNavLink>
-        <MobileNavLink to="/cart" darkMode={darkMode} icon={<RiShoppingBag3Line />} badge={cartCount} onClick={closeMobileMenu}>
+        <MobileNavLink to="/cart" icon={<FiShoppingCart />} badge={cartCount} onClick={closeMobileMenu}>
           Cart
         </MobileNavLink>
         {user ? (
-          <MobileNavLink 
-            to="#" 
-            darkMode={darkMode} 
-            icon={<FiUser />} 
-            onClick={() => {
-              closeMobileMenu();
-              handleLogout();
-            }}
-          >
-            Logout
-          </MobileNavLink>
+          <>
+            <MobileNavLink
+              to="/profile"
+              icon={<FiUser />}
+              onClick={closeMobileMenu}
+            >
+              Profile
+            </MobileNavLink>
+            <MobileNavLink
+              to="/orders"
+              icon={<FiPackage />}
+              onClick={closeMobileMenu}
+            >
+              My Orders
+            </MobileNavLink>
+            <MobileNavLink
+              to="#"
+              icon={<FiLogOut />}
+              onClick={() => {
+                closeMobileMenu();
+                handleLogout();
+              }}
+            >
+              Logout
+            </MobileNavLink>
+          </>
         ) : (
-          <MobileNavLink 
-            to="/login" 
-            darkMode={darkMode} 
-            icon={<FiUser />} 
+          <MobileNavLink
+            to="/login"
+            icon={<FiUser />}
             onClick={closeMobileMenu}
           >
             Login
@@ -241,15 +237,11 @@ export default function Navbar() {
 }
 
 // Desktop NavLink Component
-function NavLink({ to, children, darkMode, icon }) {
+function NavLink({ to, children, icon }) {
   return (
-    <Link 
-      to={to} 
-      className={`px-4 py-2 rounded-full text-sm font-medium flex items-center transition-colors ${
-        darkMode 
-          ? 'text-gray-300 hover:bg-gray-800 hover:text-orange-400' 
-          : 'text-gray-700 hover:bg-orange-50 hover:text-orange-600'
-      }`}
+    <Link
+      to={to}
+      className="px-4 py-2 rounded-full text-sm font-medium flex items-center transition-colors text-gray-700 hover:bg-orange-50 hover:text-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
     >
       {icon}
       <span className="ml-1.5">{children}</span>
@@ -258,25 +250,19 @@ function NavLink({ to, children, darkMode, icon }) {
 }
 
 // Mobile NavLink Component
-function MobileNavLink({ to, children, darkMode, onClick, icon, badge }) {
+function MobileNavLink({ to, children, onClick, icon, badge }) {
   return (
-    <Link 
-      to={to} 
+    <Link
+      to={to}
       onClick={onClick}
-      className={`flex items-center justify-between px-5 py-3 mx-2 rounded-lg text-base font-medium transition-colors ${
-        darkMode 
-          ? 'text-gray-300 hover:bg-gray-800 hover:text-orange-400' 
-          : 'text-gray-700 hover:bg-orange-50 hover:text-orange-600'
-      }`}
+      className="flex items-center justify-between px-5 py-3 mx-2 rounded-lg text-base font-medium transition-colors text-gray-700 hover:bg-orange-50 hover:text-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
     >
       <div className="flex items-center">
         <span className="mr-3">{icon}</span>
         <span>{children}</span>
       </div>
       {badge > 0 && (
-        <span className={`text-xs px-2 py-1 rounded-full ${
-          darkMode ? 'bg-orange-600 text-white' : 'bg-orange-100 text-orange-800'
-        }`}>
+        <span className="text-xs px-2 py-1 rounded-full bg-orange-100 text-orange-800">
           {badge}
         </span>
       )}
