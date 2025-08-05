@@ -3,241 +3,200 @@ import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, ArrowRight
 
 export default function Footer() {
   return (
-    <footer className="bg-white text-gray-800">
+    <footer className="bg-white text-gray-800 border-t border-gray-200">
       {/* Features Section */}
-      <div className="bg-gradient-to-r from-orange-50 to-orange-100 border-b border-orange-200">
-        <div className="max-w-6xl mx-auto px-6 py-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <div className="flex items-center gap-3 text-center md:text-left">
-              <div className="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center">
-                <Truck className="text-white" size={24} />
+      <div className="bg-orange-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="flex flex-col sm:flex-row items-center text-center sm:text-left gap-4">
+              <div className="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center flex-shrink-0">
+                <Truck className="text-white" size={20} />
               </div>
               <div>
                 <h4 className="font-bold text-gray-800">Free Shipping</h4>
-                <p className="text-gray-600 text-sm">On orders over $99</p>
+                <p className="text-gray-600 text-sm">On orders over ₹999</p>
               </div>
             </div>
-            <div className="flex items-center gap-3 text-center md:text-left">
-              <div className="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center">
-                <Shield className="text-white" size={24} />
+            <div className="flex flex-col sm:flex-row items-center text-center sm:text-left gap-4">
+              <div className="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center flex-shrink-0">
+                <Shield className="text-white" size={20} />
               </div>
               <div>
                 <h4 className="font-bold text-gray-800">Warranty</h4>
-                <p className="text-gray-600 text-sm">2-year protection</p>
+                <p className="text-gray-600 text-sm">1 Year Protection</p>
               </div>
             </div>
-            <div className="flex items-center gap-3 text-center md:text-left">
-              <div className="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center">
-                <Headphones className="text-white" size={24} />
+            <div className="flex flex-col sm:flex-row items-center text-center sm:text-left gap-4">
+              <div className="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center flex-shrink-0">
+                <Headphones className="text-white" size={20} />
               </div>
               <div>
                 <h4 className="font-bold text-gray-800">24/7 Support</h4>
-                <p className="text-gray-600 text-sm">Expert assistance</p>
+                <p className="text-gray-600 text-sm">Dedicated Support</p>
               </div>
             </div>
-            <div className="flex items-center gap-3 text-center md:text-left">
-              <div className="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center">
-                <CreditCard className="text-white" size={24} />
+            <div className="flex flex-col sm:flex-row items-center text-center sm:text-left gap-4">
+              <div className="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center flex-shrink-0">
+                <CreditCard className="text-white" size={20} />
               </div>
               <div>
                 <h4 className="font-bold text-gray-800">Secure Payment</h4>
-                <p className="text-gray-600 text-sm">100% protected</p>
+                <p className="text-gray-600 text-sm">100% Protected</p>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Newsletter Section */}
-      <div className="bg-gradient-to-r from-orange-500 to-orange-600 text-white">
-        <div className="max-w-6xl mx-auto px-6 py-8">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div>
-              <h3 className="text-2xl font-bold mb-2">Stay Connected</h3>
-              <p className="text-orange-100">Get the latest deals and mobile tech updates delivered to your inbox</p>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
-              <input 
-                type="email" 
-                placeholder="Enter your email"
-                className="px-4 py-3 bg-white text-gray-800 border border-orange-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-300 focus:border-transparent flex-1 md:w-80"
-              />
-              <button className="px-6 py-3 bg-white text-orange-600 hover:bg-orange-50 rounded-lg font-medium transition-colors duration-200 flex items-center gap-2 justify-center">
-                Subscribe
-                <ArrowRight size={16} />
-              </button>
             </div>
           </div>
         </div>
       </div>
 
       {/* Main Footer Content */}
-      <div className="max-w-6xl mx-auto px-6 py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 bg-gradient-to-r from-orange-500 to-orange-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">S</span>
+              <div className="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-lg">M</span>
               </div>
-              <span className="text-2xl font-bold text-gray-800">SnapMob</span>
+              <span className="text-2xl font-bold text-gray-800">MobileShop</span>
             </div>
             <p className="text-gray-600 mb-6 leading-relaxed">
-              Your trusted mobile retailer since 2023. We bring you the latest smartphones with unbeatable prices and exceptional service.
+              Your one-stop shop for the latest smartphones and accessories at unbeatable prices.
             </p>
             
             {/* Contact Info */}
             <div className="space-y-3">
               <div className="flex items-center gap-3 text-gray-600">
                 <Phone size={16} className="text-orange-500" />
-                <span>+1 (555) 123-4567</span>
+                <span>+91 98765 43210</span>
               </div>
               <div className="flex items-center gap-3 text-gray-600">
                 <Mail size={16} className="text-orange-500" />
-                <span>hello@snapmob.com</span>
+                <span>support@mobileshop.com</span>
               </div>
               <div className="flex items-center gap-3 text-gray-600">
                 <MapPin size={16} className="text-orange-500" />
-                <span>123 Tech Street, Mobile City</span>
+                <span>123 Tech Park, Bangalore</span>
               </div>
             </div>
           </div>
           
-          {/* Shop Links */}
+          {/* Quick Links */}
           <div>
-            <h3 className="font-bold text-lg mb-6 text-gray-800">Shop</h3>
+            <h3 className="font-bold text-lg mb-6 text-gray-800">Quick Links</h3>
             <ul className="space-y-3">
               <li>
-                <a href="/products" className="text-gray-600 hover:text-orange-500 transition-colors duration-200 flex items-center gap-2 group">
-                  <ArrowRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity text-orange-500" />
-                  All Phones
+                <a href="/products" className="text-gray-600 hover:text-orange-500 transition-colors duration-200">
+                  All Products
                 </a>
               </li>
               <li>
-                <a href="/deals" className="text-gray-600 hover:text-orange-500 transition-colors duration-200 flex items-center gap-2 group">
-                  <ArrowRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity text-orange-500" />
-                  Special Deals
+                <a href="/new-arrivals" className="text-gray-600 hover:text-orange-500 transition-colors duration-200">
+                  New Arrivals
                 </a>
               </li>
               <li>
-                <a href="/brands" className="text-gray-600 hover:text-orange-500 transition-colors duration-200 flex items-center gap-2 group">
-                  <ArrowRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity text-orange-500" />
-                  Top Brands
+                <a href="/deals" className="text-gray-600 hover:text-orange-500 transition-colors duration-200">
+                  Today's Deals
                 </a>
               </li>
               <li>
-                <a href="/accessories" className="text-gray-600 hover:text-orange-500 transition-colors duration-200 flex items-center gap-2 group">
-                  <ArrowRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity text-orange-500" />
+                <a href="/best-sellers" className="text-gray-600 hover:text-orange-500 transition-colors duration-200">
+                  Best Sellers
+                </a>
+              </li>
+              <li>
+                <a href="/accessories" className="text-gray-600 hover:text-orange-500 transition-colors duration-200">
                   Accessories
-                </a>
-              </li>
-              <li>
-                <a href="/trade-in" className="text-gray-600 hover:text-orange-500 transition-colors duration-200 flex items-center gap-2 group">
-                  <ArrowRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity text-orange-500" />
-                  Trade-In Program
                 </a>
               </li>
             </ul>
           </div>
           
-          {/* Support Links */}
+          {/* Customer Service */}
           <div>
-            <h3 className="font-bold text-lg mb-6 text-gray-800">Support</h3>
+            <h3 className="font-bold text-lg mb-6 text-gray-800">Customer Service</h3>
             <ul className="space-y-3">
               <li>
-                <a href="/contact" className="text-gray-600 hover:text-orange-500 transition-colors duration-200 flex items-center gap-2 group">
-                  <ArrowRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity text-orange-500" />
+                <a href="/contact" className="text-gray-600 hover:text-orange-500 transition-colors duration-200">
                   Contact Us
                 </a>
               </li>
               <li>
-                <a href="/faq" className="text-gray-600 hover:text-orange-500 transition-colors duration-200 flex items-center gap-2 group">
-                  <ArrowRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity text-orange-500" />
+                <a href="/faq" className="text-gray-600 hover:text-orange-500 transition-colors duration-200">
                   FAQs
                 </a>
               </li>
               <li>
-                <a href="/shipping" className="text-gray-600 hover:text-orange-500 transition-colors duration-200 flex items-center gap-2 group">
-                  <ArrowRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity text-orange-500" />
-                  Shipping Info
+                <a href="/shipping" className="text-gray-600 hover:text-orange-500 transition-colors duration-200">
+                  Shipping Policy
                 </a>
               </li>
               <li>
-                <a href="/returns" className="text-gray-600 hover:text-orange-500 transition-colors duration-200 flex items-center gap-2 group">
-                  <ArrowRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity text-orange-500" />
-                  Returns & Exchanges
+                <a href="/returns" className="text-gray-600 hover:text-orange-500 transition-colors duration-200">
+                  Returns & Refunds
                 </a>
               </li>
               <li>
-                <a href="/warranty" className="text-gray-600 hover:text-orange-500 transition-colors duration-200 flex items-center gap-2 group">
-                  <ArrowRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity text-orange-500" />
-                  Warranty
+                <a href="/track-order" className="text-gray-600 hover:text-orange-500 transition-colors duration-200">
+                  Track Your Order
                 </a>
               </li>
             </ul>
           </div>
           
-          {/* Company & Legal */}
+          {/* Newsletter */}
           <div>
-            <h3 className="font-bold text-lg mb-6 text-white">Company</h3>
-            <ul className="space-y-3">
-              <li>
-                <a href="/about" className="text-gray-400 hover:text-white transition-colors duration-200 flex items-center gap-2 group">
-                  <ArrowRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
-                  About Us
+            <h3 className="font-bold text-lg mb-6 text-gray-800">Newsletter</h3>
+            <p className="text-gray-600 mb-4">Subscribe to get updates on new products and special offers</p>
+            <div className="flex flex-col sm:flex-row gap-2">
+              <input 
+                type="email" 
+                placeholder="Your email address"
+                className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent flex-1"
+              />
+              <button className="px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg font-medium transition-colors duration-200">
+                Subscribe
+              </button>
+            </div>
+            
+            {/* Social Media */}
+            <div className="mt-6">
+              <h4 className="font-medium text-gray-800 mb-3">Follow Us</h4>
+              <div className="flex gap-4">
+                <a href="#" className="text-gray-600 hover:text-orange-500 transition-colors duration-200">
+                  <Facebook size={20} />
                 </a>
-              </li>
-              <li>
-                <a href="/careers" className="text-gray-400 hover:text-white transition-colors duration-200 flex items-center gap-2 group">
-                  <ArrowRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
-                  Careers
+                <a href="#" className="text-gray-600 hover:text-orange-500 transition-colors duration-200">
+                  <Twitter size={20} />
                 </a>
-              </li>
-              <li>
-                <a href="/press" className="text-gray-400 hover:text-white transition-colors duration-200 flex items-center gap-2 group">
-                  <ArrowRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
-                  Press & Media
+                <a href="#" className="text-gray-600 hover:text-orange-500 transition-colors duration-200">
+                  <Instagram size={20} />
                 </a>
-              </li>
-              <li>
-                <a href="/privacy" className="text-gray-400 hover:text-white transition-colors duration-200 flex items-center gap-2 group">
-                  <ArrowRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
-                  Privacy Policy
+                <a href="#" className="text-gray-600 hover:text-orange-500 transition-colors duration-200">
+                  <Linkedin size={20} />
                 </a>
-              </li>
-              <li>
-                <a href="/terms" className="text-gray-400 hover:text-white transition-colors duration-200 flex items-center gap-2 group">
-                  <ArrowRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
-                  Terms of Service
-                </a>
-              </li>
-            </ul>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Bottom Section */}
-      <div className="border-t border-gray-700">
-        <div className="max-w-6xl mx-auto px-6 py-6">
+      {/* Copyright Section */}
+      <div className="bg-gray-50 border-t border-gray-200 py-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="text-gray-400 text-center md:text-left">
-              <p>&copy; 2024 SnapMob. All rights reserved. | Trusted by 50,000+ customers worldwide</p>
+            <div className="text-gray-500 text-sm text-center md:text-left">
+              <p>&copy; {new Date().getFullYear()} MobileShop. All rights reserved.</p>
             </div>
-            
-            {/* Social Media Links */}
-            <div className="flex items-center gap-4">
-              <span className="text-gray-400 text-sm mr-2">Follow us:</span>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200 p-2 hover:bg-gray-700 rounded-lg">
-                <Facebook size={20} />
+            <div className="flex items-center gap-6">
+              <a href="/privacy" className="text-gray-500 hover:text-orange-500 text-sm transition-colors duration-200">
+                Privacy Policy
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200 p-2 hover:bg-gray-700 rounded-lg">
-                <Twitter size={20} />
+              <a href="/terms" className="text-gray-500 hover:text-orange-500 text-sm transition-colors duration-200">
+                Terms of Service
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200 p-2 hover:bg-gray-700 rounded-lg">
-                <Instagram size={20} />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200 p-2 hover:bg-gray-700 rounded-lg">
-                <Linkedin size={20} />
+              <a href="/sitemap" className="text-gray-500 hover:text-orange-500 text-sm transition-colors duration-200">
+                Sitemap
               </a>
             </div>
           </div>

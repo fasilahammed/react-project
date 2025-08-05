@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { 
-  FaHeart, 
-  FaRegHeart, 
-  FaShoppingCart, 
+import {
+  FaHeart,
+  FaRegHeart,
+  FaShoppingCart,
   FaStar,
   FaFilter,
   FaSearch,
@@ -42,7 +42,7 @@ const ProductCard = ({ product, onAddToCart, onAddToWishlist, onViewDetails, car
           )}
         </button>
 
-        <div 
+        <div
           className="pt-[100%] bg-gray-50 relative cursor-pointer"
           onClick={() => onViewDetails(product)}
         >
@@ -66,7 +66,7 @@ const ProductCard = ({ product, onAddToCart, onAddToWishlist, onViewDetails, car
           <span className="text-xs font-medium text-orange-600 uppercase tracking-wider">
             {product.brand}
           </span>
-          <h3 
+          <h3
             className="text-lg font-bold text-gray-900 mt-1 mb-2 line-clamp-2 cursor-pointer hover:text-orange-600"
             onClick={() => onViewDetails(product)}
           >
@@ -74,9 +74,9 @@ const ProductCard = ({ product, onAddToCart, onAddToWishlist, onViewDetails, car
           </h3>
           <div className="flex items-center">
             {[...Array(5)].map((_, i) => (
-              <FaStar 
-                key={i} 
-                className={i < Math.floor(product.rating || 4) ? "text-yellow-400" : "text-gray-300"} 
+              <FaStar
+                key={i}
+                className={i < Math.floor(product.rating || 4) ? "text-yellow-400" : "text-gray-300"}
               />
             ))}
             <span className="text-sm text-gray-500 ml-1">({product.reviews?.length || 0})</span>
@@ -104,28 +104,27 @@ const ProductCard = ({ product, onAddToCart, onAddToWishlist, onViewDetails, car
           <button
             onClick={() => onAddToCart(product)}
             disabled={product.stock <= 0}
-            className={`py-2 px-4 rounded-lg transition-colors text-sm font-medium flex items-center justify-center gap-2 ${
-              product.stock <= 0
-                ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
-                : isInCart
-                  ? 'bg-green-100 text-green-700 border border-green-200'
-                  : 'bg-orange-500 hover:bg-orange-600 text-white'
-            }`}
+            className={`py-2 px-4 rounded-lg transition-colors text-sm font-medium flex items-center justify-center gap-2 ${product.stock <= 0
+              ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
+              : isInCart
+                ? 'bg-green-100 text-green-700 border border-green-200'
+                : 'bg-orange-500 hover:bg-orange-600 text-white'
+              }`}
           >
             <FaShoppingCart />
             {isInCart ? 'Added' : 'Add'}
           </button>
         </div>
-        
+
         {/* Buy Now Button */}
         <button
           onClick={handleBuyNow}
           disabled={product.stock <= 0}
-          className={`mt-2 w-full py-2 px-4 rounded-lg transition-colors text-sm font-medium ${
-            product.stock <= 0
+          className={`mt-2 w-full py-2 px-4 rounded-lg text-sm font-medium transition-colors 
+    ${product.stock <= 0
               ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
-              : 'bg-blue-500 hover:bg-blue-600 text-white'
-          }`}
+              : 'border border-orange-500 text-orange-500 hover:bg-orange-50'
+            }`}
         >
           Buy Now
         </button>
@@ -137,7 +136,7 @@ const ProductCard = ({ product, onAddToCart, onAddToWishlist, onViewDetails, car
 const FilterSection = ({ title, children, isOpen, onToggle }) => {
   return (
     <div className="mb-4">
-      <button 
+      <button
         className="flex justify-between items-center w-full py-2 text-left font-medium"
         onClick={onToggle}
       >
@@ -153,12 +152,12 @@ const FilterSection = ({ title, children, isOpen, onToggle }) => {
   );
 };
 
-const Filters = ({ 
-  brands, 
-  priceRanges, 
-  categories, 
-  onFilterChange, 
-  onReset 
+const Filters = ({
+  brands,
+  priceRanges,
+  categories,
+  onFilterChange,
+  onReset
 }) => {
   const [filters, setFilters] = useState({
     brand: [],
@@ -166,9 +165,9 @@ const Filters = ({
     category: []
   });
   const [openSections, setOpenSections] = useState({
-    brand: true,
-    price: true,
-    category: true
+    brand: false,
+    price: false,
+    category: false
   });
 
   const toggleSection = (section) => {
@@ -199,27 +198,32 @@ const Filters = ({
   };
 
   return (
-    <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+    <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200 w-full">
       <div className="flex justify-between items-center mb-4">
         <h3 className="font-bold flex items-center">
           <FaFilter className="mr-2 text-orange-500" /> Filters
         </h3>
-        <button 
-          onClick={handleReset}
-          className="text-sm text-orange-600 hover:underline"
-        >
-          Reset All
-        </button>
+        <div className="flex gap-2">
+          <button
+            onClick={handleReset}
+            className="text-sm text-orange-600 hover:underline"
+          >
+            Reset All
+          </button>
+          <button className="lg:hidden text-gray-500">
+            <FaTimes />
+          </button>
+        </div>
       </div>
 
-      <FilterSection 
-        title="Brands" 
+      <FilterSection
+        title="Brands"
         isOpen={openSections.brand}
         onToggle={() => toggleSection('brand')}
       >
         {brands.map(brand => (
-          <div 
-            key={brand} 
+          <div
+            key={brand}
             className={`px-3 py-2 rounded cursor-pointer ${filters.brand.includes(brand) ? 'bg-orange-100 text-orange-700' : 'hover:bg-gray-50'}`}
             onClick={() => handleFilterToggle('brand', brand)}
           >
@@ -228,14 +232,14 @@ const Filters = ({
         ))}
       </FilterSection>
 
-      <FilterSection 
-        title="Price Range" 
+      <FilterSection
+        title="Price Range"
         isOpen={openSections.price}
         onToggle={() => toggleSection('price')}
       >
         {priceRanges.map(range => (
-          <div 
-            key={range.value} 
+          <div
+            key={range.value}
             className={`px-3 py-2 rounded cursor-pointer ${filters.price.includes(range.value) ? 'bg-orange-100 text-orange-700' : 'hover:bg-gray-50'}`}
             onClick={() => handleFilterToggle('price', range.value)}
           >
@@ -244,14 +248,14 @@ const Filters = ({
         ))}
       </FilterSection>
 
-      <FilterSection 
-        title="Categories" 
+      <FilterSection
+        title="Categories"
         isOpen={openSections.category}
         onToggle={() => toggleSection('category')}
       >
         {categories.map(category => (
-          <div 
-            key={category} 
+          <div
+            key={category}
             className={`px-3 py-2 rounded cursor-pointer ${filters.category.includes(category) ? 'bg-orange-100 text-orange-700' : 'hover:bg-gray-50'}`}
             onClick={() => handleFilterToggle('category', category)}
           >
@@ -262,6 +266,7 @@ const Filters = ({
     </div>
   );
 };
+
 
 const SearchBar = ({ value, onChange, onClear }) => {
   return (
@@ -290,7 +295,7 @@ const SearchBar = ({ value, onChange, onClear }) => {
 
 const ProductDetailsModal = ({ product, onClose, onAddToCart, onAddToWishlist, cart, wishlist }) => {
   const navigate = useNavigate();
-  
+
   if (!product) return null;
 
   const isInCart = cart.some(item => item.id === product.id);
@@ -307,7 +312,7 @@ const ProductDetailsModal = ({ product, onClose, onAddToCart, onAddToWishlist, c
       <div className="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
         <div className="flex justify-between items-center border-b p-4 sticky top-0 bg-white z-10">
           <h3 className="text-xl font-bold">{product.name}</h3>
-          <button 
+          <button
             onClick={onClose}
             className="text-gray-500 hover:text-gray-700"
           >
@@ -346,9 +351,9 @@ const ProductDetailsModal = ({ product, onClose, onAddToCart, onAddToWishlist, c
                   <span className="text-sm text-orange-600">{product.brand}</span>
                   <div className="flex items-center mt-1">
                     {[...Array(5)].map((_, i) => (
-                      <FaStar 
-                        key={i} 
-                        className={i < Math.floor(product.rating || 4) ? "text-yellow-400" : "text-gray-300"} 
+                      <FaStar
+                        key={i}
+                        className={i < Math.floor(product.rating || 4) ? "text-yellow-400" : "text-gray-300"}
                       />
                     ))}
                     <span className="text-sm text-gray-500 ml-1">({product.reviews?.length || 0})</span>
@@ -385,24 +390,22 @@ const ProductDetailsModal = ({ product, onClose, onAddToCart, onAddToWishlist, c
                     onClose();
                   }}
                   disabled={product.stock <= 0}
-                  className={`py-2 px-4 rounded-lg flex items-center justify-center gap-2 ${
-                    product.stock <= 0
-                      ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
-                      : isInCart
-                        ? 'bg-green-100 text-green-700 border border-green-200'
-                        : 'bg-orange-500 hover:bg-orange-600 text-white'
-                  }`}
+                  className={`py-2 px-4 rounded-lg flex items-center justify-center gap-2 ${product.stock <= 0
+                    ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
+                    : isInCart
+                      ? 'bg-green-100 text-green-700 border border-green-200'
+                      : 'bg-orange-500 hover:bg-orange-600 text-white'
+                    }`}
                 >
                   <FaShoppingCart />
                   {isInCart ? 'Added to Cart' : 'Add to Cart'}
                 </button>
                 <button
                   onClick={() => onAddToWishlist(product)}
-                  className={`py-2 px-4 rounded-lg border flex items-center justify-center gap-2 ${
-                    isInWishlist
-                      ? 'border-red-200 bg-red-50 text-red-600'
-                      : 'border-gray-300 hover:bg-gray-50 text-gray-700'
-                  }`}
+                  className={`py-2 px-4 rounded-lg border flex items-center justify-center gap-2 ${isInWishlist
+                    ? 'border-red-200 bg-red-50 text-red-600'
+                    : 'border-gray-300 hover:bg-gray-50 text-gray-700'
+                    }`}
                 >
                   {isInWishlist ? (
                     <FaHeart className="text-red-500" />
@@ -412,16 +415,15 @@ const ProductDetailsModal = ({ product, onClose, onAddToCart, onAddToWishlist, c
                   {isInWishlist ? 'In Wishlist' : 'Wishlist'}
                 </button>
               </div>
-              
+
               {/* Buy Now Button */}
               <button
                 onClick={handleBuyNow}
                 disabled={product.stock <= 0}
-                className={`mt-3 w-full py-2 px-4 rounded-lg ${
-                  product.stock <= 0
-                    ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
-                    : 'bg-blue-500 hover:bg-blue-600 text-white'
-                }`}
+                className={`mt-3 w-full py-2 px-4 rounded-lg ${product.stock <= 0
+                  ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
+                  : 'bg-blue-500 hover:bg-blue-600 text-white'
+                  }`}
               >
                 Buy Now
               </button>
@@ -457,30 +459,30 @@ export default function Products() {
 
   useEffect(() => {
     axios.get("http://localhost:3000/products")
-      .then((res) => { 
+      .then((res) => {
         const productsData = res.data || [];
         setProducts(productsData);
         setFilteredProducts(productsData);
-        
+
         // Extract unique brands and categories
         const uniqueBrands = [...new Set(productsData.map(p => p.brand))];
         const uniqueCategories = [...new Set(productsData.map(p => p.category))];
-        
+
         setBrands(uniqueBrands);
         setCategories(uniqueCategories);
-        setLoading(false); 
+        setLoading(false);
       })
       .catch(() => setLoading(false));
   }, []);
 
   const handleFilterChange = (filters) => {
     let results = [...products];
-    
+
     // Apply brand filters
     if (filters.brand.length > 0) {
       results = results.filter(p => filters.brand.includes(p.brand));
     }
-    
+
     // Apply price filters
     if (filters.price.length > 0) {
       results = results.filter(p => {
@@ -490,21 +492,21 @@ export default function Products() {
         });
       });
     }
-    
+
     // Apply category filters
     if (filters.category.length > 0) {
       results = results.filter(p => filters.category.includes(p.category));
     }
-    
+
     // Apply search
     if (searchTerm) {
-      results = results.filter(p => 
+      results = results.filter(p =>
         p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         p.brand.toLowerCase().includes(searchTerm.toLowerCase()) ||
         p.description.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
-    
+
     setFilteredProducts(results);
   };
 
@@ -524,10 +526,10 @@ export default function Products() {
   const handleAddToWishlist = (product) => {
     const added = toggleWishlist(product);
     toast.success(
-      added 
-        ? `${product.name} added to wishlist!` 
+      added
+        ? `${product.name} added to wishlist!`
         : `${product.name} removed from wishlist`,
-      { 
+      {
         position: "bottom-right",
         icon: added ? '❤️' : '💔',
       }
@@ -540,12 +542,12 @@ export default function Products() {
   };
 
   if (loading) return (
-    <Loading/>
+    <Loading />
   );
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <SearchBar 
+      <SearchBar
         value={searchTerm}
         onChange={setSearchTerm}
         onClear={() => {
@@ -556,7 +558,7 @@ export default function Products() {
 
       <div className="flex flex-col lg:flex-row gap-6">
         {/* Mobile filter toggle button */}
-        <button 
+        <button
           onClick={() => setShowFilters(!showFilters)}
           className="lg:hidden flex items-center justify-center gap-2 py-2 px-4 bg-orange-500 text-white rounded-lg mb-4"
         >
@@ -566,7 +568,7 @@ export default function Products() {
 
         {/* Filters - hidden on mobile unless showFilters is true */}
         <div className={`${showFilters ? 'block' : 'hidden'} lg:block lg:w-1/5`}>
-          <Filters 
+          <Filters
             brands={brands}
             priceRanges={priceRanges}
             categories={categories}

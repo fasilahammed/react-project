@@ -119,7 +119,52 @@
       "password": "aflahkm@123",
       "confirmPassword": "aflahkm@123",
       "role": "user",
-      "cart": [],
+      "cart": [
+        {
+          "id": "p12",
+          "name": "Apple iPhone 15 Pro Max",
+          "brand": "Apple",
+          "price": 129900,
+          "category": "smartphones",
+          "images": [
+            "https://imgs.search.brave.com/GR6ZU4OgPLORo113-SoA2PiEw8arOhe3_--EljWWihc/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/cG5nYWxsLmNvbS93/cC1jb250ZW50L3Vw/bG9hZHMvMTgvQXJ0/aXN0aWMtV2hpdGUt/aVBob25lLUZyYW1l/ZC1CeS1OYXR1cmFs/LUVsZW1lbnQtUE5H/LXRodW1iLnBuZw"
+          ],
+          "stock": 8,
+          "description": "Premium iPhone model with Pro features and large display.",
+          "specifications": {
+            "display": "6.7-inch OLED",
+            "storage": "256GB",
+            "camera": "48MP + 12MP + 12MP",
+            "battery": "4422mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true,
+          "quantity": 1
+        },
+        {
+          "id": "p5",
+          "name": "Apple iPhone 11",
+          "brand": "Apple",
+          "price": 44900,
+          "category": "smartphones",
+          "images": [
+            "https://imgs.search.brave.com/Q2w9Mf-dJIWLVQFUpfPV8Q_7nF5FKOKAFqnHKc5nFWk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9wbmdp/bWcuY29tL3VwbG9h/ZHMvaXBob25lXzEx/L3NtYWxsL2lwaG9u/ZV8xMV9QTkczOC5w/bmc"
+          ],
+          "stock": 30,
+          "description": "6.1-inch Liquid Retina display, dual-camera system, A13 Bionic chip.",
+          "specifications": {
+            "display": "6.1-inch LCD",
+            "storage": "64GB",
+            "camera": "12MP + 12MP",
+            "battery": "3110mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true,
+          "quantity": 1
+        }
+      ],
       "wishlist": [
         {
           "id": "p1",
