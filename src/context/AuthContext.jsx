@@ -21,8 +21,9 @@ export function AuthProvider({ children }) {
       const { data } = await loginUser(email, password);
       
       if (data.length > 0) {
-        setUser(data[0]);
-        localStorage.setItem('snapmob-user', JSON.stringify(data[0]));
+        const userData = data[0];
+        setUser(userData);
+        localStorage.setItem('snapmob-user', JSON.stringify(userData));
         toast.success('Login successful!');
         return true;
       } else {
@@ -65,6 +66,8 @@ export function AuthProvider({ children }) {
   const logout = () => {
     setUser(null);
     localStorage.removeItem('snapmob-user');
+    localStorage.removeItem('snapmob-cart');
+    localStorage.removeItem('snapmob-wishlist');
     toast.success('Logged out successfully');
   };
 

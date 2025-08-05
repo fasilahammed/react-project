@@ -1,27 +1,53 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
+import { useAuth } from './AuthContext';
 
 const CartContext = createContext();
 
 export function CartProvider({ children }) {
+  const { user } = useAuth();
   const [cart, setCart] = useState([]);
   const [cartCount, setCartCount] = useState(0);
   const [orders, setOrders] = useState([]);
 
   // Load cart and orders from localStorage
   useEffect(() => {
-    const storedCart = localStorage.getItem('snapmob-cart');
-    const storedOrders = localStorage.getItem('snapmob-orders');
+    const loadCartData = () => {
+      if (user) {
+        // For logged-in users, use their cart from user data
+        setCart(user.cart || []);
+        setCartCount(user.cart?.reduce((total, item) => total + item.quantity, 0) || 0);
+      } else {
+        // For guests, use localStorage
+        const storedCart = localStorage.getItem('snapmob-cart');
+        if (storedCart) {
+          setCart(JSON.parse(storedCart));
+          setCartCount(JSON.parse(storedCart).reduce((total, item) => total + item.quantity, 0));
+        }
+      }
+      
+      const storedOrders = localStorage.getItem('snapmob-orders');
+      if (storedOrders) {
+        setOrders(JSON.parse(storedOrders));
+      }
+    };
+
+    loadCartData();
+  }, [user]);
+
+  const updateCart = (newCart) => {
+    setCart(newCart);
+    setCartCount(newCart.reduce((total, item) => total + item.quantity, 0));
     
-    if (storedCart) {
-      setCart(JSON.parse(storedCart));
-      setCartCount(JSON.parse(storedCart).reduce((total, item) => total + item.quantity, 0));
+    if (user) {
+      // Update user's cart in localStorage
+      const updatedUser = { ...user, cart: newCart };
+      localStorage.setItem('snapmob-user', JSON.stringify(updatedUser));
+    } else {
+      // For guests, store in separate localStorage key
+      localStorage.setItem('snapmob-cart', JSON.stringify(newCart));
     }
-    
-    if (storedOrders) {
-      setOrders(JSON.parse(storedOrders));
-    }
-  }, []);
+  };
 
   const addToCart = (product) => {
     const existingItem = cart.find(item => item.id === product.id);
@@ -73,12 +99,6 @@ export function CartProvider({ children }) {
   const clearCart = () => {
     updateCart([]);
     toast.success('Cart cleared');
-  };
-
-  const updateCart = (newCart) => {
-    setCart(newCart);
-    setCartCount(newCart.reduce((total, item) => total + item.quantity, 0));
-    localStorage.setItem('snapmob-cart', JSON.stringify(newCart));
   };
 
   const checkout = (orderDetails) => {
