@@ -72,7 +72,7 @@ const ProductCard = ({ product, onAddToCart, onAddToWishlist, onViewDetails, car
           >
             {product.name}
           </h3>
-          <div className="flex items-center">
+          {/* <div className="flex items-center">
             {[...Array(5)].map((_, i) => (
               <FaStar
                 key={i}
@@ -80,7 +80,7 @@ const ProductCard = ({ product, onAddToCart, onAddToWishlist, onViewDetails, car
               />
             ))}
             <span className="text-sm text-gray-500 ml-1">({product.reviews?.length || 0})</span>
-          </div>
+          </div> */}
         </div>
 
         <div className="mt-4 flex items-end justify-between">

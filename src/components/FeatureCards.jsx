@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { FiSmartphone, FiDollarSign, FiTruck, FiShield, FiRefreshCw, FiHeadphones } from 'react-icons/fi';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 export default function FeatureCards() {
   const [hoveredIndex, setHoveredIndex] = useState(null);
-
+   const navigate = useNavigate();
   const features = [
     {
       icon: <FiSmartphone size={32} />,
@@ -99,9 +100,9 @@ export default function FeatureCards() {
               
               {hoveredIndex === index && (
                 <div className="mt-4 pt-4 border-t border-gray-100">
-                  <button className="text-sm font-medium text-orange-500 hover:text-orange-600">
+                  {/* <button className="text-sm font-medium text-orange-500 hover:text-orange-600">
                     Learn more →
-                  </button>
+                  </button> */}
                 </div>
               )}
             </motion.div>
@@ -109,7 +110,7 @@ export default function FeatureCards() {
         </motion.div>
 
         <div className="mt-16 text-center">
-          <button className="bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-8 rounded-lg transition-colors duration-300 inline-flex items-center">
+          <button onClick={() => navigate("/products")} className="bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-8 rounded-lg transition-colors duration-300 inline-flex items-center">
             Explore All Benefits
             <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

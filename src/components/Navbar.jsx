@@ -241,7 +241,7 @@ function NavLink({ to, children, icon }) {
   return (
     <Link
       to={to}
-      className="px-4 py-2 rounded-full text-sm font-medium flex items-center transition-colors text-gray-700 hover:bg-orange-50 hover:text-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+      className="px-4 py-2 rounded-full text-sm font-medium flex items-center transition-colors text-gray-700 hover:bg-orange-50 hover:text-orange-600 "
     >
       {icon}
       <span className="ml-1.5">{children}</span>
@@ -255,7 +255,7 @@ function MobileNavLink({ to, children, onClick, icon, badge }) {
     <Link
       to={to}
       onClick={onClick}
-      className="flex items-center justify-between px-5 py-3 mx-2 rounded-lg text-base font-medium transition-colors text-gray-700 hover:bg-orange-50 hover:text-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+      className="flex items-center justify-between px-5 py-3 mx-2 rounded-lg text-base font-medium transition-colors text-gray-700 hover:bg-orange-50 hover:text-orange-600 "
     >
       <div className="flex items-center">
         <span className="mr-3">{icon}</span>

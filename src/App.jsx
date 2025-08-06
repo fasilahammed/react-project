@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer"; // <-- Import Footer
 import { Toaster } from 'react-hot-toast';
 import Loading from './components/Loading';
+import ScrollToTop from './components/ScrollToTop';
 
 // Lazy-loaded pages
 const Home = lazy(() => import("./pages/Home"));
@@ -46,6 +47,7 @@ function Layout() {
       <div className="flex-grow">
         <Suspense fallback={<Loading />}>
           <Routes>
+            
             <Route path="*" element={<ErrorPage />} />
             {/* Public routes */}
             <Route path="/" element={<Home />} />
@@ -79,6 +81,7 @@ export default function App() {
       <CartProvider>
         <WishlistProvider>
           <Router>
+            <ScrollToTop />
             <Layout />
           </Router>
         </WishlistProvider>
