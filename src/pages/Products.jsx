@@ -17,7 +17,7 @@ import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import Loading from "../components/Loading";
 
-// Components
+
 const ProductCard = ({ product, onAddToCart, onAddToWishlist, onViewDetails, cart, wishlist }) => {
   const navigate = useNavigate();
   const isInCart = cart.some(item => item.id === product.id);
@@ -309,7 +309,7 @@ const ProductDetailsModal = ({ product, onClose, onAddToCart, onAddToWishlist, c
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-white bg-opacity-50 p-4">
       <div className="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
         <div className="flex justify-between items-center border-b p-4 sticky top-0 bg-white z-10">
           <h3 className="text-xl font-bold">{product.name}</h3>
@@ -416,9 +416,10 @@ const ProductDetailsModal = ({ product, onClose, onAddToCart, onAddToWishlist, c
               <button
                 onClick={handleBuyNow}
                 disabled={product.stock <= 0}
-                className={`mt-3 w-full py-2 px-4 rounded-lg ${product.stock <= 0
-                  ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
-                  : 'bg-blue-500 hover:bg-blue-600 text-white'
+                className={`mt-2 w-full py-2 px-4 rounded-lg text-sm font-medium transition-colors 
+                ${product.stock <= 0
+                    ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
+                    : 'border border-orange-500 text-orange-500 hover:bg-orange-50'
                   }`}
               >
                 Buy Now
@@ -517,12 +518,12 @@ export default function Products() {
 
   const handleAddToCart = (product) => {
     addToCart(product);
-    
+
   };
 
   const handleAddToWishlist = (product) => {
     const added = toggleWishlist(product);
-    
+
   };
 
   const handleViewDetails = (product) => {
