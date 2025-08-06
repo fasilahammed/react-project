@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import HeroSection from '../components/HeroSection';
 import FeatureCards from '../components/FeatureCards';
 import AboutSection from '../components/AboutSection';
-import LuxuryProduct from '../components/LuxuryProduct';
 import LandingProduct from '../components/LandingProduct';
 
 export default function Home() {
@@ -11,7 +10,6 @@ export default function Home() {
       <main>
         <HeroSection />
         <LandingProduct/>
-        {/* <LuxuryProduct /> */}
         <FeatureCards />
         <AboutSection />
       </main>

@@ -5,7 +5,7 @@ import { CartProvider } from './context/CartContext';
 import { WishlistProvider } from './context/WishlistContext';
 import PrivateRoute from './routes/PrivateRoute';
 import Navbar from "./components/Navbar";
-import Footer from "./components/Footer"; // <-- Import Footer
+import Footer from "./components/Footer";
 import { Toaster } from 'react-hot-toast';
 import Loading from './components/Loading';
 import ScrollToTop from './components/ScrollToTop';
@@ -26,8 +26,14 @@ const ErrorPage = lazy(() => import('./components/ErrorResponse'));
 
 function Layout() {
   const location = useLocation();
-  const hidePaths = ['/login', '/register']; // same rule for both navbar & footer
-  const shouldShowLayout = !hidePaths.includes(location.pathname);
+
+  // Navbar hidden on login & register
+  const hideNavbarPaths = ['/login', '/register'];
+  const shouldShowNavbar = !hideNavbarPaths.includes(location.pathname);
+
+  // Footer visible only on these pages
+  const footerPaths = ['/', '/products', '/cart', '/wishlist'];
+  const shouldShowFooter = footerPaths.includes(location.pathname);
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 flex flex-col">
@@ -39,15 +45,14 @@ function Layout() {
           error: { style: { background: '#FF3333', color: '#fff' } },
         }}
       />
-      
+
       {/* Navbar */}
-      {shouldShowLayout && <Navbar />}
+      {shouldShowNavbar && <Navbar />}
 
       {/* Main content */}
       <div className="flex-grow">
         <Suspense fallback={<Loading />}>
           <Routes>
-            
             <Route path="*" element={<ErrorPage />} />
             {/* Public routes */}
             <Route path="/" element={<Home />} />
@@ -70,7 +75,7 @@ function Layout() {
       </div>
 
       {/* Footer */}
-      {shouldShowLayout && <Footer />}
+      {shouldShowFooter && <Footer />}
     </div>
   );
 }

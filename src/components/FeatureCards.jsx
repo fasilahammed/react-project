@@ -100,9 +100,9 @@ export default function FeatureCards() {
               
               {hoveredIndex === index && (
                 <div className="mt-4 pt-4 border-t border-gray-100">
-                  {/* <button className="text-sm font-medium text-orange-500 hover:text-orange-600">
+                  <button className="text-sm font-medium text-orange-500 hover:text-orange-600">
                     Learn more →
-                  </button> */}
+                  </button>
                 </div>
               )}
             </motion.div>

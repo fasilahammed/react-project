@@ -72,15 +72,6 @@ const ProductCard = ({ product, onAddToCart, onAddToWishlist, onViewDetails, car
           >
             {product.name}
           </h3>
-          {/* <div className="flex items-center">
-            {[...Array(5)].map((_, i) => (
-              <FaStar
-                key={i}
-                className={i < Math.floor(product.rating || 4) ? "text-yellow-400" : "text-gray-300"}
-              />
-            ))}
-            <span className="text-sm text-gray-500 ml-1">({product.reviews?.length || 0})</span>
-          </div> */}
         </div>
 
         <div className="mt-4 flex items-end justify-between">
@@ -116,12 +107,11 @@ const ProductCard = ({ product, onAddToCart, onAddToWishlist, onViewDetails, car
           </button>
         </div>
 
-        {/* Buy Now Button */}
         <button
           onClick={handleBuyNow}
           disabled={product.stock <= 0}
           className={`mt-2 w-full py-2 px-4 rounded-lg text-sm font-medium transition-colors 
-    ${product.stock <= 0
+            ${product.stock <= 0
               ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
               : 'border border-orange-500 text-orange-500 hover:bg-orange-50'
             }`}
@@ -267,7 +257,6 @@ const Filters = ({
   );
 };
 
-
 const SearchBar = ({ value, onChange, onClear }) => {
   return (
     <div className="relative max-w-2xl mx-auto mb-8">
@@ -279,12 +268,24 @@ const SearchBar = ({ value, onChange, onClear }) => {
         placeholder="Search products by name, brand or description..."
         className="block w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
         value={value}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={(e) => {
+          e.preventDefault();
+          onChange(e.target.value);
+        }}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+          }
+        }}
       />
       {value && (
         <button
-          onClick={onClear}
+          onClick={(e) => {
+            e.preventDefault();
+            onClear();
+          }}
           className="absolute inset-y-0 right-0 pr-3 flex items-center"
+          aria-label="Clear search"
         >
           <FaTimes className="text-gray-400 hover:text-gray-500" />
         </button>
@@ -322,7 +323,6 @@ const ProductDetailsModal = ({ product, onClose, onAddToCart, onAddToWishlist, c
 
         <div className="p-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Product Images */}
             <div>
               <div className="bg-gray-100 rounded-lg p-4 mb-4">
                 <img
@@ -344,7 +344,6 @@ const ProductDetailsModal = ({ product, onClose, onAddToCart, onAddToWishlist, c
               </div>
             </div>
 
-            {/* Product Details */}
             <div>
               <div className="flex justify-between items-start mb-4">
                 <div>
@@ -369,7 +368,6 @@ const ProductDetailsModal = ({ product, onClose, onAddToCart, onAddToWishlist, c
 
               <p className="text-gray-700 mb-6">{product.description}</p>
 
-              {/* Specifications */}
               <div className="mb-6">
                 <h4 className="font-bold mb-3">Specifications</h4>
                 <div className="grid grid-cols-2 gap-4">
@@ -382,7 +380,6 @@ const ProductDetailsModal = ({ product, onClose, onAddToCart, onAddToWishlist, c
                 </div>
               </div>
 
-              {/* Action Buttons */}
               <div className="grid grid-cols-2 gap-3">
                 <button
                   onClick={() => {
@@ -416,7 +413,6 @@ const ProductDetailsModal = ({ product, onClose, onAddToCart, onAddToWishlist, c
                 </button>
               </div>
 
-              {/* Buy Now Button */}
               <button
                 onClick={handleBuyNow}
                 disabled={product.stock <= 0}
@@ -435,7 +431,6 @@ const ProductDetailsModal = ({ product, onClose, onAddToCart, onAddToWishlist, c
   );
 };
 
-// Main Component
 export default function Products() {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -464,7 +459,6 @@ export default function Products() {
         setProducts(productsData);
         setFilteredProducts(productsData);
 
-        // Extract unique brands and categories
         const uniqueBrands = [...new Set(productsData.map(p => p.brand))];
         const uniqueCategories = [...new Set(productsData.map(p => p.category))];
 
@@ -478,12 +472,10 @@ export default function Products() {
   const handleFilterChange = (filters) => {
     let results = [...products];
 
-    // Apply brand filters
     if (filters.brand.length > 0) {
       results = results.filter(p => filters.brand.includes(p.brand));
     }
 
-    // Apply price filters
     if (filters.price.length > 0) {
       results = results.filter(p => {
         return filters.price.some(range => {
@@ -493,21 +485,29 @@ export default function Products() {
       });
     }
 
-    // Apply category filters
     if (filters.category.length > 0) {
       results = results.filter(p => filters.category.includes(p.category));
     }
 
-    // Apply search
     if (searchTerm) {
+      const searchTermLower = searchTerm.toLowerCase();
       results = results.filter(p =>
-        p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        p.brand.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        p.description.toLowerCase().includes(searchTerm.toLowerCase())
+        p.name.toLowerCase().includes(searchTermLower) ||
+        p.brand.toLowerCase().includes(searchTermLower) ||
+        (p.description && p.description.toLowerCase().includes(searchTermLower))
       );
     }
 
     setFilteredProducts(results);
+  };
+
+  const handleSearchChange = (term) => {
+    setSearchTerm(term);
+    handleFilterChange({
+      brand: [],
+      price: [],
+      category: []
+    });
   };
 
   const handleResetFilters = () => {
@@ -517,23 +517,12 @@ export default function Products() {
 
   const handleAddToCart = (product) => {
     addToCart(product);
-    toast.success(`${product.name} added to cart!`, {
-      position: "bottom-right",
-      icon: '🛒',
-    });
+    
   };
 
   const handleAddToWishlist = (product) => {
     const added = toggleWishlist(product);
-    toast.success(
-      added
-        ? `${product.name} added to wishlist!`
-        : `${product.name} removed from wishlist`,
-      {
-        position: "bottom-right",
-        icon: added ? '❤️' : '💔',
-      }
-    );
+    
   };
 
   const handleViewDetails = (product) => {
@@ -541,15 +530,13 @@ export default function Products() {
     setShowModal(true);
   };
 
-  if (loading) return (
-    <Loading />
-  );
+  if (loading) return <Loading />;
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <SearchBar
         value={searchTerm}
-        onChange={setSearchTerm}
+        onChange={handleSearchChange}
         onClear={() => {
           setSearchTerm('');
           handleResetFilters();
@@ -557,7 +544,6 @@ export default function Products() {
       />
 
       <div className="flex flex-col lg:flex-row gap-6">
-        {/* Mobile filter toggle button */}
         <button
           onClick={() => setShowFilters(!showFilters)}
           className="lg:hidden flex items-center justify-center gap-2 py-2 px-4 bg-orange-500 text-white rounded-lg mb-4"
@@ -566,7 +552,6 @@ export default function Products() {
           {showFilters ? 'Hide Filters' : 'Show Filters'}
         </button>
 
-        {/* Filters - hidden on mobile unless showFilters is true */}
         <div className={`${showFilters ? 'block' : 'hidden'} lg:block lg:w-1/5`}>
           <Filters
             brands={brands}

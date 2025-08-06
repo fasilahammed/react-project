@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext'; // Import Auth context
 
 export default function HeroSection() {
+    const { user } = useAuth(); // Access logged-in user
+
     const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
     const videos = [
         {
@@ -11,7 +14,7 @@ export default function HeroSection() {
             highlight: "Mobile Deals"
         },
         {
-            src:"https://storage.googleapis.com/mannequin/blobs/7ff7a741-6b49-405b-a6d8-b9b1e09ad9e1.mp4" ,
+            src: "https://storage.googleapis.com/mannequin/blobs/7ff7a741-6b49-405b-a6d8-b9b1e09ad9e1.mp4",
             title: "Experience Cutting-Edge Technology",
             subtitle: "Explore the latest innovations in mobile technology with our premium selection.",
             highlight: "Technology"
@@ -29,14 +32,14 @@ export default function HeroSection() {
             setCurrentVideoIndex((prevIndex) =>
                 prevIndex === videos.length - 1 ? 0 : prevIndex + 1
             );
-        }, 8000); // Change video every 8 seconds
+        }, 8000);
 
         return () => clearInterval(interval);
     }, [videos.length]);
 
     return (
         <section className="relative w-full h-screen overflow-hidden">
-            {/* Video background with slider */}
+            {/* Video background */}
             {videos.map((video, index) => (
                 <video
                     key={index}
@@ -51,12 +54,11 @@ export default function HeroSection() {
                 </video>
             ))}
 
-            {/* Dark overlay for better text contrast */}
+            {/* Dark overlay */}
             <div className="absolute inset-0 bg-black bg-opacity-50 z-1"></div>
 
-            {/* Content container */}
+            {/* Content */}
             <div className="relative z-20 flex flex-col md:flex-row items-center justify-between h-full max-w-6xl mx-auto px-6">
-                {/* Left Column - Text */}
                 <div className="md:w-1/2 mb-10 md:mb-0 text-white">
                     <h1 className="text-4xl md:text-5xl font-bold mb-4">
                         {videos[currentVideoIndex].title.split(videos[currentVideoIndex].highlight)[0]}
@@ -66,25 +68,31 @@ export default function HeroSection() {
                         {videos[currentVideoIndex].subtitle}
                     </p>
                     <div className="flex gap-4">
-                        <Link
-                            to="/register"
-                            className="bg-orange-600 hover:bg-orange-700 text-white px-6 py-3 rounded-lg shadow-md transition-colors"
-                        >
-                            Get Started
-                        </Link>
+                        {/* Show only if user is NOT logged in */}
+                        {!user && (
+                            <Link
+                                to="/register"
+                                className="bg-orange-600 hover:bg-orange-700 text-white px-6 py-3 rounded-lg shadow-md transition-colors"
+                            >
+                                Get Started
+                            </Link>
+                        )}
+
                         <Link
                             to="/products"
-                            className="bg-white text-orange-600 hover:bg-orange-50 px-6 py-3 rounded-lg border border-orange-600 transition-colors"
+                            className={`px-6 py-3 rounded-lg shadow-md transition-colors 
+                                ${user
+                                    ? 'bg-orange-600 hover:bg-orange-700 text-white'  // Logged in → orange style
+                                    : 'bg-white text-orange-600 hover:bg-orange-50 border border-orange-600' // Not logged in → white style
+                                }`}
                         >
                             Browse Phones
                         </Link>
                     </div>
+
                 </div>
 
-                {/* Right Column - Optional (can be removed if not needed) */}
-                <div className="md:w-1/2 flex justify-center">
-                    {/* Additional content or empty for spacing */}
-                </div>
+                <div className="md:w-1/2 flex justify-center"></div>
             </div>
 
             {/* Slider indicators */}

@@ -84,6 +84,12 @@ export function CartProvider({ children }) {
       return;
     }
 
+    const minQuantity = 0;
+    if (newQuantity > minQuantity) {
+      toast.error(`You can only add ${minQuantity} of this item to your cart`);
+      return;
+    }
+
     const updatedCart = cart.map(item =>
       item.id === productId 
         ? { ...item, quantity: newQuantity } 

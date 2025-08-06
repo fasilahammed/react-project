@@ -7,15 +7,21 @@ import { FiEdit, FiUser, FiShoppingBag, FiHeart, FiLock, FiMail, FiPhone, FiMapP
 import { toast } from 'react-hot-toast';
 
 export default function Profile() {
-  const { user, updateUserData } = useAuth();
+  const { user, updateUserData, logout } = useAuth();
   const { cartCount, orders } = useCart();
   const { wishlistCount } = useWishlist();
   const [editMode, setEditMode] = useState(false);
+  const [showPasswordForm, setShowPasswordForm] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
     address: ''
+  });
+  const [passwordData, setPasswordData] = useState({
+    currentPassword: '',
+    newPassword: '',
+    confirmPassword: ''
   });
 
   useEffect(() => {
@@ -34,6 +40,11 @@ export default function Profile() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
+  const handlePasswordChange = (e) => {
+    const { name, value } = e.target;
+    setPasswordData(prev => ({ ...prev, [name]: value }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -42,6 +53,36 @@ export default function Profile() {
       setEditMode(false);
     } catch (error) {
       toast.error('Failed to update profile');
+    }
+  };
+
+  const handlePasswordSubmit = async (e) => {
+    e.preventDefault();
+    
+    if (passwordData.newPassword !== passwordData.confirmPassword) {
+      toast.error("New passwords don't match");
+      return;
+    }
+
+    if (passwordData.newPassword.length < 6) {
+      toast.error("Password must be at least 6 characters");
+      return;
+    }
+
+    try {
+      // In a real app, you would call your API to change password
+      // await changePassword(user.id, passwordData.currentPassword, passwordData.newPassword);
+      
+      // For demo purposes, we'll just show a success message
+      toast.success('Password changed successfully!');
+      setPasswordData({
+        currentPassword: '',
+        newPassword: '',
+        confirmPassword: ''
+      });
+      setShowPasswordForm(false);
+    } catch (error) {
+      toast.error('Failed to change password. Please check your current password.');
     }
   };
 
@@ -70,7 +111,10 @@ export default function Profile() {
                 <div className="w-24 h-24 rounded-full bg-gradient-to-r from-orange-400 to-orange-600 flex items-center justify-center text-white text-3xl font-bold">
                   {user.name.charAt(0).toUpperCase()}
                 </div>
-                <button className="absolute bottom-0 right-0 bg-white p-2 rounded-full shadow-md hover:bg-gray-100">
+                <button 
+                  className="absolute bottom-0 right-0 bg-white p-2 rounded-full shadow-md hover:bg-gray-100"
+                  onClick={() => setEditMode(!editMode)}
+                >
                   <FiEdit className="text-orange-500" />
                 </button>
               </div>
@@ -124,6 +168,13 @@ export default function Profile() {
                 <span className="font-medium">{orders.length}</span>
               </div>
             </div>
+
+            <button
+              onClick={logout}
+              className="mt-6 w-full py-2 px-4 border border-red-500 text-red-500 rounded-lg hover:bg-red-50 transition-colors"
+            >
+              Logout
+            </button>
           </div>
         </div>
 
@@ -282,12 +333,69 @@ export default function Profile() {
                     <div className="bg-orange-100 p-3 rounded-lg mr-4">
                       <FiLock className="text-orange-500 text-xl" />
                     </div>
-                    <div>
+                    <div className="flex-1">
                       <h3 className="text-sm font-medium text-gray-500">Password</h3>
                       <p className="text-gray-800 font-medium">••••••••</p>
-                      <button className="mt-2 text-sm text-orange-500 hover:text-orange-600">
-                        Change Password
-                      </button>
+                      
+                      {showPasswordForm ? (
+                        <form onSubmit={handlePasswordSubmit} className="mt-4 space-y-4">
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">Current Password</label>
+                            <input
+                              type="password"
+                              name="currentPassword"
+                              value={passwordData.currentPassword}
+                              onChange={handlePasswordChange}
+                              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-orange-500 focus:border-orange-500"
+                              required
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">New Password</label>
+                            <input
+                              type="password"
+                              name="newPassword"
+                              value={passwordData.newPassword}
+                              onChange={handlePasswordChange}
+                              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-orange-500 focus:border-orange-500"
+                              required
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">Confirm New Password</label>
+                            <input
+                              type="password"
+                              name="confirmPassword"
+                              value={passwordData.confirmPassword}
+                              onChange={handlePasswordChange}
+                              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-orange-500 focus:border-orange-500"
+                              required
+                            />
+                          </div>
+                          <div className="flex space-x-3">
+                            <button
+                              type="button"
+                              onClick={() => setShowPasswordForm(false)}
+                              className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50"
+                            >
+                              Cancel
+                            </button>
+                            <button
+                              type="submit"
+                              className="px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg"
+                            >
+                              Change Password
+                            </button>
+                          </div>
+                        </form>
+                      ) : (
+                        <button 
+                          onClick={() => setShowPasswordForm(true)}
+                          className="mt-2 text-sm text-orange-500 hover:text-orange-600"
+                        >
+                          Change Password
+                        </button>
+                      )}
                     </div>
                   </div>
                 </div>
