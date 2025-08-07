@@ -75,28 +75,6 @@
       "role": "user",
       "cart": [
         {
-          "id": "p3",
-          "name": "iPhone X",
-          "brand": "Apple",
-          "price": 39900,
-          "category": "smartphones",
-          "images": [
-            "https://imgs.search.brave.com/DakOOdht2EGgbFhkNw4qdFTKDwdUUu-HTeUckCcbfjI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzAyLzk0LzE3Lzkw/LzM2MF9GXzI5NDE3/OTAyN183NTlwd242/ZXo3dVYyUXRDcTdE/Q0JyaGtpWE5USlZu/Ry5qcGc"
-          ],
-          "stock": 20,
-          "description": "5.8-inch Super Retina display, Face ID, A11 Bionic chip.",
-          "specifications": {
-            "display": "5.8-inch OLED",
-            "storage": "64GB",
-            "camera": "12MP + 12MP",
-            "battery": "2716mAh"
-          },
-          "rating": null,
-          "reviews": [],
-          "isActive": true,
-          "quantity": 3
-        },
-        {
           "id": "p4",
           "name": "Apple iPhone 8 Plus",
           "brand": "Apple",
@@ -165,7 +143,7 @@
       ],
       "createdAt": "2025-08-01T06:16:41.553Z",
       "phone": "9946811493",
-      "address": "fdg"
+      "address": "kayal madathil"
     },
     {
       "id": "be8f",
