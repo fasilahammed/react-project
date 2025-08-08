@@ -8,95 +8,117 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // Load user from localStorage or sessionStorage on mount
   useEffect(() => {
     try {
-      const storedUser = localStorage.getItem('snapmob-user');
+      let storedUser = localStorage.getItem('user') || sessionStorage.getItem('user');
       if (storedUser && storedUser !== 'undefined') {
         setUser(JSON.parse(storedUser));
       }
     } catch (error) {
-      console.error('Failed to parse user data:', error);
-      localStorage.removeItem('snapmob-user');
+      console.error('Failed to parse stored user:', error);
+      localStorage.removeItem('user');
+      sessionStorage.removeItem('user');
     } finally {
       setLoading(false);
     }
   }, []);
 
-  const login = async (email, password) => {
+  // LOGIN
+  const login = async (email, password, rememberMe = false) => {
     try {
       const response = await loginUser(email, password);
-      
-      if (response.data && response.data.length > 0) {
+
+      if (response?.data?.length > 0) {
         const userData = response.data[0];
+
         setUser(userData);
-        localStorage.setItem('snapmob-user', JSON.stringify(userData));
+        if (rememberMe) {
+          localStorage.setItem('user', JSON.stringify(userData));
+        } else {
+          sessionStorage.setItem('user', JSON.stringify(userData));
+        }
+
         toast.success('Login successful!');
-        return true;
+        return { success: true, role: userData.role || 'user' };
       }
+
       toast.error('Invalid email or password');
-      return false;
+      return { success: false };
     } catch (error) {
+      console.error('Login error:', error);
       toast.error('Login failed. Please try again.');
-      return false;
+      return { success: false };
     }
   };
 
+  // REGISTER
   const register = async (userData) => {
     try {
-      const existingUsers = await loginUser(userData.email, '');
-      if (existingUsers.data.length > 0) {
-        toast.error('Email already registered');
-        return false;
-      }
-
       const newUser = {
         ...userData,
         role: 'user',
         cart: [],
         wishlist: [],
-        createdAt: new Date().toISOString()
+        createdAt: new Date().toISOString(),
       };
 
       const response = await registerUser(newUser);
-      setUser(response.data);
-      localStorage.setItem('snapmob-user', JSON.stringify(response.data));
-      toast.success('Registration successful!');
-      return true;
+      if (response?.data) {
+        setUser(response.data);
+        localStorage.setItem('user', JSON.stringify(response.data));
+        toast.success('Registration successful!');
+        return true;
+      }
+
+      toast.error('Registration failed');
+      return false;
     } catch (error) {
+      console.error('Register error:', error);
       toast.error('Registration failed');
       return false;
     }
   };
 
+  // UPDATE USER
   const updateUserData = async (updatedData) => {
     if (!user) return false;
-    
+
     try {
       const response = await updateUser(user.id, updatedData);
-      setUser(response.data);
-      localStorage.setItem('snapmob-user', JSON.stringify(response.data));
-      return true;
+      if (response?.data) {
+        setUser(response.data);
+        localStorage.setItem('user', JSON.stringify(response.data));
+        return true;
+      }
+
+      toast.error('Failed to update user');
+      return false;
     } catch (error) {
+      console.error('Update user error:', error);
       toast.error('Failed to update user data');
       return false;
     }
   };
 
+  // LOGOUT
   const logout = () => {
-    localStorage.removeItem("snapmob-user")
+    localStorage.removeItem('user');
+    sessionStorage.removeItem('user');
     setUser(null);
-   
   };
 
   return (
-    <AuthContext.Provider value={{ 
-      user, 
-      loading, 
-      login, 
-      register, 
-      logout,
-      updateUserData
-    }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        loading,
+        login,
+        register,
+        logout,
+        updateUserData,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

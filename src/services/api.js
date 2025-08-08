@@ -6,9 +6,13 @@ const API = axios.create({
 });
 
 // -------------------- PRODUCTS --------------------
-export const fetchProducts = () => API.get('/products');
+export const fetchProducts = (page = 1, limit = 10) => 
+  API.get(`/products?_page=${page}&_limit=${limit}&_sort=id&_order=desc`);
 
 export const fetchProductById = (id) => API.get(`/products/${id}`);
+
+// Get total count of products for pagination
+export const fetchProductsCount = () => API.get('/products').then(res => res.data.length);
 
 // -------------------- USERS --------------------
 export const loginUser = (email, password) =>

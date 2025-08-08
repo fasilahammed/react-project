@@ -63,7 +63,7 @@ export function CartProvider({ children }) {
     }
     
     await updateCart(updatedCart);
-    toast.success(`${product.name} added to cart!`);
+ 
     return true;
   };
 
@@ -73,8 +73,9 @@ export function CartProvider({ children }) {
   };
 
   const updateQuantity = async (productId, newQuantity) => {
+    // Ensure quantity is at least 1
     if (newQuantity < 1) {
-      await removeFromCart(productId);
+      
       return;
     }
 
@@ -83,8 +84,6 @@ export function CartProvider({ children }) {
       toast.error(`You can only add ${maxQuantity} of this item to your cart`);
       return;
     }
-
-    
 
     const updatedCart = cart.map(item =>
       item.id === productId 

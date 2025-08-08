@@ -6,9 +6,8 @@
       "email": "admin@snapmob.com",
       "password": "admin123",
       "role": "admin",
-      "cart": [],
-      "wishlist": [],
-      "createdAt": "2023-07-20T10:00:00Z"
+      "createdAt": "2023-07-20T10:00:00Z",
+      "cart": []
     },
     {
       "id": "7f9c",
@@ -73,30 +72,7 @@
       "password": "aflahkm@123",
       "confirmPassword": "aflahkm@123",
       "role": "user",
-      "cart": [
-        {
-          "id": "p4",
-          "name": "Apple iPhone 8 Plus",
-          "brand": "Apple",
-          "price": 35900,
-          "category": "smartphones",
-          "images": [
-            "https://m.media-amazon.com/images/I/61yX3VKY7GL._AC_UL480_FMwebp_QL65_.jpg"
-          ],
-          "stock": 15,
-          "description": "5.5-inch Retina HD display, Touch ID, A11 Bionic chip.",
-          "specifications": {
-            "display": "5.5-inch LCD",
-            "storage": "64GB",
-            "camera": "12MP + 12MP",
-            "battery": "2691mAh"
-          },
-          "rating": null,
-          "reviews": [],
-          "isActive": true,
-          "quantity": 2
-        }
-      ],
+      "cart": [],
       "wishlist": [
         {
           "id": "p4",
@@ -135,6 +111,48 @@
             "storage": "64GB",
             "camera": "12MP + 12MP",
             "battery": "2716mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true
+        },
+        {
+          "id": "p2",
+          "name": "Samsung Galaxy S23 Ultra",
+          "brand": "Samsung",
+          "price": 124999,
+          "category": "smartphones",
+          "images": [
+            "https://m.media-amazon.com/images/I/51MpKU9XowL._AC_UL480_FMwebp_QL65_.jpg"
+          ],
+          "stock": 15,
+          "description": "200MP camera, S Pen, Snapdragon 8 Gen 2.",
+          "specifications": {
+            "display": "6.8-inch AMOLED",
+            "storage": "256GB",
+            "camera": "200MP + 12MP + 10MP",
+            "battery": "5000mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true
+        },
+        {
+          "id": "p5",
+          "name": "Apple iPhone 11",
+          "brand": "Apple",
+          "price": 44900,
+          "category": "smartphones",
+          "images": [
+            "https://imgs.search.brave.com/Q2w9Mf-dJIWLVQFUpfPV8Q_7nF5FKOKAFqnHKc5nFWk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9wbmdp/bWcuY29tL3VwbG9h/ZHMvaXBob25lXzEx/L3NtYWxsL2lwaG9u/ZV8xMV9QTkczOC5w/bmc"
+          ],
+          "stock": 30,
+          "description": "6.1-inch Liquid Retina display, dual-camera system, A13 Bionic chip.",
+          "specifications": {
+            "display": "6.1-inch LCD",
+            "storage": "64GB",
+            "camera": "12MP + 12MP",
+            "battery": "3110mAh"
           },
           "rating": null,
           "reviews": [],

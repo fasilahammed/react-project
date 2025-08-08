@@ -17,7 +17,6 @@ import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import Loading from "../components/Loading";
 
-
 const ProductCard = ({ product, onAddToCart, onAddToWishlist, onViewDetails, cart, wishlist }) => {
   const navigate = useNavigate();
   const isInCart = cart.some(item => item.id === product.id);
@@ -432,6 +431,77 @@ const ProductDetailsModal = ({ product, onClose, onAddToCart, onAddToWishlist, c
   );
 };
 
+const Pagination = ({ currentPage, totalPages, onPageChange }) => {
+  const maxVisiblePages = 5;
+  let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+  let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+
+  if (endPage - startPage + 1 < maxVisiblePages) {
+    startPage = Math.max(1, endPage - maxVisiblePages + 1);
+  }
+
+  const pages = [];
+  for (let i = startPage; i <= endPage; i++) {
+    pages.push(i);
+  }
+
+  return (
+    <div className="flex justify-center mt-8">
+      <nav className="flex items-center gap-1">
+        <button
+          onClick={() => onPageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+          className={`px-3 py-1 rounded border ${currentPage === 1 ? 'text-gray-400 cursor-not-allowed' : 'hover:bg-gray-100'}`}
+        >
+          &laquo;
+        </button>
+
+        {startPage > 1 && (
+          <>
+            <button
+              onClick={() => onPageChange(1)}
+              className={`px-3 py-1 rounded border ${1 === currentPage ? 'bg-orange-500 text-white' : 'hover:bg-gray-100'}`}
+            >
+              1
+            </button>
+            {startPage > 2 && <span className="px-2">...</span>}
+          </>
+        )}
+
+        {pages.map(page => (
+          <button
+            key={page}
+            onClick={() => onPageChange(page)}
+            className={`px-3 py-1 rounded border ${page === currentPage ? 'bg-orange-500 text-white' : 'hover:bg-gray-100'}`}
+          >
+            {page}
+          </button>
+        ))}
+
+        {endPage < totalPages && (
+          <>
+            {endPage < totalPages - 1 && <span className="px-2">...</span>}
+            <button
+              onClick={() => onPageChange(totalPages)}
+              className={`px-3 py-1 rounded border ${totalPages === currentPage ? 'bg-orange-500 text-white' : 'hover:bg-gray-100'}`}
+            >
+              {totalPages}
+            </button>
+          </>
+        )}
+
+        <button
+          onClick={() => onPageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+          className={`px-3 py-1 rounded border ${currentPage === totalPages ? 'text-gray-400 cursor-not-allowed' : 'hover:bg-gray-100'}`}
+        >
+          &raquo;
+        </button>
+      </nav>
+    </div>
+  );
+};
+
 export default function Products() {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -444,6 +514,10 @@ export default function Products() {
   const [showFilters, setShowFilters] = useState(false);
   const { addToCart, cart } = useCart();
   const { wishlist, toggleWishlist } = useWishlist();
+  
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage] = useState(12);
 
   const priceRanges = [
     { label: "Under ₹10,000", value: "0-10000" },
@@ -469,6 +543,12 @@ export default function Products() {
       })
       .catch(() => setLoading(false));
   }, []);
+
+  // Get current products
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
 
   const handleFilterChange = (filters) => {
     let results = [...products];
@@ -500,6 +580,7 @@ export default function Products() {
     }
 
     setFilteredProducts(results);
+    setCurrentPage(1); // Reset to first page when filters change
   };
 
   const handleSearchChange = (term) => {
@@ -514,21 +595,25 @@ export default function Products() {
   const handleResetFilters = () => {
     setFilteredProducts(products);
     setSearchTerm('');
+    setCurrentPage(1);
   };
 
   const handleAddToCart = (product) => {
     addToCart(product);
-
   };
 
   const handleAddToWishlist = (product) => {
     const added = toggleWishlist(product);
-
   };
 
   const handleViewDetails = (product) => {
     setSelectedProduct(product);
     setShowModal(true);
+  };
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   if (loading) return <Loading />;
@@ -569,24 +654,34 @@ export default function Products() {
               {filteredProducts.length} {filteredProducts.length === 1 ? 'Product' : 'Products'} Found
             </h2>
             <div className="text-sm text-gray-500">
-              Showing {filteredProducts.length} of {products.length}
+              Showing {indexOfFirstProduct + 1}-{Math.min(indexOfLastProduct, filteredProducts.length)} of {filteredProducts.length}
             </div>
           </div>
 
-          {filteredProducts.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredProducts.map((product) => (
-                <ProductCard
-                  key={product.id}
-                  product={product}
-                  onAddToCart={handleAddToCart}
-                  onAddToWishlist={handleAddToWishlist}
-                  onViewDetails={handleViewDetails}
-                  cart={cart}
-                  wishlist={wishlist}
+          {currentProducts.length > 0 ? (
+            <>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {currentProducts.map((product) => (
+                  <ProductCard
+                    key={product.id}
+                    product={product}
+                    onAddToCart={handleAddToCart}
+                    onAddToWishlist={handleAddToWishlist}
+                    onViewDetails={handleViewDetails}
+                    cart={cart}
+                    wishlist={wishlist}
+                  />
+                ))}
+              </div>
+              
+              {totalPages > 1 && (
+                <Pagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  onPageChange={handlePageChange}
                 />
-              ))}
-            </div>
+              )}
+            </>
           ) : (
             <div className="text-center py-16 bg-white rounded-lg border border-gray-200">
               <FaSearch className="mx-auto h-12 w-12 text-gray-400 mb-4" />

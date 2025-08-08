@@ -4,11 +4,16 @@ import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 import { WishlistProvider } from './context/WishlistContext';
 import PrivateRoute from './routes/PrivateRoute';
+import AdminRoute from './routes/AdminRoute';
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { Toaster } from 'react-hot-toast';
 import Loading from './components/Loading';
-import ScrollToTop from './components/ScrollToTop';
+import ScrollToTop from './components/CommonSetUp/ScrollToTop';
+import AdminDashboard from './admin/AdminDashboard';
+import AdminUsers from './admin/AdminUsers';
+import AdminProducts from './admin/AdminProducts';
+import AdminOrders from './admin/AdminOrders';
 
 // Lazy-loaded pages
 const Home = lazy(() => import("./pages/Home"));
@@ -22,18 +27,21 @@ const Profile = lazy(() => import("./pages/Profile"));
 const Orders = lazy(() => import("./pages/Orders"));
 const OrderDetails = lazy(() => import("./pages/OrderDetails"));
 const OrderSuccess = lazy(() => import("./pages/OrderSuccess"));
-const ErrorPage = lazy(() => import('./components/ErrorResponse'));
+const ErrorPage = lazy(() => import('./components/ErrorResponse'))
 
 function Layout() {
   const location = useLocation();
 
+  // Hide Navbar and Footer for admin pages
+  const isAdminPage = location.pathname.startsWith("/admin");
+
   // Navbar hidden on login & register
   const hideNavbarPaths = ['/login', '/register'];
-  const shouldShowNavbar = !hideNavbarPaths.includes(location.pathname);
+  const shouldShowNavbar = !hideNavbarPaths.includes(location.pathname) && !isAdminPage;
 
-  // Footer visible only on these pages
+  // Footer visible only on these pages (and not admin)
   const footerPaths = ['/', '/products', '/cart', '/wishlist'];
-  const shouldShowFooter = footerPaths.includes(location.pathname);
+  const shouldShowFooter = footerPaths.includes(location.pathname) && !isAdminPage;
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 flex flex-col">
@@ -54,12 +62,13 @@ function Layout() {
         <Suspense fallback={<Loading />}>
           <Routes>
             <Route path="*" element={<ErrorPage />} />
+
             {/* Public routes */}
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
 
-            {/* Protected routes */}
+            {/* Protected user routes */}
             <Route element={<PrivateRoute />}>
               <Route path="/products" element={<Products />} />
               <Route path="/cart" element={<Cart />} />
@@ -69,6 +78,19 @@ function Layout() {
               <Route path="/checkout" element={<Checkout />} />
               <Route path="/order-success" element={<OrderSuccess />} />
               <Route path="/wishlist" element={<Wishlist />} />
+            </Route>
+
+            {/* Admin-only routes */}
+            <Route path="/admin" element={<AdminRoute />}>
+              <Route index element={<AdminDashboard />} />
+              <Route path="users" element={<AdminUsers />} />
+              <Route path="products" element={<AdminProducts />} />
+              <Route path="orders" element={<AdminOrders />} />
+              <Route path="analytics" element={<div className="p-6 text-2xl font-bold dark:text-white">Analytics Coming Soon</div>} />
+              <Route path="settings" element={<div className="p-6 text-2xl font-bold dark:text-white">Settings Coming Soon</div>} />
+              <Route path="products/new" element={<div className="p-6 text-2xl font-bold dark:text-white">Add New Product Form Coming Soon</div>} />
+              <Route path="products/:id" element={<div className="p-6 text-2xl font-bold dark:text-white">Edit Product Form Coming Soon</div>} />
+              <Route path="users/:id" element={<div className="p-6 text-2xl font-bold dark:text-white">User Details Coming Soon</div>} />
             </Route>
           </Routes>
         </Suspense>

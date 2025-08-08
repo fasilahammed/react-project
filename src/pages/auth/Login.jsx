@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../../context/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
-import { FiEye, FiEyeOff, FiLock, FiMail } from 'react-icons/fi';
+import { FiEye, FiEyeOff } from 'react-icons/fi';
 import logo from '../../assets/img/snapmob-logo.png';
 
 export default function Login() {
@@ -15,8 +15,14 @@ export default function Login() {
 
   const onSubmit = async ({ email, password }) => {
     try {
-      await login(email, password, rememberMe);
-      navigate('/');
+      const userData = await login(email, password, rememberMe);
+
+      // Role-based navigation
+      if (userData?.role === 'admin') {
+        navigate('/admin');
+      } else {
+        navigate('/');
+      }
     } catch {
       setError('Invalid email or password');
     }
@@ -25,6 +31,7 @@ export default function Login() {
   return (
     <div className="min-h-screen bg-gradient-to-r from-orange-50 to-gray-50 flex items-center justify-center">
       <div className="w-[80%] flex bg-white rounded-xl shadow-lg overflow-hidden">
+        
         {/* Left Side - Branding */}
         <div className="hidden md:flex flex-col justify-center items-center w-1/2 p-12 bg-white">
           <img src={logo} alt="SnapMob Logo" className="h-24 mb-6" />
@@ -49,6 +56,7 @@ export default function Login() {
             )}
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+              {/* Email */}
               <div>
                 <label className="block mb-1 text-gray-700">Email Address</label>
                 <input
@@ -68,6 +76,7 @@ export default function Login() {
                 )}
               </div>
 
+              {/* Password */}
               <div>
                 <label className="block mb-1 text-gray-700">Password</label>
                 <div className="relative">
@@ -90,6 +99,7 @@ export default function Login() {
                 )}
               </div>
 
+              {/* Remember Me */}
               <div className="flex items-center">
                 <input
                   type="checkbox"
@@ -100,6 +110,7 @@ export default function Login() {
                 <label className="ml-2 text-sm text-gray-700">Remember me</label>
               </div>
 
+              {/* Submit */}
               <button
                 type="submit"
                 className="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white py-3 rounded-lg hover:from-orange-600 hover:to-orange-700 transition-all shadow-md"
@@ -107,6 +118,7 @@ export default function Login() {
                 Login
               </button>
 
+              {/* Link */}
               <p className="text-center text-sm text-gray-500 mt-4">
                 Don’t have an account?{' '}
                 <Link to="/register" className="text-orange-600 font-medium hover:underline">

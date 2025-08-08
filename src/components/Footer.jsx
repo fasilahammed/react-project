@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, ArrowRight, CreditCard, Shield, Truck, Headphones } from 'lucide-react';
+import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, CreditCard, Shield, Truck, Headphones } from 'lucide-react';
 
 export default function Footer() {
   return (
