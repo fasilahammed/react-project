@@ -1,27 +1,42 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaPlus, FaUsers, FaShoppingBag, FaChartLine } from 'react-icons/fa';
+import { 
+  FaPlus, 
+  FaUsers, 
+  FaShoppingBag, 
+  FaChartLine,
+  FaArrowRight
+} from 'react-icons/fa';
 
-const icons = {
-  add: <FaPlus className="text-indigo-500" size={20} />,
-  users: <FaUsers className="text-blue-500" size={20} />,
-  orders: <FaShoppingBag className="text-green-500" size={20} />,
-  analytics: <FaChartLine className="text-purple-500" size={20} />
+const iconComponents = {
+  add: <FaPlus />,
+  users: <FaUsers />,
+  orders: <FaShoppingBag />,
+  analytics: <FaChartLine />
 };
 
-const QuickActionCard = ({ title, icon, link, description }) => {
+const variantClasses = {
+  violet: 'bg-violet-600 hover:bg-violet-700 text-white',
+  blue: 'bg-blue-600 hover:bg-blue-700 text-white',
+  green: 'bg-green-600 hover:bg-green-700 text-white',
+  orange: 'bg-orange-600 hover:bg-orange-700 text-white'
+};
+
+const QuickActionCard = ({ title, icon, link, description, variant = 'violet' }) => {
   return (
     <Link
       to={link}
-      className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 hover:shadow-md transition-all border border-gray-200 dark:border-gray-600 hover:border-indigo-300 dark:hover:border-indigo-500"
+      className={`rounded-xl p-5 flex flex-col justify-between transition-all ${variantClasses[variant]}`}
     >
-      <div className="flex items-start space-x-3">
-        <div className="p-2 rounded-full bg-white dark:bg-gray-600">
-          {icons[icon]}
+      <div className="flex justify-between items-start">
+        <div className="p-3 rounded-lg bg-black bg-opacity-20">
+          {React.cloneElement(iconComponents[icon], { className: 'text-xl' })}
         </div>
-        <div>
-          <h3 className="font-medium text-gray-800 dark:text-gray-200">{title}</h3>
-          <p className="text-sm text-gray-500 dark:text-gray-400">{description}</p>
-        </div>
+        <FaArrowRight className="opacity-50" />
+      </div>
+      <div className="mt-4">
+        <h3 className="font-semibold">{title}</h3>
+        <p className="text-sm opacity-80 mt-1">{description}</p>
       </div>
     </Link>
   );

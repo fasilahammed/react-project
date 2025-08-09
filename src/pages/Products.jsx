@@ -106,17 +106,7 @@ const ProductCard = ({ product, onAddToCart, onAddToWishlist, onViewDetails, car
           </button>
         </div>
 
-        <button
-          onClick={handleBuyNow}
-          disabled={product.stock <= 0}
-          className={`mt-2 w-full py-2 px-4 rounded-lg text-sm font-medium transition-colors 
-            ${product.stock <= 0
-              ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
-              : 'border border-orange-500 text-orange-500 hover:bg-orange-50'
-            }`}
-        >
-          Buy Now
-        </button>
+       
       </div>
     </div>
   );
@@ -412,17 +402,7 @@ const ProductDetailsModal = ({ product, onClose, onAddToCart, onAddToWishlist, c
                 </button>
               </div>
 
-              <button
-                onClick={handleBuyNow}
-                disabled={product.stock <= 0}
-                className={`mt-2 w-full py-2 px-4 rounded-lg text-sm font-medium transition-colors 
-                ${product.stock <= 0
-                    ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
-                    : 'border border-orange-500 text-orange-500 hover:bg-orange-50'
-                  }`}
-              >
-                Buy Now
-              </button>
+              
             </div>
           </div>
         </div>

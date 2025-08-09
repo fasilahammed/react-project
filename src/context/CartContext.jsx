@@ -1,6 +1,12 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import { useAuth } from './AuthContext';
+import { 
+  fetchOrdersByUser, 
+  createOrder, 
+  updateOrder, 
+  deleteOrder 
+} from '../services/api';
 
 const CartContext = createContext();
 
@@ -9,30 +15,41 @@ export function CartProvider({ children }) {
   const [cart, setCart] = useState([]);
   const [cartCount, setCartCount] = useState(0);
   const [orders, setOrders] = useState([]);
+  const [loadingOrders, setLoadingOrders] = useState(false);
 
-  // Load cart from user data
   useEffect(() => {
     if (user) {
       setCart(user.cart || []);
       setCartCount(user.cart?.reduce((total, item) => total + item.quantity, 0) || 0);
+      loadUserOrders();
     } else {
       setCart([]);
       setCartCount(0);
-    }
-
-    // Load orders from localStorage
-    const storedOrders = localStorage.getItem('snapmob-orders');
-    if (storedOrders) {
-      setOrders(JSON.parse(storedOrders));
+      setOrders([]);
     }
   }, [user]);
 
+  const loadUserOrders = async () => {
+    if (!user?.id) return;
+    try {
+      setLoadingOrders(true);
+      const userOrders = await fetchOrdersByUser(user.id);
+      setOrders(Array.isArray(userOrders) ? userOrders : []);
+    } catch (error) {
+      toast.error('Failed to load orders');
+      console.error('Error loading orders:', error);
+    } finally {
+      setLoadingOrders(false);
+    }
+  };
+
   const updateCart = async (newCart) => {
-    setCart(newCart);
-    setCartCount(newCart.reduce((total, item) => total + item.quantity, 0));
+    const updatedCart = Array.isArray(newCart) ? newCart : [];
+    setCart(updatedCart);
+    setCartCount(updatedCart.reduce((total, item) => total + (item.quantity || 0), 0));
     
     if (user) {
-      await updateUserData({ ...user, cart: newCart });
+      await updateUserData({ ...user, cart: updatedCart });
     }
   };
 
@@ -59,11 +76,13 @@ export function CartProvider({ children }) {
           : item
       );
     } else {
-      updatedCart = [...cart, { ...product, quantity: 1 }];
+      updatedCart = [...cart, { 
+        ...product, 
+        quantity: 1 
+      }];
     }
     
     await updateCart(updatedCart);
- 
     return true;
   };
 
@@ -73,15 +92,11 @@ export function CartProvider({ children }) {
   };
 
   const updateQuantity = async (productId, newQuantity) => {
-    // Ensure quantity is at least 1
-    if (newQuantity < 1) {
-      
-      return;
-    }
-
+    if (newQuantity < 1) return;
+    
     const maxQuantity = 5;
     if (newQuantity > maxQuantity) {
-      toast.error(`You can only add ${maxQuantity} of this item to your cart`);
+      toast.error(`Maximum ${maxQuantity} items allowed`);
       return;
     }
 
@@ -99,18 +114,18 @@ export function CartProvider({ children }) {
   };
 
   const totalPrice = cart.reduce(
-    (total, item) => total + (item.price * item.quantity),
+    (total, item) => total + ((item.price || 0) * (item.quantity || 0)),
     0
   );
 
   const checkout = async (orderData) => {
-    if (cart.length === 0) {
+    if (!user || cart.length === 0) {
       toast.error('Your cart is empty');
       return null;
     }
 
     const newOrder = {
-      id: Date.now(),
+      userId: user.id,
       date: new Date().toISOString(),
       items: [...cart],
       total: totalPrice,
@@ -118,59 +133,42 @@ export function CartProvider({ children }) {
       ...orderData
     };
 
-    const updatedOrders = [...orders, newOrder];
-    setOrders(updatedOrders);
-    localStorage.setItem('snapmob-orders', JSON.stringify(updatedOrders));
-    
-    await clearCart();
-    
-    return newOrder;
+    try {
+      const createdOrder = await createOrder(newOrder);
+      setOrders(prev => [createdOrder, ...prev]);
+      await clearCart();
+      return createdOrder;
+    } catch (error) {
+      toast.error('Failed to create order');
+      console.error('Checkout error:', error);
+      throw error;
+    }
   };
 
   const cancelOrder = async (orderId) => {
     try {
-      // In a real app, you would call your API here first
-      // await api.cancelOrder(orderId);
-      
-      // Update local state
-      setOrders(prevOrders => 
-        prevOrders.map(order => 
+      await updateOrder(orderId, { status: 'cancelled' });
+      setOrders(prev => 
+        prev.map(order => 
           order.id === orderId 
             ? { ...order, status: 'cancelled' } 
             : order
         )
       );
-      
-      // Update localStorage
-      const updatedOrders = orders.map(order => 
-        order.id === orderId 
-          ? { ...order, status: 'cancelled' } 
-          : order
-      );
-      localStorage.setItem('snapmob-orders', JSON.stringify(updatedOrders));
-      
       return true;
     } catch (error) {
-      console.error('Error cancelling order:', error);
+      console.error('Cancel order error:', error);
       throw error;
     }
   };
 
   const removeOrder = async (orderId) => {
     try {
-      // In a real app, you would call your API here first
-      // await api.deleteOrder(orderId);
-      
-      // Update local state
-      setOrders(prevOrders => prevOrders.filter(order => order.id !== orderId));
-      
-      // Update localStorage
-      const updatedOrders = orders.filter(order => order.id !== orderId);
-      localStorage.setItem('snapmob-orders', JSON.stringify(updatedOrders));
-      
+      await deleteOrder(orderId);
+      setOrders(prev => prev.filter(order => order.id !== orderId));
       return true;
     } catch (error) {
-      console.error('Error deleting order:', error);
+      console.error('Delete order error:', error);
       throw error;
     }
   };
@@ -181,6 +179,7 @@ export function CartProvider({ children }) {
         cart, 
         cartCount,
         orders,
+        loadingOrders,
         addToCart, 
         removeFromCart, 
         updateQuantity,

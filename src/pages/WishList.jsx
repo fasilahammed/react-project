@@ -17,6 +17,7 @@ export default function WishList() {
   };
 
   const handleBuyNow = (product) => {
+    
     addToCart(product);
     navigate('/checkout');
   };
@@ -91,12 +92,7 @@ export default function WishList() {
                   <FiShoppingCart />
                   {addedItems[product.id] || cart.some(item => item.id === product.id) ? 'Added' : 'Add to Cart'}
                 </button>
-                <button
-                  onClick={() => handleBuyNow(product)}
-                  className="py-2 px-3 rounded-lg border border-orange-500 text-orange-500 hover:bg-orange-50 text-sm"
-                >
-                  Buy Now
-                </button>
+                
               </div>
             </div>
           </div>

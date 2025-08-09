@@ -1,62 +1,123 @@
 import { Outlet, Navigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import AdminSidebar from './AdminSidebar';
-import { useState, useEffect } from 'react';
-import { FaMoon, FaSun } from 'react-icons/fa';
+import { useState } from 'react';
+import { 
+  FaHome, 
+  FaUsers, 
+  FaBox, 
+  FaShoppingBag, 
+  FaChartBar, 
+  FaCog, 
+  FaSignOutAlt,
+  FaChevronRight,
+  FaChevronLeft,
+  FaUserCircle
+} from 'react-icons/fa';
 
 const AdminLayout = () => {
   const { user, logout } = useAuth();
-  const [darkMode, setDarkMode] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
-  // Check for saved theme preference
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('admin-theme');
-    if (savedTheme === 'dark') {
-      setDarkMode(true);
-    }
-  }, []);
-
-  // Apply dark mode class to body
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('admin-theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('admin-theme', 'light');
-    }
-  }, [darkMode]);
-
-  // Redirect if not admin
   if (user?.role !== 'admin') {
     return <Navigate to="/" />;
   }
 
-  return (
-    <div className={`flex h-screen ${darkMode ? 'dark' : ''}`}>
-      <AdminSidebar />
-      
-      <div className="flex flex-col flex-1 overflow-hidden">
-        {/* Top navigation */}
-        <header className="flex items-center justify-between h-16 px-4 border-b bg-white dark:bg-gray-800 dark:border-gray-700">
-          <div className="flex items-center">
-            <h1 className="text-xl font-bold">Admin Dashboard</h1>
-          </div>
-          <div className="flex items-center space-x-4">
-            <button
-              onClick={() => setDarkMode(!darkMode)}
-              className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"
-            >
-              {darkMode ? <FaSun className="text-yellow-300" /> : <FaMoon />}
-            </button>
-          </div>
-        </header>
+  const menuItems = [
+    { path: '/admin', icon: <FaHome />, text: 'Dashboard' },
+    { path: '/admin/users', icon: <FaUsers />, text: 'Users' },
+    { path: '/admin/products', icon: <FaBox />, text: 'Products' },
+    { path: '/admin/orders', icon: <FaShoppingBag />, text: 'Orders' },
+    { path: '/admin/analytics', icon: <FaChartBar />, text: 'Analytics' },
+    { path: '/admin/settings', icon: <FaCog />, text: 'Settings' }
+  ];
 
-        {/* Main content */}
-        <main className="flex-1 overflow-y-auto p-4 bg-gray-50 dark:bg-gray-900">
-          <Outlet />
-        </main>
+  return (
+    <div className="flex h-screen bg-gray-900">
+      {/* Fixed Sidebar - Dark Theme */}
+      <div className={`
+        fixed h-full bg-gray-800 border-r border-gray-700 z-10
+        transition-all duration-300 ease-in-out
+        ${sidebarCollapsed ? 'w-20' : 'w-64'}
+      `}>
+        {/* Sidebar Header */}
+        <div className="p-4 border-b border-gray-700 flex items-center justify-between">
+          {!sidebarCollapsed && (
+            <h1 className="text-xl font-bold text-purple-400">Admin Panel</h1>
+          )}
+          <button 
+            onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+            className="p-1 rounded-full hover:bg-gray-700 text-gray-300"
+          >
+            {sidebarCollapsed ? <FaChevronRight /> : <FaChevronLeft />}
+          </button>
+        </div>
+
+        {/* User Profile */}
+        <div className="p-4 border-b border-gray-700 flex items-center space-x-3">
+          <div className="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center">
+            <FaUserCircle className="text-purple-400 text-xl" />
+          </div>
+          {!sidebarCollapsed && (
+            <div>
+              <p className="font-medium text-white">{user.name || 'Admin'}</p>
+              <p className="text-xs text-gray-400">Administrator</p>
+            </div>
+          )}
+        </div>
+
+        {/* Navigation Menu */}
+        <nav className="p-2">
+          <ul className="space-y-1">
+            {menuItems.map((item) => (
+              <li key={item.text}>
+                <a
+                  href={item.path}
+                  className={`
+                    flex items-center p-3 rounded-lg
+                    hover:bg-gray-700 hover:text-purple-400
+                    transition-colors duration-200
+                    ${window.location.pathname === item.path ? 
+                      'bg-gray-700 text-purple-400' : 
+                      'text-gray-300'}
+                  `}
+                >
+                  <span className="text-lg">{item.icon}</span>
+                  {!sidebarCollapsed && (
+                    <span className="ml-3">{item.text}</span>
+                  )}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        {/* Logout Button */}
+        <div className="absolute bottom-0 w-full p-4 border-t border-gray-700">
+          <button
+            onClick={logout}
+            className={`
+              flex items-center w-full p-3 rounded-lg
+              hover:bg-gray-700 hover:text-red-400
+              text-gray-300
+              transition-colors duration-200
+              ${sidebarCollapsed ? 'justify-center' : ''}
+            `}
+          >
+            <FaSignOutAlt />
+            {!sidebarCollapsed && <span className="ml-3">Logout</span>}
+          </button>
+        </div>
       </div>
+
+      {/* Main Content - Dark Theme */}
+      <main className={`
+        flex-1 overflow-y-auto transition-all duration-300 ease-in-out bg-gray-900
+        ${sidebarCollapsed ? 'ml-20' : 'ml-64'}
+      `}>
+        <div className="p-6 text-white">
+          <Outlet />
+        </div>
+      </main>
     </div>
   );
 };
