@@ -81,7 +81,7 @@ export default function HeroSection() {
                         <Link
                             to="/products"
                             className={`px-6 py-3 rounded-lg shadow-md transition-colors 
-                                ${user
+                                 ${user
                                     ? 'bg-orange-600 hover:bg-orange-700 text-white'  // Logged in → orange style
                                     : 'bg-white text-orange-600 hover:bg-orange-50 border border-orange-600' // Not logged in → white style
                                 }`}

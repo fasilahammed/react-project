@@ -3,6 +3,7 @@ import axios from 'axios';
 import StatCard from './components/StatCard';
 import RecentOrdersTable from './components/RecentOrdersTable';
 import Loading from '../components/Loading';
+import QuickActionCard from './components/QuickActionCard';
 
 const AdminDashboard = () => {
   const [stats, setStats] = useState(null);
@@ -12,47 +13,46 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Fetch users
-        const usersRes = await axios.get('http://localhost:3000/users');
+        // Fetch users and products in parallel
+        const [usersRes, productsRes] = await Promise.all([
+          axios.get('http://localhost:3000/users'),
+          axios.get('http://localhost:3000/products')
+        ]);
+
         const users = usersRes.data;
-        
-        // Fetch products
-        const productsRes = await axios.get('http://localhost:3000/products');
         const products = productsRes.data;
         
         // Calculate stats
         const totalUsers = users.length;
         const totalProducts = products.length;
         
-        // Calculate total sales from all users' carts
-        let totalSales = 0;
-        let totalOrders = 0;
-        
-        users.forEach(user => {
-          if (user.cart && user.cart.length > 0) {
-            totalSales += user.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            totalOrders += user.cart.length;
+        // Calculate total sales and orders
+        const { totalSales, totalOrders } = users.reduce((acc, user) => {
+          if (user.cart?.length > 0) {
+            acc.totalSales += user.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            acc.totalOrders += user.cart.length;
           }
-        });
+          return acc;
+        }, { totalSales: 0, totalOrders: 0 });
         
         setStats({
           totalSales,
           totalOrders,
           totalUsers,
           totalProducts,
-          salesChange: 12.5, // Example percentage
-          ordersChange: 8.3, // Example percentage
-          usersChange: 5.7, // Example percentage
-          productsChange: 3.2 // Example percentage
+          salesChange: 12.5,
+          ordersChange: 8.3,
+          usersChange: 5.7,
+          productsChange: 3.2
         });
         
-        // Get recent orders (for demo, we'll use cart items as orders)
+        // Get recent orders
         const allOrders = users.flatMap(user => 
-          user.cart ? user.cart.map(item => ({
+          user.cart?.map(item => ({
             ...item,
             user: { name: user.name, email: user.email },
             date: user.createdAt
-          })) : []
+          })) || []
         );
         
         setRecentOrders(allOrders.slice(0, 5));
@@ -69,59 +69,80 @@ const AdminDashboard = () => {
   if (loading) return <Loading />;
 
   return (
-    <div className="p-6">
-      <h1 className="text-3xl font-bold mb-6 dark:text-white">Admin Dashboard</h1>
+    <div className="p-4 md:p-6">
+      <h1 className="text-2xl md:text-3xl font-bold mb-6 dark:text-white">Dashboard Overview</h1>
       
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         <StatCard 
           title="Total Sales" 
           value={`₹${stats?.totalSales?.toLocaleString() || 0}`} 
           change={stats?.salesChange || 0}
           icon="sales"
+          trend="up"
         />
         <StatCard 
           title="Total Orders" 
           value={stats?.totalOrders || 0} 
           change={stats?.ordersChange || 0}
           icon="orders"
+          trend="up"
         />
         <StatCard 
           title="Total Users" 
           value={stats?.totalUsers || 0} 
           change={stats?.usersChange || 0}
           icon="users"
+          trend="up"
         />
         <StatCard 
           title="Total Products" 
           value={stats?.totalProducts || 0} 
           change={stats?.productsChange || 0}
           icon="products"
+          trend="up"
         />
       </div>
 
       {/* Recent Orders */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-6">
-        <h2 className="text-xl font-semibold mb-4 dark:text-white">Recent Orders</h2>
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4 md:p-6 mb-6">
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-xl font-semibold dark:text-white">Recent Orders</h2>
+          <button className="text-sm text-indigo-600 dark:text-indigo-400 hover:underline">
+            View All
+          </button>
+        </div>
         <RecentOrdersTable orders={recentOrders} />
       </div>
 
       {/* Quick Actions */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4 md:p-6">
         <h2 className="text-xl font-semibold mb-4 dark:text-white">Quick Actions</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {/* <Link to="/admin/products" className="p-4 bg-blue-100 dark:bg-blue-900 rounded-lg hover:bg-blue-200 dark:hover:bg-blue-800 transition-colors text-center">
-            Add New Product
-          </Link>
-          <Link to="/admin/orders" className="p-4 bg-green-100 dark:bg-green-900 rounded-lg hover:bg-green-200 dark:hover:bg-green-800 transition-colors text-center">
-            View Orders
-          </Link>
-          <Link to="/admin/users" className="p-4 bg-purple-100 dark:bg-purple-900 rounded-lg hover:bg-purple-200 dark:hover:bg-purple-800 transition-colors text-center">
-            Manage Users
-          </Link>
-          <Link to="/admin/analytics" className="p-4 bg-yellow-100 dark:bg-yellow-900 rounded-lg hover:bg-yellow-200 dark:hover:bg-yellow-800 transition-colors text-center">
-            View Analytics
-          </Link> */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <QuickActionCard 
+            title="Add Product" 
+            icon="add" 
+            link="/admin/products/new"
+            description="Create a new product listing"
+          />
+          <QuickActionCard 
+            title="Manage Users" 
+            icon="users" 
+            link="/admin/users"
+            description="View and manage user accounts"
+          />
+          <QuickActionCard 
+            title="View Orders" 
+            icon="orders" 
+            link="/admin/orders"
+            description="Process and track orders"
+          />
+          <QuickActionCard 
+            title="Analytics" 
+            icon="analytics" 
+            link="/admin/analytics"
+            description="View sales and traffic reports"
+          />
         </div>
       </div>
     </div>

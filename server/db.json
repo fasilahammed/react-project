@@ -7,7 +7,30 @@
       "password": "admin123",
       "role": "admin",
       "createdAt": "2023-07-20T10:00:00Z",
-      "cart": []
+      "cart": [
+        {
+          "id": "p2",
+          "name": "Samsung Galaxy S23 Ultra",
+          "brand": "Samsung",
+          "price": 124999,
+          "category": "smartphones",
+          "images": [
+            "https://m.media-amazon.com/images/I/51MpKU9XowL._AC_UL480_FMwebp_QL65_.jpg"
+          ],
+          "stock": 15,
+          "description": "200MP camera, S Pen, Snapdragon 8 Gen 2.",
+          "specifications": {
+            "display": "6.8-inch AMOLED",
+            "storage": "256GB",
+            "camera": "200MP + 12MP + 10MP",
+            "battery": "5000mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true,
+          "quantity": 1
+        }
+      ]
     },
     {
       "id": "7f9c",
@@ -393,6 +416,17 @@
       "cart": [],
       "wishlist": [],
       "createdAt": "2025-08-06T04:42:40.441Z"
+    },
+    {
+      "id": "bd5f",
+      "name": "anas",
+      "email": "anas@gmail.com",
+      "password": "anas@123",
+      "confirmPassword": "anas@123",
+      "role": "user",
+      "cart": [],
+      "wishlist": [],
+      "createdAt": "2025-08-08T13:27:05.346Z"
     }
   ],
   "products": [

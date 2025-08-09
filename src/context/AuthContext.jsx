@@ -8,7 +8,7 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Load user from localStorage or sessionStorage on mount
+  
   useEffect(() => {
     try {
       let storedUser = localStorage.getItem('user') || sessionStorage.getItem('user');

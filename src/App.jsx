@@ -14,6 +14,7 @@ import AdminDashboard from './admin/AdminDashboard';
 import AdminUsers from './admin/AdminUsers';
 import AdminProducts from './admin/AdminProducts';
 import AdminOrders from './admin/AdminOrders';
+import AdminLayout from './admin/AdminLayout';
 
 // Lazy-loaded pages
 const Home = lazy(() => import("./pages/Home"));
@@ -82,15 +83,14 @@ function Layout() {
 
             {/* Admin-only routes */}
             <Route path="/admin" element={<AdminRoute />}>
-              <Route index element={<AdminDashboard />} />
-              <Route path="users" element={<AdminUsers />} />
-              <Route path="products" element={<AdminProducts />} />
-              <Route path="orders" element={<AdminOrders />} />
-              <Route path="analytics" element={<div className="p-6 text-2xl font-bold dark:text-white">Analytics Coming Soon</div>} />
-              <Route path="settings" element={<div className="p-6 text-2xl font-bold dark:text-white">Settings Coming Soon</div>} />
-              <Route path="products/new" element={<div className="p-6 text-2xl font-bold dark:text-white">Add New Product Form Coming Soon</div>} />
-              <Route path="products/:id" element={<div className="p-6 text-2xl font-bold dark:text-white">Edit Product Form Coming Soon</div>} />
-              <Route path="users/:id" element={<div className="p-6 text-2xl font-bold dark:text-white">User Details Coming Soon</div>} />
+              <Route element={<AdminLayout />}>
+                <Route index element={<AdminDashboard />} />
+                <Route path="users" element={<AdminUsers />} />
+                <Route path="products" element={<AdminProducts />} />
+                
+                <Route path="orders" element={<AdminOrders />} />
+                
+              </Route>
             </Route>
           </Routes>
         </Suspense>
