@@ -16,6 +16,7 @@ import AdminProducts from './admin/AdminProducts';
 import AdminOrders from './admin/AdminOrders';
 import AdminLayout from './admin/AdminLayout';
 import UserDetails from './admin/components/UserDetails';
+import ProductForm from './admin/components/ProductForm';
 
 // Lazy-loaded pages
 const Home = lazy(() => import("./pages/Home"));
@@ -89,8 +90,11 @@ function Layout() {
                 <Route path="users" element={<AdminUsers />} />
                 <Route path="users/:userId" element={<UserDetails />} />
                 <Route path="products" element={<AdminProducts />} />
-                <Route path="orders" element={<AdminOrders />} />
+                <Route path="products/new" element={<ProductForm />} />
+                <Route path="products/:id/edit" element={<ProductForm />} />
                 
+                <Route path="orders" element={<AdminOrders />} />
+
               </Route>
             </Route>
           </Routes>

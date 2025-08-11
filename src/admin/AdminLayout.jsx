@@ -27,8 +27,7 @@ const AdminLayout = () => {
     { path: '/admin/users', icon: <FaUsers />, text: 'Users' },
     { path: '/admin/products', icon: <FaBox />, text: 'Products' },
     { path: '/admin/orders', icon: <FaShoppingBag />, text: 'Orders' },
-    { path: '/admin/analytics', icon: <FaChartBar />, text: 'Analytics' },
-    { path: '/admin/settings', icon: <FaCog />, text: 'Settings' }
+  
   ];
 
   return (

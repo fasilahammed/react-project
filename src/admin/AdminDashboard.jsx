@@ -234,13 +234,7 @@ const AdminDashboard = () => {
             description="Manage customer orders"
             variant="green"
           />
-          <QuickActionCard 
-            title="View Reports" 
-            icon="analytics" 
-            link="/admin/analytics"
-            description="Business performance"
-            variant="orange"
-          />
+          
         </div>
       </div>
     </div>

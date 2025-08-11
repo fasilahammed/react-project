@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
-import { FiUser, FiMail, FiSettings, FiTrash2, FiEye } from 'react-icons/fi';
+import { 
+  FiUser, FiMail, FiTrash2, FiEye, 
+  FiCheckCircle, FiXCircle, FiLock, FiUnlock 
+} from 'react-icons/fi';
 import { toast } from 'react-hot-toast';
 import AdminLoading from './components/AdminLoading';
 
@@ -30,20 +33,42 @@ const AdminUsers = () => {
 
   const filteredUsers = users.filter(user =>
     user.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    user.email?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    user.role?.toLowerCase().includes(searchTerm.toLowerCase())
+    user.email?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const updateUserRole = async (userId, newRole) => {
+  const toggleUserStatus = async (userId, currentStatus) => {
     try {
-      await axios.patch(`http://localhost:3000/users/${userId}`, { role: newRole });
+      const newStatus = !currentStatus;
+      await axios.patch(`http://localhost:3000/users/${userId}`, { 
+        isActive: newStatus 
+      });
+      
       setUsers(users.map(user => 
-        user.id === userId ? { ...user, role: newRole } : user
+        user.id === userId ? { ...user, isActive: newStatus } : user
       ));
-      toast.success('User role updated successfully');
+      
+      toast.success(`User ${newStatus ? 'activated' : 'deactivated'}`);
     } catch (error) {
-      console.error('Error updating user role:', error);
-      toast.error('Failed to update user role');
+      console.error('Error updating user status:', error);
+      toast.error('Failed to update user status');
+    }
+  };
+
+  const toggleBlockStatus = async (userId, isBlocked) => {
+    try {
+      const newBlockStatus = !isBlocked;
+      await axios.patch(`http://localhost:3000/users/${userId}`, { 
+        isBlocked: newBlockStatus 
+      });
+      
+      setUsers(users.map(user => 
+        user.id === userId ? { ...user, isBlocked: newBlockStatus } : user
+      ));
+      
+      toast.success(`User ${newBlockStatus ? 'blocked' : 'unblocked'}`);
+    } catch (error) {
+      console.error('Error updating block status:', error);
+      toast.error('Failed to update block status');
     }
   };
 
@@ -90,7 +115,8 @@ const AdminUsers = () => {
               <tr>
                 <th className="px-6 py-4 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">User</th>
                 <th className="px-6 py-4 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Email</th>
-                <th className="px-6 py-4 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Role</th>
+                <th className="px-6 py-4 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Status</th>
+                <th className="px-6 py-4 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Blocked</th>
                 <th className="px-6 py-4 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Joined</th>
                 <th className="px-6 py-4 text-right text-xs font-medium text-gray-300 uppercase tracking-wider">Actions</th>
               </tr>
@@ -117,18 +143,44 @@ const AdminUsers = () => {
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <select
-                        value={user.role || 'user'}
-                        onChange={(e) => updateUserRole(user.id, e.target.value)}
-                        className={`border rounded-lg px-3 py-1 focus:outline-none focus:ring-2 ${
-                          user.role === 'admin' 
-                            ? 'border-purple-500 bg-purple-900/20 text-purple-300' 
-                            : 'border-gray-600 bg-gray-700 text-gray-300'
+                      <button
+                        onClick={() => toggleUserStatus(user.id, user.isActive)}
+                        className={`flex items-center gap-1 px-3 py-1 rounded-full text-xs ${
+                          user.isActive 
+                            ? 'bg-green-100 text-green-800 hover:bg-green-200' 
+                            : 'bg-red-100 text-red-800 hover:bg-red-200'
                         }`}
                       >
-                        <option value="admin">Admin</option>
-                        <option value="user">User</option>
-                      </select>
+                        {user.isActive ? (
+                          <>
+                            <FiCheckCircle /> Active
+                          </>
+                        ) : (
+                          <>
+                            <FiXCircle /> Inactive
+                          </>
+                        )}
+                      </button>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <button
+                        onClick={() => toggleBlockStatus(user.id, user.isBlocked)}
+                        className={`flex items-center gap-1 px-3 py-1 rounded-full text-xs ${
+                          user.isBlocked 
+                            ? 'bg-red-100 text-red-800 hover:bg-red-200' 
+                            : 'bg-gray-100 text-gray-800 hover:bg-gray-200'
+                        }`}
+                      >
+                        {user.isBlocked ? (
+                          <>
+                            <FiLock /> Blocked
+                          </>
+                        ) : (
+                          <>
+                            <FiUnlock /> Unblocked
+                          </>
+                        )}
+                      </button>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-400">
                       {new Date(user.createdAt || Date.now()).toLocaleDateString()}
@@ -146,6 +198,7 @@ const AdminUsers = () => {
                           onClick={() => deleteUser(user.id)}
                           className="text-red-400 hover:text-red-300 p-2 rounded-full hover:bg-red-900/20"
                           title="Delete User"
+                          disabled={user.role === 'admin'}
                         >
                           <FiTrash2 />
                         </button>
@@ -155,7 +208,7 @@ const AdminUsers = () => {
                 ))
               ) : (
                 <tr>
-                  <td colSpan="5" className="px-6 py-8 text-center text-gray-400">
+                  <td colSpan="6" className="px-6 py-8 text-center text-gray-400">
                     {searchTerm ? 'No matching users found' : 'No users available'}
                   </td>
                 </tr>
