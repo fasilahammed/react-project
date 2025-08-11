@@ -8,8 +8,6 @@ import ProductPerformanceChart from './components/Charts.jsx/ProductPerformanceC
 import UserGrowthChart from './components/Charts.jsx/UserGrowthChart';
 import SalesChart from './components/Charts.jsx/SalesChart';
 
-
-
 const AdminDashboard = () => {
   const [dashboardData, setDashboardData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -28,25 +26,71 @@ const AdminDashboard = () => {
         const products = productsRes.data;
         const orders = ordersRes.data || [];
 
-        // Calculate stats
+        // Calculate current period stats
+        const currentPeriod = getDateRange(timeRange, 0);
+        const previousPeriod = getDateRange(timeRange, 1);
+        
+        const currentOrders = orders.filter(order => 
+          new Date(order.date) >= currentPeriod.start && 
+          new Date(order.date) <= currentPeriod.end
+        );
+        
+        const previousOrders = orders.filter(order => 
+          new Date(order.date) >= previousPeriod.start && 
+          new Date(order.date) <= previousPeriod.end
+        );
+
+        // Calculate totals
         const totalUsers = users.length;
         const totalProducts = products.length;
-        const totalOrders = orders.length;
-        const totalSales = orders.reduce((sum, order) => sum + order.total, 0);
+        const totalOrders = currentOrders.length;
+        const totalSales = currentOrders.reduce((sum, order) => sum + (order.total || 0), 0);
 
-        // Calculate growth percentages (mock data for demo)
-        const salesChange = 12.5;
-        const ordersChange = 8.3;
-        const usersChange = 5.7;
-        const productsChange = 3.2;
+        // Calculate growth percentages
+        const previousTotalSales = previousOrders.reduce((sum, order) => sum + (order.total || 0), 0);
+        const previousTotalOrders = previousOrders.length;
+        
+        const salesChange = previousTotalSales > 0 
+          ? ((totalSales - previousTotalSales) / previousTotalSales * 100).toFixed(1)
+          : 100;
+          
+        const ordersChange = previousTotalOrders > 0 
+          ? ((totalOrders - previousTotalOrders) / previousTotalOrders * 100).toFixed(1)
+          : 100;
+
+        // User growth calculation
+        const currentUsers = users.filter(user => 
+          new Date(user.createdAt) <= currentPeriod.end
+        ).length;
+        
+        const previousUsers = users.filter(user => 
+          new Date(user.createdAt) <= previousPeriod.end
+        ).length;
+        
+        const usersChange = previousUsers > 0 
+          ? ((currentUsers - previousUsers) / previousUsers * 100).toFixed(1)
+          : 100;
+
+        // Product growth calculation
+        const currentProducts = products.filter(product => 
+          new Date(product.createdAt) <= currentPeriod.end
+        ).length;
+        
+        const previousProducts = products.filter(product => 
+          new Date(product.createdAt) <= previousPeriod.end
+        ).length;
+        
+        const productsChange = previousProducts > 0 
+          ? ((currentProducts - previousProducts) / previousProducts * 100).toFixed(1)
+          : 100;
 
         // Get recent orders (last 5)
         const recentOrders = [...orders]
-          .sort((a, b) => new Date(b.date) - new Date(a.date))
+          .sort((a, b) => new Date(b.date || b.createdAt) - new Date(a.date || a.createdAt))
           .slice(0, 5);
 
         // Prepare chart data
-        const salesData = generateChartData(orders, timeRange);
+        const salesData = generateSalesData(orders, timeRange);
         const userGrowthData = generateUserGrowthData(users, timeRange);
         const productPerformanceData = generateProductPerformanceData(products, orders);
 
@@ -106,7 +150,7 @@ const AdminDashboard = () => {
           value={`₹${dashboardData.stats.totalSales.toLocaleString()}`} 
           change={dashboardData.stats.salesChange}
           icon="revenue"
-          trend="up"
+          trend={dashboardData.stats.salesChange >= 0 ? "up" : "down"}
           currency="INR"
         />
         <StatCard 
@@ -114,21 +158,21 @@ const AdminDashboard = () => {
           value={dashboardData.stats.totalOrders} 
           change={dashboardData.stats.ordersChange}
           icon="orders"
-          trend="up"
+          trend={dashboardData.stats.ordersChange >= 0 ? "up" : "down"}
         />
         <StatCard 
           title="Active Users" 
           value={dashboardData.stats.totalUsers} 
           change={dashboardData.stats.usersChange}
           icon="users"
-          trend="up"
+          trend={dashboardData.stats.usersChange >= 0 ? "up" : "down"}
         />
         <StatCard 
           title="Products Listed" 
           value={dashboardData.stats.totalProducts} 
           change={dashboardData.stats.productsChange}
           icon="products"
-          trend="up"
+          trend={dashboardData.stats.productsChange >= 0 ? "up" : "down"}
         />
       </div>
 
@@ -137,14 +181,6 @@ const AdminDashboard = () => {
         <div className="bg-gray-800 rounded-xl shadow-lg p-6">
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-xl font-semibold text-white">Sales Analytics</h2>
-            <div className="flex space-x-2">
-              <button className="px-3 py-1 text-xs bg-violet-600 text-white rounded-full">
-                Revenue
-              </button>
-              <button className="px-3 py-1 text-xs bg-gray-700 text-gray-300 rounded-full">
-                Orders
-              </button>
-            </div>
           </div>
           <SalesChart data={dashboardData.salesData} />
         </div>
@@ -211,89 +247,163 @@ const AdminDashboard = () => {
   );
 };
 
-// Helper functions for chart data generation
-function generateChartData(orders, range) {
-  // This would be replaced with actual data processing
-  // Mock data for demonstration
-  const dataMap = {
-    week: [
-      { day: 'Mon', sales: 4000, orders: 24 },
-      { day: 'Tue', sales: 3000, orders: 13 },
-      { day: 'Wed', sales: 5000, orders: 28 },
-      { day: 'Thu', sales: 2000, orders: 15 },
-      { day: 'Fri', sales: 8000, orders: 32 },
-      { day: 'Sat', sales: 7000, orders: 29 },
-      { day: 'Sun', sales: 6000, orders: 25 }
-    ],
-    month: Array(30).fill(0).map((_, i) => ({
-      day: `Day ${i+1}`,
-      sales: Math.floor(Math.random() * 10000),
-      orders: Math.floor(Math.random() * 50)
-    })),
-    quarter: Array(12).fill(0).map((_, i) => ({
-      week: `Week ${i+1}`,
-      sales: Math.floor(Math.random() * 50000),
-      orders: Math.floor(Math.random() * 200)
-    })),
-    year: [
-      { month: 'Jan', sales: 40000, orders: 150 },
-      { month: 'Feb', sales: 30000, orders: 100 },
-      { month: 'Mar', sales: 60000, orders: 250 },
-      { month: 'Apr', sales: 45000, orders: 180 },
-      { month: 'May', sales: 55000, orders: 220 },
-      { month: 'Jun', sales: 70000, orders: 300 },
-      { month: 'Jul', sales: 65000, orders: 280 },
-      { month: 'Aug', sales: 75000, orders: 320 },
-      { month: 'Sep', sales: 80000, orders: 350 },
-      { month: 'Oct', sales: 90000, orders: 400 },
-      { month: 'Nov', sales: 95000, orders: 420 },
-      { month: 'Dec', sales: 100000, orders: 450 }
-    ]
-  };
+// Helper functions for data processing
+function getDateRange(range, offset = 0) {
+  const now = new Date();
+  let start, end;
 
-  return dataMap[range] || dataMap.week;
+  switch (range) {
+    case 'week':
+      end = new Date(now);
+      end.setDate(end.getDate() - (offset * 7));
+      start = new Date(end);
+      start.setDate(start.getDate() - 6);
+      break;
+    case 'month':
+      end = new Date(now.getFullYear(), now.getMonth() - offset, 0);
+      start = new Date(end.getFullYear(), end.getMonth(), 1);
+      break;
+    case 'quarter':
+      const quarter = Math.floor(now.getMonth() / 3) - offset;
+      const quarterStartMonth = quarter * 3;
+      start = new Date(now.getFullYear(), quarterStartMonth, 1);
+      end = new Date(now.getFullYear(), quarterStartMonth + 3, 0);
+      break;
+    case 'year':
+      end = new Date(now.getFullYear() - offset, 11, 31);
+      start = new Date(now.getFullYear() - offset, 0, 1);
+      break;
+    default:
+      end = new Date(now);
+      end.setDate(end.getDate() - (offset * 7));
+      start = new Date(end);
+      start.setDate(start.getDate() - 6);
+  }
+
+  return { start, end };
+}
+
+function generateSalesData(orders, range) {
+  const { start, end } = getDateRange(range, 0);
+  const filteredOrders = orders.filter(order => 
+    new Date(order.date) >= start && new Date(order.date) <= end
+  );
+
+  if (range === 'week') {
+    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    return days.map(day => {
+      const dayOrders = filteredOrders.filter(order => 
+        days[new Date(order.date).getDay()] === day
+      );
+      return {
+        day,
+        sales: dayOrders.reduce((sum, order) => sum + (order.total || 0), 0),
+        orders: dayOrders.length
+      };
+    });
+  } else if (range === 'month') {
+    const daysInMonth = new Date(end.getFullYear(), end.getMonth() + 1, 0).getDate();
+    return Array.from({ length: daysInMonth }, (_, i) => {
+      const day = i + 1;
+      const dayOrders = filteredOrders.filter(order => 
+        new Date(order.date).getDate() === day
+      );
+      return {
+        day: `Day ${day}`,
+        sales: dayOrders.reduce((sum, order) => sum + (order.total || 0), 0),
+        orders: dayOrders.length
+      };
+    });
+  } else if (range === 'quarter') {
+    return Array.from({ length: 12 }, (_, i) => {
+      const weekOrders = filteredOrders.filter(order => {
+        const orderDate = new Date(order.date);
+        return Math.floor((orderDate.getDate() + orderDate.getDay()) / 7) === i;
+      });
+      return {
+        week: `Week ${i + 1}`,
+        sales: weekOrders.reduce((sum, order) => sum + (order.total || 0), 0),
+        orders: weekOrders.length
+      };
+    }).filter(week => week.orders > 0 || week.sales > 0);
+  } else { // year
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    return months.map((month, i) => {
+      const monthOrders = filteredOrders.filter(order => 
+        new Date(order.date).getMonth() === i
+      );
+      return {
+        month,
+        sales: monthOrders.reduce((sum, order) => sum + (order.total || 0), 0),
+        orders: monthOrders.length
+      };
+    });
+  }
 }
 
 function generateUserGrowthData(users, range) {
-  // Mock data for demonstration
-  const dataMap = {
-    week: Array(7).fill(0).map((_, i) => ({
-      date: new Date(Date.now() - (6 - i) * 24 * 60 * 60 * 1000).toLocaleDateString(),
-      users: Math.floor(Math.random() * 50)
-    })),
-    month: Array(30).fill(0).map((_, i) => ({
-      date: `Day ${i+1}`,
-      users: Math.floor(Math.random() * 20)
-    })),
-    quarter: Array(12).fill(0).map((_, i) => ({
-      date: `Week ${i+1}`,
-      users: Math.floor(Math.random() * 100)
-    })),
-    year: Array(12).fill(0).map((_, i) => ({
-      date: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][i],
-      users: Math.floor(Math.random() * 500)
-    }))
-  };
+  const { start, end } = getDateRange(range, 0);
+  const filteredUsers = users.filter(user => 
+    new Date(user.createdAt) >= start && new Date(user.createdAt) <= end
+  );
 
-  return dataMap[range] || dataMap.week;
+  if (range === 'week') {
+    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    return days.map(day => ({
+      date: day,
+      users: filteredUsers.filter(user => 
+        days[new Date(user.createdAt).getDay()] === day
+      ).length
+    }));
+  } else if (range === 'month') {
+    const daysInMonth = new Date(end.getFullYear(), end.getMonth() + 1, 0).getDate();
+    return Array.from({ length: daysInMonth }, (_, i) => ({
+      date: `Day ${i + 1}`,
+      users: filteredUsers.filter(user => 
+        new Date(user.createdAt).getDate() === i + 1
+      ).length
+    }));
+  } else if (range === 'quarter') {
+    return Array.from({ length: 12 }, (_, i) => ({
+      date: `Week ${i + 1}`,
+      users: filteredUsers.filter(user => {
+        const userDate = new Date(user.createdAt);
+        return Math.floor((userDate.getDate() + userDate.getDay()) / 7) === i;
+      }).length
+    })).filter(week => week.users > 0);
+  } else { // year
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    return months.map((month, i) => ({
+      date: month,
+      users: filteredUsers.filter(user => 
+        new Date(user.createdAt).getMonth() === i
+      ).length
+    }));
+  }
 }
 
 function generateProductPerformanceData(products, orders) {
-  // Get top 5 products by sales
   const productSales = {};
   
+  // Initialize all products with zero values
+  products.forEach(product => {
+    productSales[product.id] = {
+      ...product,
+      totalSales: 0,
+      totalOrders: 0
+    };
+  });
+
+  // Calculate sales and orders for each product
   orders.forEach(order => {
-    order.items.forEach(item => {
-      if (!productSales[item.id]) {
-        productSales[item.id] = {
-          ...products.find(p => p.id === item.id),
-          totalSales: 0,
-          totalOrders: 0
-        };
-      }
-      productSales[item.id].totalSales += item.price * item.quantity;
-      productSales[item.id].totalOrders += 1;
-    });
+    if (order.items && order.items.length > 0) {
+      order.items.forEach(item => {
+        if (productSales[item.productId || item.id]) {
+          productSales[item.productId || item.id].totalSales += (item.price || 0) * (item.quantity || 1);
+          productSales[item.productId || item.id].totalOrders += 1;
+        }
+      });
+    }
   });
 
   return Object.values(productSales)

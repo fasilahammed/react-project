@@ -22,7 +22,7 @@ const StatCard = ({ title, value, change, icon, trend, currency }) => {
         <div>
           <p className="text-sm font-medium text-gray-400">{title}</p>
           <p className="text-2xl font-bold text-white mt-1">
-            {currency && currency === 'INR' ? '₹' : ''}{value}
+            {currency && currency === 'INR' ? '' : ''}{value}
           </p>
         </div>
         <div className="h-12 w-12 rounded-lg bg-gray-700 flex items-center justify-center">
