@@ -634,6 +634,81 @@
         }
       ],
       "createdAt": "2025-08-11T05:29:51.154Z"
+    },
+    {
+      "id": "a18a",
+      "name": "ashwin ",
+      "email": "ashwin@gmail.com",
+      "password": "ashwin@123",
+      "confirmPassword": "ashwin@123",
+      "role": "user",
+      "cart": [],
+      "wishlist": [
+        {
+          "id": "p8",
+          "name": "iPhone 13",
+          "brand": "Apple",
+          "price": 69900,
+          "category": "smartphones",
+          "images": [
+            "https://imgs.search.brave.com/amsWDdY4fkpIqnmo9XHMCGCDCSbA6TueAYGOyGgVxpo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9wbmdp/bWcuY29tL3VwbG9h/ZHMvaXBob25lXzEz/L3NtYWxsL2lwaG9u/ZV8xM19QTkcyLnBu/Zw"
+          ],
+          "stock": 20,
+          "description": "6.1-inch Super Retina XDR display, A15 Bionic chip, advanced dual-camera system.",
+          "specifications": {
+            "display": "6.1-inch OLED",
+            "storage": "128GB",
+            "camera": "12MP + 12MP",
+            "battery": "3227mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true
+        },
+        {
+          "id": "p11",
+          "name": "Green Apple iPhone 15",
+          "brand": "Apple",
+          "price": 79900,
+          "category": "smartphones",
+          "images": [
+            "https://m.media-amazon.com/images/I/51HaS1fqwzL._AC_UL480_FMwebp_QL65_.jpg"
+          ],
+          "stock": 12,
+          "description": "Latest iPhone model in green color with advanced features.",
+          "specifications": {
+            "display": "6.1-inch OLED",
+            "storage": "128GB",
+            "camera": "48MP + 12MP",
+            "battery": "3349mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true
+        },
+        {
+          "id": "p2",
+          "name": "Samsung Galaxy S23 Ultra",
+          "brand": "Samsung",
+          "price": 124999,
+          "category": "smartphones",
+          "images": [
+            "https://m.media-amazon.com/images/I/51MpKU9XowL._AC_UL480_FMwebp_QL65_.jpg"
+          ],
+          "stock": 0,
+          "description": "200MP camera, S Pen, Snapdragon 8 Gen 2.",
+          "specifications": {
+            "display": "6.8-inch AMOLED",
+            "storage": "256GB",
+            "camera": "200MP + 12MP + 10MP",
+            "battery": "5000mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true
+        }
+      ],
+      "createdAt": "2025-08-12T03:44:38.436Z"
     }
   ],
   "products": [
@@ -2530,6 +2605,176 @@
         "city": "dcz",
         "state": "asdsadasdsd24242",
         "zip": "2424242"
+      },
+      "paymentMethod": "cod",
+      "paymentDetails": {
+        "type": "cod"
+      }
+    },
+    {
+      "id": "5c5f",
+      "userId": "a18a",
+      "date": "2025-08-12T03:46:31.245Z",
+      "items": [
+        {
+          "id": "p8",
+          "name": "iPhone 13",
+          "brand": "Apple",
+          "price": 69900,
+          "category": "smartphones",
+          "images": [
+            "https://imgs.search.brave.com/amsWDdY4fkpIqnmo9XHMCGCDCSbA6TueAYGOyGgVxpo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9wbmdp/bWcuY29tL3VwbG9h/ZHMvaXBob25lXzEz/L3NtYWxsL2lwaG9u/ZV8xM19QTkcyLnBu/Zw"
+          ],
+          "stock": 20,
+          "description": "6.1-inch Super Retina XDR display, A15 Bionic chip, advanced dual-camera system.",
+          "specifications": {
+            "display": "6.1-inch OLED",
+            "storage": "128GB",
+            "camera": "12MP + 12MP",
+            "battery": "3227mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true,
+          "quantity": 1
+        },
+        {
+          "id": "p9",
+          "name": "iPhone 13 Pro",
+          "brand": "Apple",
+          "price": 89900,
+          "category": "smartphones",
+          "images": [
+            "https://m.media-amazon.com/images/I/61LzJQkk+RL._AC_UL480_FMwebp_QL65_.jpg"
+          ],
+          "stock": 15,
+          "description": "6.1-inch Super Retina XDR display with ProMotion, A15 Bionic chip, pro camera system.",
+          "specifications": {
+            "display": "6.1-inch OLED",
+            "storage": "128GB",
+            "camera": "12MP + 12MP + 12MP",
+            "battery": "3095mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true,
+          "quantity": 1
+        },
+        {
+          "id": "p37",
+          "name": "Google Pixel 6 5G",
+          "brand": "Google",
+          "price": 39999,
+          "category": "smartphones",
+          "images": [
+            "https://m.media-amazon.com/images/I/61Txip5YAFL._AC_SY355_.jpg"
+          ],
+          "stock": 10,
+          "description": "5G enabled Pixel smartphone with Tensor chip.",
+          "specifications": {
+            "display": "6.4-inch OLED",
+            "storage": "128GB",
+            "camera": "50MP + 12MP",
+            "battery": "4614mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true,
+          "quantity": 1
+        }
+      ],
+      "total": 199799,
+      "status": "processing",
+      "shippingAddress": {
+        "name": "ashwin",
+        "address": "kayal madathil (h)",
+        "city": "ash city",
+        "state": "malappuram",
+        "zip": "676016"
+      },
+      "paymentMethod": "cod",
+      "paymentDetails": {
+        "type": "cod"
+      }
+    },
+    {
+      "id": "5965",
+      "userId": "a18a",
+      "date": "2025-08-12T03:50:41.454Z",
+      "items": [
+        {
+          "id": "p6",
+          "name": "iPhone 13",
+          "brand": "Apple",
+          "price": 69900,
+          "category": "smartphones",
+          "images": [
+            "https://imgs.search.brave.com/zEPG7Nu_Y_eEpsAIbFwEyMgDZXyu3SMvuLO-sXiR87s/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9wbmdp/bWcuY29tL3VwbG9h/ZHMvaXBob25lXzEz/L3NtYWxsL2lwaG9u/ZV8xM19QTkc5LnBu/Zw"
+          ],
+          "stock": 25,
+          "description": "6.1-inch Super Retina XDR display, A15 Bionic chip, advanced dual-camera system.",
+          "specifications": {
+            "display": "6.1-inch OLED",
+            "storage": "128GB",
+            "camera": "12MP + 12MP",
+            "battery": "3227mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true,
+          "quantity": 1
+        }
+      ],
+      "total": 69900,
+      "status": "cancelled",
+      "shippingAddress": {
+        "name": "ashwin ",
+        "address": "kishaanns house",
+        "city": "tirur",
+        "state": "kerala",
+        "zip": "676016"
+      },
+      "paymentMethod": "cod",
+      "paymentDetails": {
+        "type": "cod"
+      }
+    },
+    {
+      "id": "f64d",
+      "userId": "a18a",
+      "date": "2025-08-12T03:51:34.987Z",
+      "items": [
+        {
+          "id": "p28",
+          "name": "Moto G Play",
+          "brand": "Motorola",
+          "price": 10999,
+          "category": "smartphones",
+          "images": [
+            "https://m.media-amazon.com/images/I/61VEzL77UBL._AC_SY355_.jpg"
+          ],
+          "stock": 20,
+          "description": "Entry-level smartphone with long battery life.",
+          "specifications": {
+            "display": "6.5-inch LCD",
+            "storage": "32GB",
+            "camera": "16MP",
+            "battery": "5000mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true,
+          "quantity": 1
+        }
+      ],
+      "total": 10999,
+      "status": "processing",
+      "shippingAddress": {
+        "name": "ashwin ",
+        "address": "kishaanns house",
+        "city": "tirur",
+        "state": "kerala",
+        "zip": "676016"
       },
       "paymentMethod": "cod",
       "paymentDetails": {

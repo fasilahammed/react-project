@@ -52,16 +52,15 @@ export default function Navbar() {
   };
 
   return (
-    <nav className={`sticky top-0 z-50 transition-all duration-300 ${
-      scrolled ? 'shadow-lg bg-white' : 'shadow-sm bg-white'
-    }`}>
+    <nav className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'shadow-lg bg-white' : 'shadow-sm bg-white'
+      }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          
+
           {/* Logo Section */}
           <div className="flex items-center flex-shrink-0">
-            <Link 
-              to="/" 
+            <Link
+              to="/"
               className="flex items-center group focus:outline-none  rounded-lg"
             >
               <img
@@ -100,7 +99,7 @@ export default function Navbar() {
                 </span>
               )}
             </Link>
-            
+
             {/* Cart Icon */}
             <Link
               to="/cart"
@@ -114,46 +113,62 @@ export default function Navbar() {
                 </span>
               )}
             </Link>
-            
+
             {user ? (
               <div className="hidden md:flex items-center space-x-3 relative">
-                <button
-                  onClick={toggleProfileDropdown}
-                  className="flex items-center space-x-1 px-3 py-1.5 rounded-full text-sm font-medium transition-colors bg-orange-100 hover:bg-orange-200 text-orange-800 "
-                  aria-label="Profile menu"
-                  aria-expanded={profileDropdownOpen}
-                >
-                  <span>Hi, {user.name.split(' ')[0]}</span>
-                  {profileDropdownOpen ? <FiChevronUp /> : <FiChevronDown />}
-                </button>
-                
-                {/* Profile Dropdown */}
-                {profileDropdownOpen && (
-                  <div className="absolute right-0 top-12 w-48 bg-white rounded-md shadow-lg py-1 z-50 border border-gray-200">
-                    <Link
-                      to="/profile"
-                      onClick={() => setProfileDropdownOpen(false)}
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-50 hover:text-orange-600 flex items-center"
-                    >
-                      <FiUser className="mr-2" /> Profile
-                    </Link>
-                    <Link
-                      to="/orders"
-                      onClick={() => setProfileDropdownOpen(false)}
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-50 hover:text-orange-600 flex items-center"
-                    >
-                      <FiPackage className="mr-2" /> My Orders
-                    </Link>
+                {user.role === 'admin' ? (
+                  // Admin user - show only logout button
+                  <button
+                    onClick={handleLogout}
+                    className="flex items-center space-x-1 px-3 py-1.5 rounded-full text-sm font-medium transition-colors bg-orange-100 hover:bg-orange-200 text-orange-800"
+                    aria-label="Logout"
+                  >
+                    <FiLogOut className="mr-1.5 h-4 w-4" />
+                    <span>Logout</span>
+                  </button>
+                ) : (
+                  // Regular user - show profile dropdown
+                  <>
                     <button
-                      onClick={handleLogout}
-                      className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-orange-50 hover:text-orange-600 flex items-center"
+                      onClick={toggleProfileDropdown}
+                      className="flex items-center space-x-1 px-3 py-1.5 rounded-full text-sm font-medium transition-colors bg-orange-100 hover:bg-orange-200 text-orange-800"
+                      aria-label="Profile menu"
+                      aria-expanded={profileDropdownOpen}
                     >
-                      <FiLogOut className="mr-2" /> Logout
+                      <span>Hi, {user.name.split(' ')[0]}</span>
+                      {profileDropdownOpen ? <FiChevronUp /> : <FiChevronDown />}
                     </button>
-                  </div>
+
+                    {/* Profile Dropdown */}
+                    {profileDropdownOpen && (
+                      <div className="absolute right-0 top-12 w-48 bg-white rounded-md shadow-lg py-1 z-50 border border-gray-200">
+                        <Link
+                          to="/profile"
+                          onClick={() => setProfileDropdownOpen(false)}
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-50 hover:text-orange-600 flex items-center"
+                        >
+                          <FiUser className="mr-2" /> Profile
+                        </Link>
+                        <Link
+                          to="/orders"
+                          onClick={() => setProfileDropdownOpen(false)}
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-50 hover:text-orange-600 flex items-center"
+                        >
+                          <FiPackage className="mr-2" /> My Orders
+                        </Link>
+                        <button
+                          onClick={handleLogout}
+                          className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-orange-50 hover:text-orange-600 flex items-center"
+                        >
+                          <FiLogOut className="mr-2" /> Logout
+                        </button>
+                      </div>
+                    )}
+                  </>
                 )}
               </div>
             ) : (
+              // Not logged in - show login button
               <Link
                 to="/login"
                 className="hidden md:flex items-center px-3 py-1.5 rounded-full text-sm font-medium transition-colors bg-orange-500 hover:bg-orange-600 text-white focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
@@ -162,7 +177,6 @@ export default function Navbar() {
                 <span>Login</span>
               </Link>
             )}
-
             {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -177,10 +191,9 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Menu */}
-      <div 
-        className={`md:hidden transition-all duration-300 ease-in-out ${
-          mobileMenuOpen ? 'max-h-screen py-2' : 'max-h-0 overflow-hidden'
-        } bg-white`}
+      <div
+        className={`md:hidden transition-all duration-300 ease-in-out ${mobileMenuOpen ? 'max-h-screen py-2' : 'max-h-0 overflow-hidden'
+          } bg-white`}
         aria-hidden={!mobileMenuOpen}
       >
         <MobileNavLink to="/" icon={<FiHome />} onClick={closeMobileMenu}>

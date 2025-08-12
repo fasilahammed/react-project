@@ -8,11 +8,15 @@ export default function AdminRoute() {
     return <div className="flex justify-center items-center h-screen">Loading...</div>;
   }
 
-  
-  if (!user || user.role !== 'admin') {
-    return <Navigate to="/" />;
+  // Redirect to admin dashboard if already admin and trying to access non-admin pages
+  if (user?.role === 'admin' && !window.location.pathname.startsWith('/admin')) {
+    return <Navigate to="/admin/dashboard" replace />;
   }
 
- 
+  // Redirect to home if not admin
+  if (!user || user.role !== 'admin') {
+    return <Navigate to="/login" replace />;
+  }
+
   return <Outlet />;
 }
