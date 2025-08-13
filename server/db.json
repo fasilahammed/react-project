@@ -41,52 +41,7 @@
       "password": "fasilkm@123",
       "confirmPassword": "fasilkm@123",
       "role": "user",
-      "cart": [
-        {
-          "id": "p34",
-          "name": "Google Pixel 9A",
-          "brand": "Google",
-          "price": 34999,
-          "category": "smartphones",
-          "images": [
-            "https://m.media-amazon.com/images/I/51Pjm7ZQUXL._AC_SX355_.jpg"
-          ],
-          "stock": 18,
-          "description": "Affordable Pixel smartphone with flagship camera.",
-          "specifications": {
-            "display": "6.1-inch OLED",
-            "storage": "128GB",
-            "camera": "12.2MP",
-            "battery": "4410mAh"
-          },
-          "rating": null,
-          "reviews": [],
-          "isActive": true,
-          "quantity": 1
-        },
-        {
-          "id": "p37",
-          "name": "Google Pixel 6 5G",
-          "brand": "Google",
-          "price": 39999,
-          "category": "smartphones",
-          "images": [
-            "https://m.media-amazon.com/images/I/61Txip5YAFL._AC_SY355_.jpg"
-          ],
-          "stock": 10,
-          "description": "5G enabled Pixel smartphone with Tensor chip.",
-          "specifications": {
-            "display": "6.4-inch OLED",
-            "storage": "128GB",
-            "camera": "50MP + 12MP",
-            "battery": "4614mAh"
-          },
-          "rating": null,
-          "reviews": [],
-          "isActive": true,
-          "quantity": 1
-        }
-      ],
+      "cart": [],
       "wishlist": [
         {
           "id": "p3",
@@ -129,11 +84,33 @@
           "rating": null,
           "reviews": [],
           "isActive": true
+        },
+        {
+          "id": "p2",
+          "name": "Samsung Galaxy S23 Ultra",
+          "brand": "Samsung",
+          "price": 124999,
+          "category": "smartphones",
+          "images": [
+            "https://m.media-amazon.com/images/I/51MpKU9XowL._AC_UL480_FMwebp_QL65_.jpg"
+          ],
+          "stock": 2,
+          "description": "200MP camera, S Pen, Snapdragon 8 Gen 2.",
+          "specifications": {
+            "display": "6.8-inch AMOLED",
+            "storage": "256GB",
+            "camera": "200MP + 12MP + 10MP",
+            "battery": "5000mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": false
         }
       ],
       "createdAt": "2025-08-01T05:30:33.132Z",
       "phone": "9946811493",
-      "address": "kayal madathil (h)"
+      "address": "kayal madathil (h)",
+      "isBlocked": false
     },
     {
       "id": "56cc",
@@ -142,7 +119,30 @@
       "password": "aflahkm@123",
       "confirmPassword": "aflahkm@123",
       "role": "user",
-      "cart": [],
+      "cart": [
+        {
+          "id": "p1",
+          "name": "iPhone 11 64GB",
+          "brand": "Apple",
+          "price": 42900,
+          "category": "smartphones",
+          "images": [
+            "https://imgs.search.brave.com/pEXklLaEBfBuDZjg_ktZtvSJ5GZem4X7WizoAalOQaQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2M0LzIy/LzJkL2M0MjIyZGMy/MDBmMGRjNDc5NjM0/OTZlOGE1NmE1OWUz/LmpwZw"
+          ],
+          "stock": 25,
+          "description": "6.1-inch Liquid Retina display, A13 Bionic chip, dual-camera system.",
+          "specifications": {
+            "display": "6.1-inch LCD",
+            "storage": "64GB",
+            "camera": "12MP + 12MP",
+            "battery": "3110mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true,
+          "quantity": 1
+        }
+      ],
       "wishlist": [
         {
           "id": "p4",
@@ -231,7 +231,9 @@
       ],
       "createdAt": "2025-08-01T06:16:41.553Z",
       "phone": "9946811493",
-      "address": "kayal madathil"
+      "address": "kayal madathil",
+      "isActive": true,
+      "isBlocked": true
     },
     {
       "id": "be8f",
@@ -563,30 +565,7 @@
       "password": "adiladh@123",
       "confirmPassword": "adiladh@123",
       "role": "user",
-      "cart": [
-        {
-          "id": "p42",
-          "name": "Google Pixel 2 XL",
-          "brand": "Google",
-          "price": 19999,
-          "category": "smartphones",
-          "images": [
-            "https://m.media-amazon.com/images/I/61UIeMfECBL.__AC_SX300_SY300_QL70_ML2_.jpg"
-          ],
-          "stock": 2,
-          "description": "Older generation Pixel smartphone with great display.",
-          "specifications": {
-            "display": "6.0-inch OLED",
-            "storage": "64GB",
-            "camera": "12.2MP",
-            "battery": "3520mAh"
-          },
-          "rating": null,
-          "reviews": [],
-          "isActive": true,
-          "quantity": 1
-        }
-      ],
+      "cart": [],
       "wishlist": [
         {
           "id": "p12",
@@ -625,6 +604,27 @@
             "storage": "64GB",
             "camera": "12.2MP",
             "battery": "3520mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true
+        },
+        {
+          "id": "p4",
+          "name": "Apple iPhone 8 Plus",
+          "brand": "Apple",
+          "price": 35900,
+          "category": "smartphones",
+          "images": [
+            "https://m.media-amazon.com/images/I/61yX3VKY7GL._AC_UL480_FMwebp_QL65_.jpg"
+          ],
+          "stock": 0,
+          "description": "5.5-inch Retina HD display, Touch ID, A11 Bionic chip.",
+          "specifications": {
+            "display": "5.5-inch LCD",
+            "storage": "64GB",
+            "camera": "12MP + 12MP",
+            "battery": "2691mAh"
           },
           "rating": null,
           "reviews": [],
@@ -687,7 +687,9 @@
           "isActive": true
         }
       ],
-      "createdAt": "2025-08-11T04:58:54.488Z"
+      "createdAt": "2025-08-11T04:58:54.488Z",
+      "phone": "9946811493",
+      "address": "kayal madathil (h)"
     },
     {
       "id": "396a",
@@ -1046,7 +1048,7 @@
       "images": [
         "https://m.media-amazon.com/images/I/61yX3VKY7GL._AC_UL480_FMwebp_QL65_.jpg"
       ],
-      "stock": 15,
+      "stock": 0,
       "description": "5.5-inch Retina HD display, Touch ID, A11 Bionic chip.",
       "specifications": {
         "display": "5.5-inch LCD",
@@ -3346,6 +3348,94 @@
       "paymentMethod": "cod",
       "paymentDetails": {
         "type": "cod"
+      }
+    },
+    {
+      "id": "9765",
+      "userId": "7f9c",
+      "date": "2025-08-13T09:44:56.755Z",
+      "items": [
+        {
+          "id": "p34",
+          "name": "Google Pixel 9A",
+          "brand": "Google",
+          "price": 34999,
+          "category": "smartphones",
+          "images": [
+            "https://m.media-amazon.com/images/I/51Pjm7ZQUXL._AC_SX355_.jpg"
+          ],
+          "stock": 18,
+          "description": "Affordable Pixel smartphone with flagship camera.",
+          "specifications": {
+            "display": "6.1-inch OLED",
+            "storage": "128GB",
+            "camera": "12.2MP",
+            "battery": "4410mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true,
+          "quantity": 2
+        },
+        {
+          "id": "p37",
+          "name": "Google Pixel 6 5G",
+          "brand": "Google",
+          "price": 39999,
+          "category": "smartphones",
+          "images": [
+            "https://m.media-amazon.com/images/I/61Txip5YAFL._AC_SY355_.jpg"
+          ],
+          "stock": 10,
+          "description": "5G enabled Pixel smartphone with Tensor chip.",
+          "specifications": {
+            "display": "6.4-inch OLED",
+            "storage": "128GB",
+            "camera": "50MP + 12MP",
+            "battery": "4614mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true,
+          "quantity": 1
+        },
+        {
+          "id": "p1",
+          "name": "iPhone 11 64GB",
+          "brand": "Apple",
+          "price": 42900,
+          "category": "smartphones",
+          "images": [
+            "https://imgs.search.brave.com/pEXklLaEBfBuDZjg_ktZtvSJ5GZem4X7WizoAalOQaQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2M0LzIy/LzJkL2M0MjIyZGMy/MDBmMGRjNDc5NjM0/OTZlOGE1NmE1OWUz/LmpwZw"
+          ],
+          "stock": 25,
+          "description": "6.1-inch Liquid Retina display, A13 Bionic chip, dual-camera system.",
+          "specifications": {
+            "display": "6.1-inch LCD",
+            "storage": "64GB",
+            "camera": "12MP + 12MP",
+            "battery": "3110mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true,
+          "quantity": 1
+        }
+      ],
+      "total": 152897,
+      "status": "processing",
+      "shippingAddress": {
+        "name": "fasil ahammed",
+        "address": "kayal madathil (h)",
+        "city": "sdfa",
+        "state": "asdsadasdsd24242",
+        "zip": "604627"
+      },
+      "paymentMethod": "card",
+      "paymentDetails": {
+        "type": "card",
+        "lastFour": "1223",
+        "cardName": "fasil ahammed"
       }
     }
   ]

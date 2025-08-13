@@ -26,30 +26,44 @@ export function AuthProvider({ children }) {
     loadUser();
   }, []);
 
-  const login = async (email, password, rememberMe = false) => {
-    try {
-      const userData = await loginUser(email, password);
-      
-      if (!userData) {
-        toast.error('Invalid email or password');
-        return { success: false };
-      }
-
-      setUser(userData);
-      if (rememberMe) {
-        localStorage.setItem('user', JSON.stringify(userData));
-      } else {
-        sessionStorage.setItem('user', JSON.stringify(userData));
-      }
-
-      toast.success('Login successful!');
-      return { success: true, role: userData.role || 'user' };
-    } catch (error) {
-      console.error('Login error:', error);
-      toast.error(error.message || 'Login failed');
+const login = async (email, password, rememberMe = false) => {
+  try {
+    const userData = await loginUser(email, password);
+    
+    if (!userData) {
+      toast.error('Invalid email or password');
       return { success: false };
     }
-  };
+
+    // Blocked user check
+    if (userData.isBlocked) {
+      toast.error('Your account is blocked. Please contact support.');
+      return { success: false };
+    }
+
+    // Existing status check (optional if both are used)
+    if (userData.status === 'blocked') {
+      toast.error('Your account has been blocked. Please contact support.');
+      return { success: false };
+    }
+
+    setUser(userData);
+    if (rememberMe) {
+      localStorage.setItem('user', JSON.stringify(userData));
+    } else {
+      sessionStorage.setItem('user', JSON.stringify(userData));
+    }
+
+    toast.success('Login successful!');
+    return { success: true, role: userData.role || 'user' };
+  } catch (error) {
+    console.error('Login error:', error);
+    toast.error(error.message || 'Login failed');
+    return { success: false };
+  }
+};
+
+  
 
   const register = async (userData) => {
     try {

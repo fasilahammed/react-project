@@ -1,21 +1,26 @@
-import { Navigate, Outlet } from 'react-router-dom';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import Loading from '../components/Loading';
 
-export default function AdminRoute() {
+export default function AdminRoute({ checkHomeRedirect = false }) {
   const { user, loading } = useAuth();
+  const location = useLocation();
 
-  if (loading) {
-    return <div className="flex justify-center items-center h-screen">Loading...</div>;
+  if (loading) return <Loading fullScreen />;
+
+  // Only check for home redirect if explicitly requested
+  if (checkHomeRedirect && user?.role === 'admin' && location.pathname === '/') {
+    return <Navigate to="/admin" replace />;
   }
 
-  // Redirect to admin dashboard if already admin and trying to access non-admin pages
-  if (user?.role === 'admin' && !window.location.pathname.startsWith('/admin')) {
-    return <Navigate to="/admin/dashboard" replace />;
-  }
-
-  // Redirect to home if not admin
-  if (!user || user.role !== 'admin') {
-    return <Navigate to="/login" replace />;
+  // Standard admin route protection (only for /admin/* routes)
+  if (!checkHomeRedirect) {
+    if (!user) {
+      return <Navigate to="/login" replace state={{ from: location }} />;
+    }
+    if (user.role !== 'admin') {
+      return <Navigate to="/" replace />;
+    }
   }
 
   return <Outlet />;

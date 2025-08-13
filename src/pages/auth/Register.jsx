@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../../context/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
@@ -7,7 +7,7 @@ import { FiEye, FiEyeOff, FiUser, FiMail, FiLock } from 'react-icons/fi';
 import logo from '../../assets/img/snapmob-logo.png';
 
 export default function Register() {
-  const { register: authRegister } = useAuth();
+  const { register: authRegister ,user} = useAuth();
   const navigate = useNavigate();
   const { register, handleSubmit, formState: { errors }, watch } = useForm();
   const [showPassword, setShowPassword] = useState(false);
@@ -21,6 +21,12 @@ export default function Register() {
       setError(err.message || 'Registration failed. Email may already exist.');
     }
   };
+
+   useEffect(() => {
+    if (user) {
+      navigate(user.role === 'admin' ? '/admin' : '/', { replace: true });
+    }
+  }, [user, navigate]);
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-orange-50 to-gray-50 flex items-center justify-center">

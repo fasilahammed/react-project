@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../../context/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
@@ -6,7 +6,7 @@ import { FiEye, FiEyeOff } from 'react-icons/fi';
 import logo from '../../assets/img/snapmob-logo.png';
 
 export default function Login() {
-  const { login } = useAuth();
+  const { user ,login } = useAuth();
   const navigate = useNavigate();
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [showPassword, setShowPassword] = useState(false);
@@ -27,6 +27,12 @@ export default function Login() {
       setError('Invalid email or password');
     }
   };
+
+   useEffect(() => {
+    if (user) {
+      navigate(user.role === 'admin' ? '/admin' : '/', { replace: true });
+    }
+  }, [user, navigate]);
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-orange-50 to-gray-50 flex items-center justify-center">
@@ -99,16 +105,7 @@ export default function Login() {
                 )}
               </div>
 
-              {/* Remember Me */}
-              <div className="flex items-center">
-                <input
-                  type="checkbox"
-                  checked={rememberMe}
-                  onChange={(e) => setRememberMe(e.target.checked)}
-                  className="h-4 w-4 text-orange-600 border-gray-300 rounded"
-                />
-                <label className="ml-2 text-sm text-gray-700">Remember me</label>
-              </div>
+             
 
               {/* Submit */}
               <button

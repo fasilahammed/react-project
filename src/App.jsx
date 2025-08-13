@@ -1,10 +1,11 @@
 import React, { Suspense, lazy } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
-import { AuthProvider } from './context/AuthContext';
+import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from "react-router-dom";
+import { AuthProvider, useAuth } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 import { WishlistProvider } from './context/WishlistContext';
 import PrivateRoute from './routes/PrivateRoute';
 import AdminRoute from './routes/AdminRoute';
+import PublicOnlyRoute from './routes/PublicOnlyRoute';
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { Toaster } from 'react-hot-toast';
@@ -30,7 +31,26 @@ const Profile = lazy(() => import("./pages/Profile"));
 const Orders = lazy(() => import("./pages/Orders"));
 const OrderDetails = lazy(() => import("./pages/OrderDetails"));
 const OrderSuccess = lazy(() => import("./pages/OrderSuccess"));
-const ErrorPage = lazy(() => import('./components/ErrorResponse'))
+const ErrorPage = lazy(() => import('./components/ErrorResponse'));
+
+const HomeRouteHandler = () => {
+  const { user, loading } = useAuth();
+
+  if (loading) return <Loading />;
+  
+  // Redirect admins to admin dashboard
+  if (user?.role === 'admin') {
+    return <Navigate to="/admin" replace />;
+  }
+  
+  // Blocked users should be logged out automatically
+  if (user?.status === 'blocked') {
+    return <Navigate to="/login" replace state={{ blocked: true }} />;
+  }
+
+  // Show home page for everyone else
+  return <Home />;
+};
 
 function Layout() {
   const location = useLocation();
@@ -67,9 +87,17 @@ function Layout() {
             <Route path="*" element={<ErrorPage />} />
 
             {/* Public routes */}
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
+            <Route path="/" element={<HomeRouteHandler />} />
+            <Route path="/login" element={
+              <PublicOnlyRoute>
+                <Login />
+              </PublicOnlyRoute>
+            } />
+            <Route path="/register" element={
+              <PublicOnlyRoute>
+                <Register />
+              </PublicOnlyRoute>
+            } />
 
             {/* Protected user routes */}
             <Route element={<PrivateRoute />}>
@@ -92,9 +120,7 @@ function Layout() {
                 <Route path="products" element={<AdminProducts />} />
                 <Route path="products/new" element={<ProductForm />} />
                 <Route path="products/:id/edit" element={<ProductForm />} />
-                
                 <Route path="orders" element={<AdminOrders />} />
-
               </Route>
             </Route>
           </Routes>

@@ -1,18 +1,26 @@
-import { Navigate, Outlet } from 'react-router-dom';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import Loading from '../components/Loading';
 
 export default function PrivateRoute() {
   const { user, loading } = useAuth();
+  const location = useLocation();
 
-  if (loading) {
-    return <div className="flex justify-center items-center h-screen">Loading...</div>;
+  if (loading) return <Loading fullScreen />;
+
+  // Check if user is blocked
+  if (user?.status === 'blocked') {
+    return <Navigate to="/login" replace state={{ from: location, blocked: true }} />;
   }
 
-  // Redirect to home if admin tries to access user routes
-  if (user?.role === 'admin') {
-    return <Navigate to="/admin/dashboard" replace />;
+  // Rest of your existing checks
+  if (!user) {
+    return <Navigate to="/login" replace state={{ from: location }} />;
   }
 
-  // Regular user access
-  return user ? <Outlet /> : <Navigate to="/login" replace />;
+  if (user.role === 'admin') {
+    return <Navigate to="/admin" replace />;
+  }
+
+  return <Outlet />;
 }
