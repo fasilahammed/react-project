@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import StatCard from './components/StatCard';
 import RecentOrdersTable from './components/RecentOrdersTable';
 import QuickActionCard from './components/QuickActionCard';
@@ -12,6 +13,8 @@ const AdminDashboard = () => {
   const [dashboardData, setDashboardData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [timeRange, setTimeRange] = useState('week');
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -196,7 +199,9 @@ const AdminDashboard = () => {
         <div className="lg:col-span-2 bg-gray-800 rounded-xl shadow-lg p-6">
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-xl font-semibold text-white">Recent Orders</h2>
-            <button className="text-sm text-violet-400 hover:text-violet-300">
+            <button className="text-sm text-violet-400 hover:text-violet-300"
+            onClick={  () => navigate('/admin/orders')}>
+              
               View All Orders →
             </button>
           </div>

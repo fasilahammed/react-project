@@ -1,4 +1,4 @@
-import { Outlet, Navigate } from 'react-router-dom';
+import { Outlet, Navigate, Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useState } from 'react';
 import { 
@@ -6,17 +6,16 @@ import {
   FaUsers, 
   FaBox, 
   FaShoppingBag, 
-  FaChartBar, 
-  FaCog, 
-  FaSignOutAlt,
   FaChevronRight,
   FaChevronLeft,
-  FaUserCircle
+  FaUserCircle,
+  FaSignOutAlt
 } from 'react-icons/fa';
 
 const AdminLayout = () => {
   const { user, logout } = useAuth();
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const location = useLocation();
 
   if (user?.role !== 'admin') {
     return <Navigate to="/" />;
@@ -27,12 +26,11 @@ const AdminLayout = () => {
     { path: '/admin/users', icon: <FaUsers />, text: 'Users' },
     { path: '/admin/products', icon: <FaBox />, text: 'Products' },
     { path: '/admin/orders', icon: <FaShoppingBag />, text: 'Orders' },
-  
   ];
 
   return (
     <div className="flex h-screen bg-gray-900">
-      {/* Fixed Sidebar - Dark Theme */}
+      {/* Fixed Sidebar */}
       <div className={`
         fixed h-full bg-gray-800 border-r border-gray-700 z-10
         transition-all duration-300 ease-in-out
@@ -69,13 +67,13 @@ const AdminLayout = () => {
           <ul className="space-y-1">
             {menuItems.map((item) => (
               <li key={item.text}>
-                <a
-                  href={item.path}
+                <Link
+                  to={item.path}
                   className={`
                     flex items-center p-3 rounded-lg
                     hover:bg-gray-700 hover:text-purple-400
                     transition-colors duration-200
-                    ${window.location.pathname === item.path ? 
+                    ${location.pathname === item.path ? 
                       'bg-gray-700 text-purple-400' : 
                       'text-gray-300'}
                   `}
@@ -84,7 +82,7 @@ const AdminLayout = () => {
                   {!sidebarCollapsed && (
                     <span className="ml-3">{item.text}</span>
                   )}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -108,7 +106,7 @@ const AdminLayout = () => {
         </div>
       </div>
 
-      {/* Main Content - Dark Theme */}
+      {/* Main Content */}
       <main className={`
         flex-1 overflow-y-auto transition-all duration-300 ease-in-out bg-gray-900
         ${sidebarCollapsed ? 'ml-20' : 'ml-64'}

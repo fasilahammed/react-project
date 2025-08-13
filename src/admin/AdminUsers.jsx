@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
-import { 
-  FiUser, FiMail, FiTrash2, FiEye, 
-  FiCheckCircle, FiXCircle, FiLock, FiUnlock 
+import {
+  FiUser, FiMail, FiTrash2, FiEye,
+  FiCheckCircle, FiXCircle, FiLock, FiUnlock
 } from 'react-icons/fi';
 import { toast } from 'react-hot-toast';
 import AdminLoading from './components/AdminLoading';
@@ -27,7 +27,7 @@ const AdminUsers = () => {
         setLoading(false);
       }
     };
-    
+
     fetchUsers();
   }, []);
 
@@ -39,14 +39,14 @@ const AdminUsers = () => {
   const toggleUserStatus = async (userId, currentStatus) => {
     try {
       const newStatus = !currentStatus;
-      await axios.patch(`http://localhost:3000/users/${userId}`, { 
-        isActive: newStatus 
+      await axios.patch(`http://localhost:3000/users/${userId}`, {
+        isActive: newStatus
       });
-      
-      setUsers(users.map(user => 
+
+      setUsers(users.map(user =>
         user.id === userId ? { ...user, isActive: newStatus } : user
       ));
-      
+
       toast.success(`User ${newStatus ? 'activated' : 'deactivated'}`);
     } catch (error) {
       console.error('Error updating user status:', error);
@@ -57,14 +57,14 @@ const AdminUsers = () => {
   const toggleBlockStatus = async (userId, isBlocked) => {
     try {
       const newBlockStatus = !isBlocked;
-      await axios.patch(`http://localhost:3000/users/${userId}`, { 
-        isBlocked: newBlockStatus 
+      await axios.patch(`http://localhost:3000/users/${userId}`, {
+        isBlocked: newBlockStatus
       });
-      
-      setUsers(users.map(user => 
+
+      setUsers(users.map(user =>
         user.id === userId ? { ...user, isBlocked: newBlockStatus } : user
       ));
-      
+
       toast.success(`User ${newBlockStatus ? 'blocked' : 'unblocked'}`);
     } catch (error) {
       console.error('Error updating block status:', error);
@@ -74,7 +74,7 @@ const AdminUsers = () => {
 
   const deleteUser = async (userId) => {
     if (!window.confirm('Are you sure you want to delete this user?')) return;
-    
+
     try {
       await axios.delete(`http://localhost:3000/users/${userId}`);
       setUsers(users.filter(user => user.id !== userId));
@@ -145,11 +145,10 @@ const AdminUsers = () => {
                     <td className="px-6 py-4 whitespace-nowrap">
                       <button
                         onClick={() => toggleUserStatus(user.id, user.isActive)}
-                        className={`flex items-center gap-1 px-3 py-1 rounded-full text-xs ${
-                          user.isActive 
-                            ? 'bg-green-100 text-green-800 hover:bg-green-200' 
+                        className={`flex items-center gap-1 px-3 py-1 rounded-full text-xs ${user.isActive
+                            ? 'bg-green-100 text-green-800 hover:bg-green-200'
                             : 'bg-red-100 text-red-800 hover:bg-red-200'
-                        }`}
+                          }`}
                       >
                         {user.isActive ? (
                           <>
@@ -165,11 +164,10 @@ const AdminUsers = () => {
                     <td className="px-6 py-4 whitespace-nowrap">
                       <button
                         onClick={() => toggleBlockStatus(user.id, user.isBlocked)}
-                        className={`flex items-center gap-1 px-3 py-1 rounded-full text-xs ${
-                          user.isBlocked 
-                            ? 'bg-red-100 text-red-800 hover:bg-red-200' 
+                        className={`flex items-center gap-1 px-3 py-1 rounded-full text-xs ${user.isBlocked
+                            ? 'bg-red-100 text-red-800 hover:bg-red-200'
                             : 'bg-gray-100 text-gray-800 hover:bg-gray-200'
-                        }`}
+                          }`}
                       >
                         {user.isBlocked ? (
                           <>
@@ -183,7 +181,11 @@ const AdminUsers = () => {
                       </button>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-400">
-                      {new Date(user.createdAt || Date.now()).toLocaleDateString()}
+                      {new Date(user.createdAt || Date.now()).toLocaleDateString("en-GB", {
+                        day: "2-digit",
+                        month: "2-digit",
+                        year: "numeric"
+                      })}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                       <div className="flex justify-end space-x-3">

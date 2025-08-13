@@ -6,7 +6,7 @@
       "email": "admin@snapmob.com",
       "password": "admin123",
       "role": "admin",
-      "createdAt": "2023-07-20T10:00:00Z",
+      "createdAt": "2025-07-20T10:00:00Z",
       "cart": [
         {
           "id": "p2",
@@ -41,7 +41,52 @@
       "password": "fasilkm@123",
       "confirmPassword": "fasilkm@123",
       "role": "user",
-      "cart": [],
+      "cart": [
+        {
+          "id": "p34",
+          "name": "Google Pixel 9A",
+          "brand": "Google",
+          "price": 34999,
+          "category": "smartphones",
+          "images": [
+            "https://m.media-amazon.com/images/I/51Pjm7ZQUXL._AC_SX355_.jpg"
+          ],
+          "stock": 18,
+          "description": "Affordable Pixel smartphone with flagship camera.",
+          "specifications": {
+            "display": "6.1-inch OLED",
+            "storage": "128GB",
+            "camera": "12.2MP",
+            "battery": "4410mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true,
+          "quantity": 1
+        },
+        {
+          "id": "p37",
+          "name": "Google Pixel 6 5G",
+          "brand": "Google",
+          "price": 39999,
+          "category": "smartphones",
+          "images": [
+            "https://m.media-amazon.com/images/I/61Txip5YAFL._AC_SY355_.jpg"
+          ],
+          "stock": 10,
+          "description": "5G enabled Pixel smartphone with Tensor chip.",
+          "specifications": {
+            "display": "6.4-inch OLED",
+            "storage": "128GB",
+            "camera": "50MP + 12MP",
+            "battery": "4614mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true,
+          "quantity": 1
+        }
+      ],
       "wishlist": [
         {
           "id": "p3",
@@ -97,30 +142,7 @@
       "password": "aflahkm@123",
       "confirmPassword": "aflahkm@123",
       "role": "user",
-      "cart": [
-        {
-          "id": "p4",
-          "name": "Apple iPhone 8 Plus",
-          "brand": "Apple",
-          "price": 35900,
-          "category": "smartphones",
-          "images": [
-            "https://m.media-amazon.com/images/I/61yX3VKY7GL._AC_UL480_FMwebp_QL65_.jpg"
-          ],
-          "stock": 15,
-          "description": "5.5-inch Retina HD display, Touch ID, A11 Bionic chip.",
-          "specifications": {
-            "display": "5.5-inch LCD",
-            "storage": "64GB",
-            "camera": "12MP + 12MP",
-            "battery": "2691mAh"
-          },
-          "rating": null,
-          "reviews": [],
-          "isActive": true,
-          "quantity": 1
-        }
-      ],
+      "cart": [],
       "wishlist": [
         {
           "id": "p4",
@@ -159,6 +181,48 @@
             "storage": "256GB",
             "camera": "48MP + 12MP + 12MP",
             "battery": "4422mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true
+        },
+        {
+          "id": "p14",
+          "name": "iPhone 16 Pro",
+          "brand": "Apple",
+          "price": 119900,
+          "category": "smartphones",
+          "images": [
+            "https://m.media-amazon.com/images/I/61Jhm0ptwyL._AC_UL480_FMwebp_QL65_.jpg"
+          ],
+          "stock": 10,
+          "description": "Latest Pro model iPhone with advanced camera system and performance.",
+          "specifications": {
+            "display": "6.7-inch OLED",
+            "storage": "256GB",
+            "camera": "48MP + 12MP + 12MP",
+            "battery": "4422mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true
+        },
+        {
+          "id": "p15",
+          "name": "iPhone 15 pro",
+          "brand": "Apple",
+          "price": 109900,
+          "category": "smartphones",
+          "images": [
+            "https://m.media-amazon.com/images/I/616mZZm8-7L._AC_UL480_FMwebp_QL65_.jpg"
+          ],
+          "stock": 12,
+          "description": "Premium iPhone model with Pro features and advanced camera system.",
+          "specifications": {
+            "display": "6.1-inch OLED",
+            "storage": "128GB",
+            "camera": "48MP + 12MP + 12MP",
+            "battery": "3274mAh"
           },
           "rating": null,
           "reviews": [],
@@ -499,7 +563,30 @@
       "password": "adiladh@123",
       "confirmPassword": "adiladh@123",
       "role": "user",
-      "cart": [],
+      "cart": [
+        {
+          "id": "p42",
+          "name": "Google Pixel 2 XL",
+          "brand": "Google",
+          "price": 19999,
+          "category": "smartphones",
+          "images": [
+            "https://m.media-amazon.com/images/I/61UIeMfECBL.__AC_SX300_SY300_QL70_ML2_.jpg"
+          ],
+          "stock": 2,
+          "description": "Older generation Pixel smartphone with great display.",
+          "specifications": {
+            "display": "6.0-inch OLED",
+            "storage": "64GB",
+            "camera": "12.2MP",
+            "battery": "3520mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true,
+          "quantity": 1
+        }
+      ],
       "wishlist": [
         {
           "id": "p12",
@@ -709,6 +796,181 @@
         }
       ],
       "createdAt": "2025-08-12T03:44:38.436Z"
+    },
+    {
+      "id": "5240",
+      "name": "shamas",
+      "email": "shamas@gmail.com",
+      "password": "shamas@123",
+      "confirmPassword": "shamas@123",
+      "role": "user",
+      "cart": [
+        {
+          "id": "p32",
+          "name": "Motorola Moto G Play",
+          "brand": "Motorola",
+          "price": 9999,
+          "category": "smartphones",
+          "images": [
+            "https://m.media-amazon.com/images/I/51+l3ErHpiL._AC_SY300_SX300_.jpg"
+          ],
+          "stock": 25,
+          "description": "Entry-level smartphone with long battery life.",
+          "specifications": {
+            "display": "6.5-inch LCD",
+            "storage": "32GB",
+            "camera": "16MP",
+            "battery": "5000mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true,
+          "quantity": 1
+        }
+      ],
+      "wishlist": [
+        {
+          "id": "p29",
+          "name": "Motorola Moto G 5G",
+          "brand": "Motorola",
+          "price": 17999,
+          "category": "smartphones",
+          "images": [
+            "https://m.media-amazon.com/images/I/51iFMfKzTvL.__AC_SX300_SY300_QL70_ML2_.jpg"
+          ],
+          "stock": 18,
+          "description": "Affordable 5G smartphone with clean Android experience.",
+          "specifications": {
+            "display": "6.5-inch LCD",
+            "storage": "128GB",
+            "camera": "48MP + 8MP + 2MP",
+            "battery": "5000mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true
+        },
+        {
+          "id": "p25",
+          "name": "S24 Ultra",
+          "brand": "Samsung",
+          "price": 129999,
+          "category": "smartphones",
+          "images": [
+            "https://m.media-amazon.com/images/I/61OWVSwdZ8L.__AC_SX300_SY300_QL70_ML2_.jpg"
+          ],
+          "stock": 10,
+          "description": "Flagship Samsung smartphone with S Pen and advanced camera system.",
+          "specifications": {
+            "display": "6.8-inch AMOLED",
+            "storage": "256GB",
+            "camera": "200MP + 50MP + 12MP + 10MP",
+            "battery": "5000mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true
+        }
+      ],
+      "createdAt": "2025-08-12T05:27:57.292Z"
+    },
+    {
+      "id": "984a",
+      "name": "mammutty",
+      "email": "mammuka@gmail.com",
+      "password": "mammu@123",
+      "confirmPassword": "mammu@123",
+      "role": "user",
+      "cart": [],
+      "wishlist": [
+        {
+          "id": "p50",
+          "name": "Apple iPhone 16 Pro",
+          "brand": "Apple",
+          "price": 149900,
+          "category": "smartphones",
+          "images": [
+            "https://m.media-amazon.com/images/I/41Vt4AQ8kwL.__AC_SX300_SY300_QL70_ML2_.jpg"
+          ],
+          "stock": 10,
+          "description": "Latest Pro model iPhone with advanced camera system and performance.",
+          "specifications": {
+            "display": "6.7-inch OLED",
+            "storage": "256GB",
+            "camera": "48MP + 12MP + 12MP",
+            "battery": "4422mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true
+        },
+        {
+          "id": "p49",
+          "name": "Apple iPhone 15 Pro Max",
+          "brand": "Apple",
+          "price": 159900,
+          "category": "smartphones",
+          "images": [
+            "https://m.media-amazon.com/images/I/616mZZm8-7L.__AC_SX300_SY300_QL70_ML2_.jpg"
+          ],
+          "stock": 5,
+          "description": "Premium iPhone model with Pro features and large display.",
+          "specifications": {
+            "display": "6.7-inch OLED",
+            "storage": "256GB",
+            "camera": "48MP + 12MP + 12MP",
+            "battery": "4422mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true
+        }
+      ],
+      "createdAt": "2025-08-12T05:31:17.118Z"
+    },
+    {
+      "id": "f0e5",
+      "name": "abin jils",
+      "email": "abin863498@gmail.com",
+      "password": "abin@123",
+      "confirmPassword": "abin@123",
+      "role": "user",
+      "cart": [],
+      "wishlist": [
+        {
+          "id": "p44",
+          "name": "Apple iPhone 14",
+          "brand": "Apple",
+          "price": 79900,
+          "category": "smartphones",
+          "images": [
+            "https://m.media-amazon.com/images/I/61PVtvf4OOL._AC_SY355_.jpg"
+          ],
+          "stock": 20,
+          "description": "6.1-inch Super Retina XDR display, A15 Bionic chip, advanced camera system.",
+          "specifications": {
+            "display": "6.1-inch OLED",
+            "storage": "128GB",
+            "camera": "12MP + 12MP",
+            "battery": "3279mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true
+        }
+      ],
+      "createdAt": "2025-08-13T03:49:10.621Z"
+    },
+    {
+      "id": "1b16",
+      "name": "adhul",
+      "email": "aduuuusss13678@gmail.com",
+      "password": "adul@123",
+      "confirmPassword": "adul@123",
+      "role": "user",
+      "cart": [],
+      "wishlist": [],
+      "createdAt": "2025-08-13T03:51:48.948Z"
     }
   ],
   "products": [
@@ -742,7 +1004,7 @@
       "images": [
         "https://m.media-amazon.com/images/I/51MpKU9XowL._AC_UL480_FMwebp_QL65_.jpg"
       ],
-      "stock": 0,
+      "stock": 2,
       "description": "200MP camera, S Pen, Snapdragon 8 Gen 2.",
       "specifications": {
         "display": "6.8-inch AMOLED",
@@ -752,7 +1014,7 @@
       },
       "rating": null,
       "reviews": [],
-      "isActive": true
+      "isActive": false
     },
     {
       "id": "p3",
@@ -1890,7 +2152,7 @@
         }
       ],
       "total": 42900,
-      "status": "processing",
+      "status": "delivered",
       "shippingAddress": {
         "name": "aflah km",
         "address": "kayal madathil",
@@ -1932,7 +2194,7 @@
         }
       ],
       "total": 124999,
-      "status": "processing",
+      "status": "delivered",
       "shippingAddress": {
         "name": "fasil ahammed",
         "address": "kayal madathil (h)",
@@ -2210,7 +2472,7 @@
         }
       ],
       "total": 164600,
-      "status": "processing",
+      "status": "delivered",
       "shippingAddress": {
         "name": "aflah km",
         "address": "kayal madathil",
@@ -2274,7 +2536,7 @@
         }
       ],
       "total": 167899,
-      "status": "processing",
+      "status": "delivered",
       "shippingAddress": {
         "name": "fasil ahammed",
         "address": "kayal madathil (h)",
@@ -2338,7 +2600,7 @@
         }
       ],
       "total": 429993,
-      "status": "processing",
+      "status": "delivered",
       "shippingAddress": {
         "name": "fasil aham",
         "address": "kayal madathil (h)",
@@ -2490,7 +2752,7 @@
         }
       ],
       "total": 269989,
-      "status": "processing",
+      "status": "delivered",
       "shippingAddress": {
         "name": "fasil aham",
         "address": "kayal madathil (h)",
@@ -2532,7 +2794,7 @@
         }
       ],
       "total": 319600,
-      "status": "processing",
+      "status": "delivered",
       "shippingAddress": {
         "name": "aflah km",
         "address": "kishaanns house",
@@ -2598,7 +2860,7 @@
         }
       ],
       "total": 249800,
-      "status": "processing",
+      "status": "delivered",
       "shippingAddress": {
         "name": "aflah km",
         "address": "kayal madathil",
@@ -2684,7 +2946,7 @@
         }
       ],
       "total": 199799,
-      "status": "processing",
+      "status": "delivered",
       "shippingAddress": {
         "name": "ashwin",
         "address": "kayal madathil (h)",
@@ -2768,13 +3030,318 @@
         }
       ],
       "total": 10999,
-      "status": "processing",
+      "status": "delivered",
       "shippingAddress": {
         "name": "ashwin ",
         "address": "kishaanns house",
         "city": "tirur",
         "state": "kerala",
         "zip": "676016"
+      },
+      "paymentMethod": "cod",
+      "paymentDetails": {
+        "type": "cod"
+      }
+    },
+    {
+      "id": "faae",
+      "userId": "5240",
+      "date": "2025-08-12T05:29:40.629Z",
+      "items": [
+        {
+          "id": "3621",
+          "name": "Google Pixel 9a",
+          "brand": "Google",
+          "category": "smartphones",
+          "price": 50999,
+          "stock": 10,
+          "description": "Google Pixel 9a - 128 GB -Unlocked Android Smartphone with AI Camera, All-Day Battery and Powerful Security - Peony",
+          "images": [
+            "https://m.media-amazon.com/images/I/61IgWXs5BRL._AC_SX425_.jpg"
+          ],
+          "isActive": true,
+          "quantity": 1
+        }
+      ],
+      "total": 50999,
+      "status": "processing",
+      "shippingAddress": {
+        "name": "fasil ahammed",
+        "address": "kayal madathil (h)",
+        "city": "dsdsd",
+        "state": "asdsadasdsd24242",
+        "zip": "2424242"
+      },
+      "paymentMethod": "card",
+      "paymentDetails": {
+        "type": "card",
+        "lastFour": "1223",
+        "cardName": "Google Pixel 9a"
+      }
+    },
+    {
+      "id": "208a",
+      "userId": "984a",
+      "date": "2025-08-12T05:33:07.068Z",
+      "items": [
+        {
+          "id": "p49",
+          "name": "Apple iPhone 15 Pro Max",
+          "brand": "Apple",
+          "price": 159900,
+          "category": "smartphones",
+          "images": [
+            "https://m.media-amazon.com/images/I/616mZZm8-7L.__AC_SX300_SY300_QL70_ML2_.jpg"
+          ],
+          "stock": 5,
+          "description": "Premium iPhone model with Pro features and large display.",
+          "specifications": {
+            "display": "6.7-inch OLED",
+            "storage": "256GB",
+            "camera": "48MP + 12MP + 12MP",
+            "battery": "4422mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true,
+          "quantity": 1
+        }
+      ],
+      "total": 159900,
+      "status": "processing",
+      "shippingAddress": {
+        "name": "mammutty",
+        "address": "mammu (h)",
+        "city": "mambaramb",
+        "state": "malappuram",
+        "zip": "676016"
+      },
+      "paymentMethod": "upi",
+      "paymentDetails": {
+        "type": "upi",
+        "upiId": "qwytrere34434@upi"
+      }
+    },
+    {
+      "id": "8c22",
+      "userId": "56cc",
+      "date": "2025-08-12T08:17:39.257Z",
+      "items": [
+        {
+          "id": "p4",
+          "name": "Apple iPhone 8 Plus",
+          "brand": "Apple",
+          "price": 35900,
+          "category": "smartphones",
+          "images": [
+            "https://m.media-amazon.com/images/I/61yX3VKY7GL._AC_UL480_FMwebp_QL65_.jpg"
+          ],
+          "stock": 15,
+          "description": "5.5-inch Retina HD display, Touch ID, A11 Bionic chip.",
+          "specifications": {
+            "display": "5.5-inch LCD",
+            "storage": "64GB",
+            "camera": "12MP + 12MP",
+            "battery": "2691mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true,
+          "quantity": 1
+        },
+        {
+          "id": "p15",
+          "name": "iPhone 15 pro",
+          "brand": "Apple",
+          "price": 109900,
+          "category": "smartphones",
+          "images": [
+            "https://m.media-amazon.com/images/I/616mZZm8-7L._AC_UL480_FMwebp_QL65_.jpg"
+          ],
+          "stock": 12,
+          "description": "Premium iPhone model with Pro features and advanced camera system.",
+          "specifications": {
+            "display": "6.1-inch OLED",
+            "storage": "128GB",
+            "camera": "48MP + 12MP + 12MP",
+            "battery": "3274mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true,
+          "quantity": 1
+        }
+      ],
+      "total": 145800,
+      "status": "processing",
+      "shippingAddress": {
+        "name": "fasil ahammed",
+        "address": "kayal madathil (h)",
+        "city": "sdfa",
+        "state": "ds",
+        "zip": "sdafd"
+      },
+      "paymentMethod": "cod",
+      "paymentDetails": {
+        "type": "cod"
+      }
+    },
+    {
+      "id": "2f3a",
+      "userId": "f0e5",
+      "date": "2025-08-13T03:50:07.911Z",
+      "items": [
+        {
+          "id": "p2",
+          "name": "Samsung Galaxy S23 Ultra",
+          "brand": "Samsung",
+          "price": 124999,
+          "category": "smartphones",
+          "images": [
+            "https://m.media-amazon.com/images/I/51MpKU9XowL._AC_UL480_FMwebp_QL65_.jpg"
+          ],
+          "stock": 2,
+          "description": "200MP camera, S Pen, Snapdragon 8 Gen 2.",
+          "specifications": {
+            "display": "6.8-inch AMOLED",
+            "storage": "256GB",
+            "camera": "200MP + 12MP + 10MP",
+            "battery": "5000mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": false,
+          "quantity": 5
+        }
+      ],
+      "total": 624995,
+      "status": "processing",
+      "shippingAddress": {
+        "name": "fasil ahammed",
+        "address": "kayal madathil",
+        "city": "dcz",
+        "state": "malappuram",
+        "zip": "604627"
+      },
+      "paymentMethod": "cod",
+      "paymentDetails": {
+        "type": "cod"
+      }
+    },
+    {
+      "id": "a5e4",
+      "userId": "f0e5",
+      "date": "2025-08-13T03:51:00.300Z",
+      "items": [
+        {
+          "id": "p44",
+          "name": "Apple iPhone 14",
+          "brand": "Apple",
+          "price": 79900,
+          "category": "smartphones",
+          "images": [
+            "https://m.media-amazon.com/images/I/61PVtvf4OOL._AC_SY355_.jpg"
+          ],
+          "stock": 20,
+          "description": "6.1-inch Super Retina XDR display, A15 Bionic chip, advanced camera system.",
+          "specifications": {
+            "display": "6.1-inch OLED",
+            "storage": "128GB",
+            "camera": "12MP + 12MP",
+            "battery": "3279mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true,
+          "quantity": 1
+        },
+        {
+          "id": "3621",
+          "name": "Google Pixel 9a",
+          "brand": "Google",
+          "category": "smartphones",
+          "price": 50999,
+          "stock": 10,
+          "description": "Google Pixel 9a - 128 GB -Unlocked Android Smartphone with AI Camera, All-Day Battery and Powerful Security - Peony",
+          "images": [
+            "https://m.media-amazon.com/images/I/61IgWXs5BRL._AC_SX425_.jpg"
+          ],
+          "isActive": true,
+          "quantity": 1
+        },
+        {
+          "id": "p49",
+          "name": "Apple iPhone 15 Pro Max",
+          "brand": "Apple",
+          "price": 159900,
+          "category": "smartphones",
+          "images": [
+            "https://m.media-amazon.com/images/I/616mZZm8-7L.__AC_SX300_SY300_QL70_ML2_.jpg"
+          ],
+          "stock": 5,
+          "description": "Premium iPhone model with Pro features and large display.",
+          "specifications": {
+            "display": "6.7-inch OLED",
+            "storage": "256GB",
+            "camera": "48MP + 12MP + 12MP",
+            "battery": "4422mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true,
+          "quantity": 1
+        }
+      ],
+      "total": 290799,
+      "status": "processing",
+      "shippingAddress": {
+        "name": "ashwin ",
+        "address": "kishaanns house",
+        "city": "tirur",
+        "state": "malappuram",
+        "zip": "604627"
+      },
+      "paymentMethod": "cod",
+      "paymentDetails": {
+        "type": "cod"
+      }
+    },
+    {
+      "id": "a122",
+      "userId": "1b16",
+      "date": "2025-08-13T03:52:32.323Z",
+      "items": [
+        {
+          "id": "p4",
+          "name": "Apple iPhone 8 Plus",
+          "brand": "Apple",
+          "price": 35900,
+          "category": "smartphones",
+          "images": [
+            "https://m.media-amazon.com/images/I/61yX3VKY7GL._AC_UL480_FMwebp_QL65_.jpg"
+          ],
+          "stock": 15,
+          "description": "5.5-inch Retina HD display, Touch ID, A11 Bionic chip.",
+          "specifications": {
+            "display": "5.5-inch LCD",
+            "storage": "64GB",
+            "camera": "12MP + 12MP",
+            "battery": "2691mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true,
+          "quantity": 3
+        }
+      ],
+      "total": 107700,
+      "status": "processing",
+      "shippingAddress": {
+        "name": "adhul",
+        "address": "adulknaad",
+        "city": "tirur",
+        "state": "kerala",
+        "zip": "604627"
       },
       "paymentMethod": "cod",
       "paymentDetails": {
