@@ -110,7 +110,7 @@
       "createdAt": "2025-08-01T05:30:33.132Z",
       "phone": "9946811493",
       "address": "kayal madathil (h)",
-      "isBlocked": true
+      "isBlocked": false
     },
     {
       "id": "56cc",
@@ -233,7 +233,7 @@
       "phone": "9946811493",
       "address": "kayal madathil",
       "isActive": true,
-      "isBlocked": false
+      "isBlocked": true
     },
     {
       "id": "be8f",
@@ -950,9 +950,42 @@
         }
       ],
       "createdAt": "2025-08-13T10:05:48.199Z",
-      "isBlocked": true,
+      "isBlocked": false,
       "phone": "9946811493",
       "address": "kayal madathil (h)"
+    },
+    {
+      "id": "e33e",
+      "name": "soth mnon",
+      "email": "sothhh@gmail.com",
+      "password": "sotyh!23",
+      "confirmPassword": "sotyh!23",
+      "role": "user",
+      "cart": [],
+      "wishlist": [],
+      "createdAt": "2025-08-14T08:17:27.349Z"
+    },
+    {
+      "id": "015b",
+      "name": "soth mnon",
+      "email": "sothhh@gmail.com",
+      "password": "sotyh!23",
+      "confirmPassword": "sotyh!23",
+      "role": "user",
+      "cart": [],
+      "wishlist": [],
+      "createdAt": "2025-08-14T08:17:28.384Z"
+    },
+    {
+      "id": "d879",
+      "name": "john deo",
+      "email": "ashudhahaahaha@gmail.com",
+      "password": "ashudhan1233",
+      "confirmPassword": "ashudhan1233",
+      "role": "user",
+      "cart": [],
+      "wishlist": [],
+      "createdAt": "2025-08-14T08:19:58.309Z"
     }
   ],
   "products": [
@@ -996,7 +1029,7 @@
       },
       "rating": null,
       "reviews": [],
-      "isActive": false
+      "isActive": true
     },
     {
       "id": "p3",
@@ -1017,7 +1050,7 @@
       },
       "rating": null,
       "reviews": [],
-      "isActive": true
+      "isActive": false
     },
     {
       "id": "p4",
@@ -1049,7 +1082,7 @@
       "images": [
         "https://imgs.search.brave.com/Q2w9Mf-dJIWLVQFUpfPV8Q_7nF5FKOKAFqnHKc5nFWk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9wbmdp/bWcuY29tL3VwbG9h/ZHMvaXBob25lXzEx/L3NtYWxsL2lwaG9u/ZV8xMV9QTkczOC5w/bmc"
       ],
-      "stock": 30,
+      "stock": 0,
       "description": "6.1-inch Liquid Retina display, dual-camera system, A13 Bionic chip.",
       "specifications": {
         "display": "6.1-inch LCD",
@@ -3039,42 +3072,6 @@
       }
     },
     {
-      "id": "faae",
-      "userId": null,
-      "date": "2025-08-12T05:29:40.629Z",
-      "items": [
-        {
-          "id": "3621",
-          "name": "Google Pixel 9a",
-          "brand": "Google",
-          "category": "smartphones",
-          "price": 50999,
-          "stock": 10,
-          "description": "Google Pixel 9a - 128 GB -Unlocked Android Smartphone with AI Camera, All-Day Battery and Powerful Security - Peony",
-          "images": [
-            "https://m.media-amazon.com/images/I/61IgWXs5BRL._AC_SX425_.jpg"
-          ],
-          "isActive": true,
-          "quantity": 1
-        }
-      ],
-      "total": 50999,
-      "status": "cancelled",
-      "shippingAddress": {
-        "name": "fasil ahammed",
-        "address": "kayal madathil (h)",
-        "city": "dsdsd",
-        "state": "asdsadasdsd24242",
-        "zip": "2424242"
-      },
-      "paymentMethod": "card",
-      "paymentDetails": {
-        "type": "card",
-        "lastFour": "1223",
-        "cardName": "Google Pixel 9a"
-      }
-    },
-    {
       "id": "208a",
       "userId": "984a",
       "date": "2025-08-12T05:33:07.068Z",
@@ -3330,7 +3327,7 @@
         }
       ],
       "total": 107700,
-      "status": "processing",
+      "status": "delivered",
       "shippingAddress": {
         "name": "adhul",
         "address": "adulknaad",
@@ -3416,7 +3413,7 @@
         }
       ],
       "total": 152897,
-      "status": "processing",
+      "status": "delivered",
       "shippingAddress": {
         "name": "fasil ahammed",
         "address": "kayal madathil (h)",
@@ -3561,6 +3558,262 @@
         "type": "card",
         "lastFour": "1223",
         "cardName": "ashwin "
+      }
+    },
+    {
+      "id": "ce18",
+      "userId": "e33e",
+      "date": "2025-08-14T08:18:11.875Z",
+      "items": [
+        {
+          "id": "p14",
+          "name": "iPhone 16 Pro",
+          "brand": "Apple",
+          "price": 119900,
+          "category": "smartphones",
+          "images": [
+            "https://m.media-amazon.com/images/I/61Jhm0ptwyL._AC_UL480_FMwebp_QL65_.jpg"
+          ],
+          "stock": 10,
+          "description": "Latest Pro model iPhone with advanced camera system and performance.",
+          "specifications": {
+            "display": "6.7-inch OLED",
+            "storage": "256GB",
+            "camera": "48MP + 12MP + 12MP",
+            "battery": "4422mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true,
+          "quantity": 4
+        },
+        {
+          "id": "p13",
+          "name": "White iPhone 12",
+          "brand": "Apple",
+          "price": 59900,
+          "category": "smartphones",
+          "images": [
+            "https://imgs.search.brave.com/U4ne6qZPuWf5__7aJg9lyhWXUwDg0nbLLBePjZLkLsY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/cG5nYWxsLmNvbS93/cC1jb250ZW50L3Vw/bG9hZHMvMTgvV2hp/dGUtaVBob25lLVNo/b3djYXNpbmctVXNl/ci1GcmllbmRseS1J/bnRlcmZhY2UtUE5H/LTE4MHgxODAucG5n"
+          ],
+          "stock": 15,
+          "description": "iPhone 12 in white color with Super Retina XDR display.",
+          "specifications": {
+            "display": "6.1-inch OLED",
+            "storage": "64GB",
+            "camera": "12MP + 12MP",
+            "battery": "2815mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true,
+          "quantity": 1
+        },
+        {
+          "id": "p15",
+          "name": "iPhone 15 pro",
+          "brand": "Apple",
+          "price": 109900,
+          "category": "smartphones",
+          "images": [
+            "https://m.media-amazon.com/images/I/616mZZm8-7L._AC_UL480_FMwebp_QL65_.jpg"
+          ],
+          "stock": 12,
+          "description": "Premium iPhone model with Pro features and advanced camera system.",
+          "specifications": {
+            "display": "6.1-inch OLED",
+            "storage": "128GB",
+            "camera": "48MP + 12MP + 12MP",
+            "battery": "3274mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true,
+          "quantity": 1
+        },
+        {
+          "id": "p23",
+          "name": "Samsung Galaxy S24 FE",
+          "brand": "Samsung",
+          "price": 49999,
+          "category": "smartphones",
+          "images": [
+            "https://m.media-amazon.com/images/I/513NjwDrXwL.__AC_SX300_SY300_QL70_ML2_.jpg"
+          ],
+          "stock": 20,
+          "description": "Fan Edition of the flagship S24 with premium features.",
+          "specifications": {
+            "display": "6.4-inch AMOLED",
+            "storage": "128GB",
+            "camera": "50MP + 12MP + 8MP",
+            "battery": "4500mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true,
+          "quantity": 1
+        },
+        {
+          "id": "p24",
+          "name": "Samsung Galaxy S21 FE",
+          "brand": "Samsung",
+          "price": 39999,
+          "category": "smartphones",
+          "images": [
+            "https://m.media-amazon.com/images/I/51BoLCWiGpL._AC_SY355_.jpg"
+          ],
+          "stock": 15,
+          "description": "Fan Edition of the flagship S21 with premium features.",
+          "specifications": {
+            "display": "6.4-inch AMOLED",
+            "storage": "128GB",
+            "camera": "12MP + 12MP + 8MP",
+            "battery": "4500mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true,
+          "quantity": 1
+        }
+      ],
+      "total": 739398,
+      "status": "processing",
+      "shippingAddress": {
+        "name": "anadha kishna ",
+        "address": "kayal madathil",
+        "city": "sdfa",
+        "state": "asdsadasdsd24242",
+        "zip": "sdafd"
+      },
+      "paymentMethod": "cod",
+      "paymentDetails": {
+        "type": "cod"
+      }
+    },
+    {
+      "id": "f40e",
+      "userId": "e33e",
+      "date": "2025-08-14T08:18:55.311Z",
+      "items": [
+        {
+          "id": "p49",
+          "name": "Apple iPhone 15 Pro Max",
+          "brand": "Apple",
+          "price": 159900,
+          "category": "smartphones",
+          "images": [
+            "https://m.media-amazon.com/images/I/616mZZm8-7L.__AC_SX300_SY300_QL70_ML2_.jpg"
+          ],
+          "stock": 5,
+          "description": "Premium iPhone model with Pro features and large display.",
+          "specifications": {
+            "display": "6.7-inch OLED",
+            "storage": "256GB",
+            "camera": "48MP + 12MP + 12MP",
+            "battery": "4422mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true,
+          "quantity": 1
+        }
+      ],
+      "total": 159900,
+      "status": "processing",
+      "shippingAddress": {
+        "name": "aflah km",
+        "address": "kayal madathil",
+        "city": "tirur",
+        "state": "s",
+        "zip": "sdafd"
+      },
+      "paymentMethod": "cod",
+      "paymentDetails": {
+        "type": "cod"
+      }
+    },
+    {
+      "id": "b91b",
+      "userId": "d879",
+      "date": "2025-08-14T08:20:43.644Z",
+      "items": [
+        {
+          "id": "p29",
+          "name": "Motorola Moto G 5G",
+          "brand": "Motorola",
+          "price": 17999,
+          "category": "smartphones",
+          "images": [
+            "https://m.media-amazon.com/images/I/51iFMfKzTvL.__AC_SX300_SY300_QL70_ML2_.jpg"
+          ],
+          "stock": 18,
+          "description": "Affordable 5G smartphone with clean Android experience.",
+          "specifications": {
+            "display": "6.5-inch LCD",
+            "storage": "128GB",
+            "camera": "48MP + 8MP + 2MP",
+            "battery": "5000mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true,
+          "quantity": 1
+        }
+      ],
+      "total": 17999,
+      "status": "processing",
+      "shippingAddress": {
+        "name": "eyupoiuytr",
+        "address": "kishaanns house",
+        "city": "dcz",
+        "state": "s",
+        "zip": "676016"
+      },
+      "paymentMethod": "cod",
+      "paymentDetails": {
+        "type": "cod"
+      }
+    },
+    {
+      "id": "3309",
+      "userId": "d879",
+      "date": "2025-08-14T08:21:30.000Z",
+      "items": [
+        {
+          "id": "p1",
+          "name": "iPhone 11 64GB",
+          "brand": "Apple",
+          "price": 42900,
+          "category": "smartphones",
+          "images": [
+            "https://imgs.search.brave.com/pEXklLaEBfBuDZjg_ktZtvSJ5GZem4X7WizoAalOQaQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2M0LzIy/LzJkL2M0MjIyZGMy/MDBmMGRjNDc5NjM0/OTZlOGE1NmE1OWUz/LmpwZw"
+          ],
+          "stock": 25,
+          "description": "6.1-inch Liquid Retina display, A13 Bionic chip, dual-camera system.",
+          "specifications": {
+            "display": "6.1-inch LCD",
+            "storage": "64GB",
+            "camera": "12MP + 12MP",
+            "battery": "3110mAh"
+          },
+          "rating": null,
+          "reviews": [],
+          "isActive": true,
+          "quantity": 1
+        }
+      ],
+      "total": 42900,
+      "status": "processing",
+      "shippingAddress": {
+        "name": "aflah km",
+        "address": "kayal madathil",
+        "city": "dcz",
+        "state": "asdsadasdsd24242",
+        "zip": "676016"
+      },
+      "paymentMethod": "cod",
+      "paymentDetails": {
+        "type": "cod"
       }
     }
   ]
