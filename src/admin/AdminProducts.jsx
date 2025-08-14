@@ -15,7 +15,7 @@ const AdminProducts = () => {
     const fetchProducts = async () => {
       try {
         setLoading(true);
-        const response = await axios.get('http://localhost:3000/products');
+        const response = await axios.get('https://snapmobdb-1.onrender.com/products');
         setProducts(response.data);
       } catch (error) {
         console.error('Error fetching products:', error);
@@ -41,7 +41,7 @@ const AdminProducts = () => {
     if (!window.confirm('Are you sure you want to delete this product?')) return;
     
     try {
-      await axios.delete(`http://localhost:3000/products/${productId}`);
+      await axios.delete(`https://snapmobdb-1.onrender.com/products/${productId}`);
       setProducts(products.filter(product => product.id !== productId));
       toast.success('Product deleted successfully');
     } catch (error) {
@@ -52,7 +52,7 @@ const AdminProducts = () => {
 
   const handleToggleActive = async (productId, currentStatus) => {
     try {
-      const updatedProduct = await axios.patch(`http://localhost:3000/products/${productId}`, {
+      const updatedProduct = await axios.patch(`https://snapmobdb-1.onrender.com/products/${productId}`, {
         isActive: !currentStatus
       });
       

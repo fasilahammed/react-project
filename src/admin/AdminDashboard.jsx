@@ -20,9 +20,9 @@ const AdminDashboard = () => {
     const fetchData = async () => {
       try {
         const [usersRes, productsRes, ordersRes] = await Promise.all([
-          axios.get('http://localhost:3000/users'),
-          axios.get('http://localhost:3000/products'),
-          axios.get('http://localhost:3000/orders')
+          axios.get('https://snapmobdb-1.onrender.com/users'),
+          axios.get('https://snapmobdb-1.onrender.com/products'),
+          axios.get('https://snapmobdb-1.onrender.com/orders')
         ]);
 
         const users = usersRes.data;

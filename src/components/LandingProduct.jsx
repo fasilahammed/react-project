@@ -17,7 +17,7 @@ const LandingProduct = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/products?premium=true&_limit=6");
+        const response = await axios.get("https://snapmobdb-1.onrender.com/products?premium=true&_limit=6");
         setProducts(response.data);
         setLoading(false);
       } catch (error) {

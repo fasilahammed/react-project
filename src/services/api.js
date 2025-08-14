@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: 'https://snapmobdb-1.onrender.com',
   headers: { 
     'Content-Type': 'application/json',
     'Accept': 'application/json'

@@ -18,7 +18,7 @@ const AdminUsers = () => {
     const fetchUsers = async () => {
       try {
         setLoading(true);
-        const response = await axios.get('http://localhost:3000/users');
+        const response = await axios.get('https://snapmobdb-1.onrender.com/users');
         setUsers(response.data);
       } catch (error) {
         console.error('Error fetching users:', error);
@@ -40,7 +40,7 @@ const AdminUsers = () => {
   const toggleBlockStatus = async (userId, isBlocked) => {
     try {
       const newBlockStatus = !isBlocked;
-      await axios.patch(`http://localhost:3000/users/${userId}`, {
+      await axios.patch(`https://snapmobdb-1.onrender.com/users/${userId}`, {
         isBlocked: newBlockStatus
       });
 
@@ -59,7 +59,7 @@ const AdminUsers = () => {
     if (!window.confirm('Are you sure you want to delete this user?')) return;
 
     try {
-      await axios.delete(`http://localhost:3000/users/${userId}`);
+      await axios.delete(`https://snapmobdb-1.onrender.com/users/${userId}`);
       setUsers(users.filter(user => user.id !== userId));
       toast.success('User deleted successfully');
     } catch (error) {

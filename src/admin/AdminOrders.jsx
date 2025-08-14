@@ -18,8 +18,8 @@ const AdminOrders = () => {
 
         // Fetch both orders and users in parallel
         const [ordersRes, usersRes] = await Promise.all([
-          axios.get('http://localhost:3000/orders'),
-          axios.get('http://localhost:3000/users')
+          axios.get('https://snapmobdb-1.onrender.com/orders'),
+          axios.get('https://snapmobdb-1.onrender.com/users')
         ]);
 
         setUsers(usersRes.data);
@@ -69,7 +69,7 @@ const AdminOrders = () => {
 
     try {
       // Update in backend
-      await axios.patch(`http://localhost:3000/orders/${orderId}`, { status: newStatus });
+      await axios.patch(`https://snapmobdb-1.onrender.com/orders/${orderId}`, { status: newStatus });
 
       // Update local state
       setOrders(orders.map(order =>

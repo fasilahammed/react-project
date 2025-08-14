@@ -508,7 +508,7 @@ export default function Products() {
   ];
 
   useEffect(() => {
-    axios.get("http://localhost:3000/products")
+    axios.get("https://snapmobdb-1.onrender.com/products")
       .then((res) => {
         const productsData = res.data || [];
         setProducts(productsData);
