@@ -24,3 +24,10 @@
 .animation-delay-4000 {
   animation-delay: 4s;
 }
+/* In index.css or App.css */
+body {
+  background-color: #f9fafb; /* A nice light gray like Tailwind's gray-50 */
+  /* or */
+  background-color: #ffffff; /* Pure white */
+  /* ... other styles */
+}

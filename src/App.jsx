@@ -67,7 +67,7 @@ function Layout() {
   const shouldShowFooter = footerPaths.includes(location.pathname) && !isAdminPage;
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 flex flex-col">
+    <div className="min-h-screen bg-gray-100 flex flex-col">
       <Toaster
         position="top-center"
         toastOptions={{
