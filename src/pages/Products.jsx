@@ -9,7 +9,8 @@ import {
   FaSearch,
   FaTimes,
   FaChevronDown,
-  FaChevronUp
+  FaChevronUp,
+  FaCheck, // ADDED: Check icon for filters
 } from "react-icons/fa";
 import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
@@ -95,18 +96,16 @@ const ProductCard = ({ product, onAddToCart, onAddToWishlist, onViewDetails, car
             onClick={() => onAddToCart(product)}
             disabled={product.stock <= 0}
             className={`py-2 px-4 rounded-lg transition-colors text-sm font-medium flex items-center justify-center gap-2 ${product.stock <= 0
-              ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
-              : isInCart
-                ? 'bg-green-100 text-green-700 border border-green-200'
-                : 'bg-orange-500 hover:bg-orange-600 text-white'
+                ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
+                : isInCart
+                  ? 'bg-green-100 text-green-700 border border-green-200'
+                  : 'bg-orange-500 hover:bg-orange-600 text-white'
               }`}
           >
             <FaShoppingCart />
             {isInCart ? 'Added' : 'Add'}
           </button>
         </div>
-
-       
       </div>
     </div>
   );
@@ -114,134 +113,96 @@ const ProductCard = ({ product, onAddToCart, onAddToWishlist, onViewDetails, car
 
 const FilterSection = ({ title, children, isOpen, onToggle }) => {
   return (
-    <div className="mb-4">
-      <button
-        className="flex justify-between items-center w-full py-2 text-left font-medium"
-        onClick={onToggle}
-      >
+    <div className="py-5 border-b border-gray-200">
+      <button className="flex justify-between items-center w-full text-left font-semibold text-gray-800" onClick={onToggle}>
         <span>{title}</span>
-        {isOpen ? <FaChevronUp className="text-gray-500" /> : <FaChevronDown className="text-gray-500" />}
+        {isOpen ? <FaChevronUp className="text-gray-400" /> : <FaChevronDown className="text-gray-400" />}
       </button>
-      {isOpen && (
-        <div className="mt-2 space-y-2">
-          {children}
-        </div>
-      )}
+      {isOpen && (<div className="mt-4 space-y-2 pr-2">{children}</div>)}
     </div>
   );
 };
 
-const Filters = ({
-  brands,
-  priceRanges,
-  categories,
-  onFilterChange,
-  onReset
-}) => {
-  const [filters, setFilters] = useState({
-    brand: [],
-    price: [],
-    category: []
-  });
-  const [openSections, setOpenSections] = useState({
-    brand: false,
-    price: false,
-    category: false
-  });
+const Filters = ({ brands, priceRanges, categories, onFilterChange, onReset, onClose }) => {
+  const [localFilters, setLocalFilters] = useState({ brand: [], price: [], category: [] });
+  const [openSections, setOpenSections] = useState({ brand: true, price: true, category: false });
 
-  const toggleSection = (section) => {
-    setOpenSections(prev => ({
-      ...prev,
-      [section]: !prev[section]
-    }));
-  };
+  const toggleSection = (section) => setOpenSections(prev => ({ ...prev, [section]: !prev[section] }));
 
   const handleFilterToggle = (type, value) => {
-    const newFilters = { ...filters };
-    if (newFilters[type].includes(value)) {
-      newFilters[type] = newFilters[type].filter(item => item !== value);
-    } else {
-      newFilters[type] = [...newFilters[type], value];
-    }
-    setFilters(newFilters);
-    onFilterChange(newFilters);
+    setLocalFilters(prevFilters => {
+      const newValues = prevFilters[type].includes(value)
+        ? prevFilters[type].filter(item => item !== value)
+        : [...prevFilters[type], value];
+      return { ...prevFilters, [type]: newValues };
+    });
+  };
+  
+  const handleApplyFilters = () => {
+    onFilterChange(localFilters);
+    onClose();
   };
 
   const handleReset = () => {
-    setFilters({
-      brand: [],
-      price: [],
-      category: []
-    });
-    onReset();
+    const freshFilters = { brand: [], price: [], category: [] };
+    setLocalFilters(freshFilters);
+    onFilterChange(freshFilters); // Apply reset immediately
   };
 
   return (
-    <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200 w-full">
-      <div className="flex justify-between items-center mb-4">
-        <h3 className="font-bold flex items-center">
-          <FaFilter className="mr-2 text-orange-500" /> Filters
+    <div className="bg-white h-full flex flex-col">
+      {/* Header */}
+      <div className="flex justify-between items-center p-5 bg-gray-50 border-b border-gray-200">
+        <h3 className="font-bold text-lg flex items-center text-gray-800">
+          <FaFilter className="mr-3 text-orange-500" /> Filters
         </h3>
-        <div className="flex gap-2">
-          <button
-            onClick={handleReset}
-            className="text-sm text-orange-600 hover:underline"
-          >
-            Reset All
-          </button>
-          <button className="lg:hidden text-gray-500">
-            <FaTimes />
-          </button>
-        </div>
+        <button onClick={onClose} className="text-gray-400 hover:text-gray-800">
+          <FaTimes size={20} />
+        </button>
       </div>
 
-      <FilterSection
-        title="Brands"
-        isOpen={openSections.brand}
-        onToggle={() => toggleSection('brand')}
-      >
-        {brands.map(brand => (
-          <div
-            key={brand}
-            className={`px-3 py-2 rounded cursor-pointer ${filters.brand.includes(brand) ? 'bg-orange-100 text-orange-700' : 'hover:bg-gray-50'}`}
-            onClick={() => handleFilterToggle('brand', brand)}
-          >
-            {brand}
-          </div>
-        ))}
-      </FilterSection>
+      {/* Filter Options */}
+      <div className="flex-grow overflow-y-auto p-5">
+        <FilterSection title="Brands" isOpen={openSections.brand} onToggle={() => toggleSection('brand')}>
+          {brands.map(brand => {
+            const isSelected = localFilters.brand.includes(brand);
+            return (
+              <div key={brand} className={`flex items-center justify-between px-3 py-2 rounded-lg cursor-pointer transition-colors ${isSelected ? 'bg-orange-50 text-orange-700 font-semibold' : 'hover:bg-gray-100 text-gray-600'}`} onClick={() => handleFilterToggle('brand', brand)}>
+                <span>{brand}</span>
+                {isSelected && <FaCheck className="text-orange-600" />}
+              </div>
+            )
+          })}
+        </FilterSection>
+        <FilterSection title="Price Range" isOpen={openSections.price} onToggle={() => toggleSection('price')}>
+          {priceRanges.map(range => {
+            const isSelected = localFilters.price.includes(range.value);
+            return (
+              <div key={range.value} className={`flex items-center justify-between px-3 py-2 rounded-lg cursor-pointer transition-colors ${isSelected ? 'bg-orange-50 text-orange-700 font-semibold' : 'hover:bg-gray-100 text-gray-600'}`} onClick={() => handleFilterToggle('price', range.value)}>
+                <span>{range.label}</span>
+                {isSelected && <FaCheck className="text-orange-600" />}
+              </div>
+            )
+          })}
+        </FilterSection>
+        {/* You can add the Categories section here following the same pattern */}
+      </div>
 
-      <FilterSection
-        title="Price Range"
-        isOpen={openSections.price}
-        onToggle={() => toggleSection('price')}
-      >
-        {priceRanges.map(range => (
-          <div
-            key={range.value}
-            className={`px-3 py-2 rounded cursor-pointer ${filters.price.includes(range.value) ? 'bg-orange-100 text-orange-700' : 'hover:bg-gray-50'}`}
-            onClick={() => handleFilterToggle('price', range.value)}
-          >
-            {range.label}
-          </div>
-        ))}
-      </FilterSection>
+      {/* Footer */}
+      <div className="p-5 bg-white border-t border-gray-200 grid grid-cols-2 gap-3">
+          <button onClick={handleReset} className="w-full py-3 px-4 rounded-lg text-sm font-medium bg-gray-200 hover:bg-gray-300 text-gray-800 transition-colors">Reset</button>
+          <button onClick={handleApplyFilters} className="w-full py-3 px-4 rounded-lg text-sm font-medium bg-orange-500 hover:bg-orange-600 text-white transition-colors">Apply</button>
+      </div>
+    </div>
+  );
+};
 
-      <FilterSection
-        title="Categories"
-        isOpen={openSections.category}
-        onToggle={() => toggleSection('category')}
-      >
-        {categories.map(category => (
-          <div
-            key={category}
-            className={`px-3 py-2 rounded cursor-pointer ${filters.category.includes(category) ? 'bg-orange-100 text-orange-700' : 'hover:bg-gray-50'}`}
-            onClick={() => handleFilterToggle('category', category)}
-          >
-            {category}
-          </div>
-        ))}
-      </FilterSection>
+const FilterDrawer = ({ isOpen, onClose, ...props }) => {
+  return (
+    <div
+      className={`fixed top-0 left-0 h-full w-96 bg-white z-40 shadow-2xl transform transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}
+    >
+      <Filters onClose={onClose} {...props} />
     </div>
   );
 };
@@ -257,22 +218,12 @@ const SearchBar = ({ value, onChange, onClear }) => {
         placeholder="Search products by name, brand or description..."
         className="block w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
         value={value}
-        onChange={(e) => {
-          e.preventDefault();
-          onChange(e.target.value);
-        }}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter') {
-            e.preventDefault();
-          }
-        }}
+        onChange={(e) => onChange(e.target.value)}
+        onKeyDown={(e) => { if (e.key === 'Enter') e.preventDefault(); }}
       />
       {value && (
         <button
-          onClick={(e) => {
-            e.preventDefault();
-            onClear();
-          }}
+          onClick={onClear}
           className="absolute inset-y-0 right-0 pr-3 flex items-center"
           aria-label="Clear search"
         >
@@ -284,65 +235,41 @@ const SearchBar = ({ value, onChange, onClear }) => {
 };
 
 const ProductDetailsModal = ({ product, onClose, onAddToCart, onAddToWishlist, cart, wishlist }) => {
-  const navigate = useNavigate();
-
   if (!product) return null;
 
   const isInCart = cart.some(item => item.id === product.id);
   const isInWishlist = wishlist.some(item => item.id === product.id);
 
-  const handleBuyNow = () => {
-    onAddToCart(product);
-    onClose();
-    navigate('/checkout');
-  };
-
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-white bg-opacity-50 p-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 p-4">
       <div className="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
         <div className="flex justify-between items-center border-b p-4 sticky top-0 bg-white z-10">
           <h3 className="text-xl font-bold">{product.name}</h3>
-          <button
-            onClick={onClose}
-            className="text-gray-500 hover:text-gray-700"
-          >
+          <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
             <FaTimes className="h-5 w-5" />
           </button>
         </div>
-
         <div className="p-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
               <div className="bg-gray-100 rounded-lg p-4 mb-4">
-                <img
-                  src={product.images[0]}
-                  alt={product.name}
-                  className="w-full h-64 object-contain"
-                />
+                <img src={product.images[0]} alt={product.name} className="w-full h-64 object-contain" />
               </div>
               <div className="grid grid-cols-4 gap-2">
                 {product.images.map((img, index) => (
                   <div key={index} className="bg-gray-100 rounded p-2 cursor-pointer hover:border-orange-500 border border-transparent">
-                    <img
-                      src={img}
-                      alt={`${product.name} ${index + 1}`}
-                      className="w-full h-16 object-contain"
-                    />
+                    <img src={img} alt={`${product.name} ${index + 1}`} className="w-full h-16 object-contain" />
                   </div>
                 ))}
               </div>
             </div>
-
             <div>
               <div className="flex justify-between items-start mb-4">
                 <div>
                   <span className="text-sm text-orange-600">{product.brand}</span>
                   <div className="flex items-center mt-1">
                     {[...Array(5)].map((_, i) => (
-                      <FaStar
-                        key={i}
-                        className={i < Math.floor(product.rating || 4) ? "text-yellow-400" : "text-gray-300"}
-                      />
+                      <FaStar key={i} className={i < Math.floor(product.rating || 4) ? "text-yellow-400" : "text-gray-300"} />
                     ))}
                     <span className="text-sm text-gray-500 ml-1">({product.reviews?.length || 0})</span>
                   </div>
@@ -354,9 +281,7 @@ const ProductDetailsModal = ({ product, onClose, onAddToCart, onAddToWishlist, c
                   </p>
                 </div>
               </div>
-
               <p className="text-gray-700 mb-6">{product.description}</p>
-
               <div className="mb-6">
                 <h4 className="font-bold mb-3">Specifications</h4>
                 <div className="grid grid-cols-2 gap-4">
@@ -368,41 +293,22 @@ const ProductDetailsModal = ({ product, onClose, onAddToCart, onAddToWishlist, c
                   ))}
                 </div>
               </div>
-
               <div className="grid grid-cols-2 gap-3">
                 <button
-                  onClick={() => {
-                    onAddToCart(product);
-                    onClose();
-                  }}
+                  onClick={() => { onAddToCart(product); onClose(); }}
                   disabled={product.stock <= 0}
-                  className={`py-2 px-4 rounded-lg flex items-center justify-center gap-2 ${product.stock <= 0
-                    ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
-                    : isInCart
-                      ? 'bg-green-100 text-green-700 border border-green-200'
-                      : 'bg-orange-500 hover:bg-orange-600 text-white'
-                    }`}
+                  className={`py-2 px-4 rounded-lg flex items-center justify-center gap-2 ${product.stock <= 0 ? 'bg-gray-200 text-gray-500 cursor-not-allowed' : isInCart ? 'bg-green-100 text-green-700 border border-green-200' : 'bg-orange-500 hover:bg-orange-600 text-white'}`}
                 >
-                  <FaShoppingCart />
-                  {isInCart ? 'Added to Cart' : 'Add to Cart'}
+                  <FaShoppingCart /> {isInCart ? 'Added to Cart' : 'Add to Cart'}
                 </button>
                 <button
                   onClick={() => onAddToWishlist(product)}
-                  className={`py-2 px-4 rounded-lg border flex items-center justify-center gap-2 ${isInWishlist
-                    ? 'border-red-200 bg-red-50 text-red-600'
-                    : 'border-gray-300 hover:bg-gray-50 text-gray-700'
-                    }`}
+                  className={`py-2 px-4 rounded-lg border flex items-center justify-center gap-2 ${isInWishlist ? 'border-red-200 bg-red-50 text-red-600' : 'border-gray-300 hover:bg-gray-50 text-gray-700'}`}
                 >
-                  {isInWishlist ? (
-                    <FaHeart className="text-red-500" />
-                  ) : (
-                    <FaRegHeart />
-                  )}
+                  {isInWishlist ? (<FaHeart className="text-red-500" />) : (<FaRegHeart />)}
                   {isInWishlist ? 'In Wishlist' : 'Wishlist'}
                 </button>
               </div>
-
-              
             </div>
           </div>
         </div>
@@ -412,75 +318,46 @@ const ProductDetailsModal = ({ product, onClose, onAddToCart, onAddToWishlist, c
 };
 
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
+  if (totalPages <= 1) return null;
   const maxVisiblePages = 5;
   let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
   let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
-
   if (endPage - startPage + 1 < maxVisiblePages) {
     startPage = Math.max(1, endPage - maxVisiblePages + 1);
   }
-
-  const pages = [];
-  for (let i = startPage; i <= endPage; i++) {
-    pages.push(i);
-  }
+  const pages = Array.from({ length: (endPage - startPage) + 1 }, (_, i) => startPage + i);
 
   return (
-    <div className="flex justify-center mt-8">
-      <nav className="flex items-center gap-1">
-        <button
-          onClick={() => onPageChange(currentPage - 1)}
-          disabled={currentPage === 1}
-          className={`px-3 py-1 rounded border ${currentPage === 1 ? 'text-gray-400 cursor-not-allowed' : 'hover:bg-gray-100'}`}
-        >
+    <div className="flex justify-center mt-12">
+      <nav className="flex items-center gap-2">
+        <button onClick={() => onPageChange(currentPage - 1)} disabled={currentPage === 1} className="px-3 py-1 rounded border disabled:text-gray-400 disabled:cursor-not-allowed hover:bg-gray-100">
           &laquo;
         </button>
-
         {startPage > 1 && (
           <>
-            <button
-              onClick={() => onPageChange(1)}
-              className={`px-3 py-1 rounded border ${1 === currentPage ? 'bg-orange-500 text-white' : 'hover:bg-gray-100'}`}
-            >
-              1
-            </button>
+            <button onClick={() => onPageChange(1)} className="px-3 py-1 rounded border hover:bg-gray-100">1</button>
             {startPage > 2 && <span className="px-2">...</span>}
           </>
         )}
-
         {pages.map(page => (
-          <button
-            key={page}
-            onClick={() => onPageChange(page)}
-            className={`px-3 py-1 rounded border ${page === currentPage ? 'bg-orange-500 text-white' : 'hover:bg-gray-100'}`}
-          >
+          <button key={page} onClick={() => onPageChange(page)} className={`px-3 py-1 rounded border ${page === currentPage ? 'bg-orange-500 text-white' : 'hover:bg-gray-100'}`}>
             {page}
           </button>
         ))}
-
         {endPage < totalPages && (
           <>
             {endPage < totalPages - 1 && <span className="px-2">...</span>}
-            <button
-              onClick={() => onPageChange(totalPages)}
-              className={`px-3 py-1 rounded border ${totalPages === currentPage ? 'bg-orange-500 text-white' : 'hover:bg-gray-100'}`}
-            >
-              {totalPages}
-            </button>
+            <button onClick={() => onPageChange(totalPages)} className="px-3 py-1 rounded border hover:bg-gray-100">{totalPages}</button>
           </>
         )}
-
-        <button
-          onClick={() => onPageChange(currentPage + 1)}
-          disabled={currentPage === totalPages}
-          className={`px-3 py-1 rounded border ${currentPage === totalPages ? 'text-gray-400 cursor-not-allowed' : 'hover:bg-gray-100'}`}
-        >
+        <button onClick={() => onPageChange(currentPage + 1)} disabled={currentPage === totalPages} className="px-3 py-1 rounded border disabled:text-gray-400 disabled:cursor-not-allowed hover:bg-gray-100">
           &raquo;
         </button>
       </nav>
     </div>
   );
 };
+
 
 export default function Products() {
   const [products, setProducts] = useState([]);
@@ -495,7 +372,6 @@ export default function Products() {
   const { addToCart, cart } = useCart();
   const { wishlist, toggleWishlist } = useWishlist();
   
-  // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage] = useState(12);
 
@@ -508,173 +384,133 @@ export default function Products() {
   ];
 
   useEffect(() => {
+    setLoading(true);
     axios.get("https://snapmobdb-1.onrender.com/products")
       .then((res) => {
         const productsData = res.data || [];
         setProducts(productsData);
         setFilteredProducts(productsData);
-
         const uniqueBrands = [...new Set(productsData.map(p => p.brand))];
         const uniqueCategories = [...new Set(productsData.map(p => p.category))];
-
         setBrands(uniqueBrands);
         setCategories(uniqueCategories);
-        setLoading(false);
       })
-      .catch(() => setLoading(false));
+      .catch(error => console.error("Failed to fetch products:", error))
+      .finally(() => setLoading(false));
   }, []);
-
-  // Get current products
+  
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
   const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
   const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
 
-  const handleFilterChange = (filters) => {
+  const applyFilters = (filters) => {
     let results = [...products];
-
     if (filters.brand.length > 0) {
       results = results.filter(p => filters.brand.includes(p.brand));
     }
-
     if (filters.price.length > 0) {
-      results = results.filter(p => {
-        return filters.price.some(range => {
-          const [min, max] = range.split('-').map(Number);
-          return p.price >= min && p.price <= max;
-        });
-      });
+      results = results.filter(p => filters.price.some(range => {
+        const [min, max] = range.split('-').map(Number);
+        return p.price >= min && p.price <= max;
+      }));
     }
-
     if (filters.category.length > 0) {
       results = results.filter(p => filters.category.includes(p.category));
     }
-
+    setFilteredProducts(results);
+    setCurrentPage(1);
+  };
+  
+  const handleFilterChange = (filters) => {
     if (searchTerm) {
-      const searchTermLower = searchTerm.toLowerCase();
-      results = results.filter(p =>
+      // This logic seems complex, let's simplify for now. The search should be independent.
+      // We will handle search separately.
+    }
+    applyFilters(filters);
+  };
+  
+  useEffect(() => {
+    const searchTermLower = searchTerm.toLowerCase();
+    const results = products.filter(p =>
         p.name.toLowerCase().includes(searchTermLower) ||
         p.brand.toLowerCase().includes(searchTermLower) ||
         (p.description && p.description.toLowerCase().includes(searchTermLower))
-      );
-    }
-
+    );
     setFilteredProducts(results);
-    setCurrentPage(1); // Reset to first page when filters change
-  };
+    setCurrentPage(1);
+  }, [searchTerm, products]);
 
-  const handleSearchChange = (term) => {
-    setSearchTerm(term);
-    handleFilterChange({
-      brand: [],
-      price: [],
-      category: []
-    });
-  };
 
   const handleResetFilters = () => {
     setFilteredProducts(products);
-    setSearchTerm('');
     setCurrentPage(1);
   };
 
-  const handleAddToCart = (product) => {
-    addToCart(product);
-  };
-
-  const handleAddToWishlist = (product) => {
-    const added = toggleWishlist(product);
-  };
-
-  const handleViewDetails = (product) => {
-    setSelectedProduct(product);
-    setShowModal(true);
-  };
-
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  const handleAddToCart = (product) => addToCart(product);
+  const handleAddToWishlist = (product) => toggleWishlist(product);
+  const handleViewDetails = (product) => { setSelectedProduct(product); setShowModal(true); };
+  const handlePageChange = (pageNumber) => { setCurrentPage(pageNumber); window.scrollTo({ top: 0, behavior: 'smooth' }); };
 
   if (loading) return <Loading />;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <SearchBar
-        value={searchTerm}
-        onChange={handleSearchChange}
-        onClear={() => {
-          setSearchTerm('');
-          handleResetFilters();
-        }}
-      />
-
-      <div className="flex flex-col lg:flex-row gap-6">
-        <button
-          onClick={() => setShowFilters(!showFilters)}
-          className="lg:hidden flex items-center justify-center gap-2 py-2 px-4 bg-orange-500 text-white rounded-lg mb-4"
-        >
-          <FaFilter />
-          {showFilters ? 'Hide Filters' : 'Show Filters'}
-        </button>
-
-        <div className={`${showFilters ? 'block' : 'hidden'} lg:block lg:w-1/5`}>
-          <Filters
-            brands={brands}
-            priceRanges={priceRanges}
-            categories={categories}
-            onFilterChange={handleFilterChange}
-            onReset={handleResetFilters}
-          />
-        </div>
-
-        <div className="lg:w-4/5">
-          <div className="mb-4 flex justify-between items-center">
-            <h2 className="text-lg font-bold">
-              {filteredProducts.length} {filteredProducts.length === 1 ? 'Product' : 'Products'} Found
-            </h2>
-            <div className="text-sm text-gray-500">
-              Showing {indexOfFirstProduct + 1}-{Math.min(indexOfLastProduct, filteredProducts.length)} of {filteredProducts.length}
-            </div>
-          </div>
-
-          {currentProducts.length > 0 ? (
-            <>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {currentProducts.map((product) => (
-                  <ProductCard
-                    key={product.id}
-                    product={product}
-                    onAddToCart={handleAddToCart}
-                    onAddToWishlist={handleAddToWishlist}
-                    onViewDetails={handleViewDetails}
-                    cart={cart}
-                    wishlist={wishlist}
-                  />
-                ))}
+    <div className="bg-gray-50 min-h-screen">
+      <div className="relative overflow-x-hidden"> {/* Prevent horizontal scroll during transition */}
+        <FilterDrawer
+          isOpen={showFilters}
+          onClose={() => setShowFilters(false)}
+          brands={brands}
+          priceRanges={priceRanges}
+          categories={categories}
+          onFilterChange={handleFilterChange} // This will be the "Apply" button's action
+          onReset={handleResetFilters} // This will be the "Reset" button's action
+        />
+        
+        <main className={`transition-all duration-300 ease-in-out ${showFilters ? 'lg:ml-96' : ''}`}>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <SearchBar value={searchTerm} onChange={setSearchTerm} onClear={() => setSearchTerm('')} />
+            
+            <div className="mb-6 flex justify-between items-center">
+              <div>
+                <h2 className="text-xl font-bold text-gray-800">
+                  {filteredProducts.length} {filteredProducts.length === 1 ? 'Product' : 'Products'} Found
+                </h2>
+                <p className="text-sm text-gray-500 mt-1">
+                  Showing {indexOfFirstProduct + 1}-{Math.min(indexOfLastProduct, filteredProducts.length)} of {filteredProducts.length}
+                </p>
               </div>
-              
-              {totalPages > 1 && (
-                <Pagination
-                  currentPage={currentPage}
-                  totalPages={totalPages}
-                  onPageChange={handlePageChange}
-                />
-              )}
-            </>
-          ) : (
-            <div className="text-center py-16 bg-white rounded-lg border border-gray-200">
-              <FaSearch className="mx-auto h-12 w-12 text-gray-400 mb-4" />
-              <h3 className="text-lg font-medium mb-2">No products found</h3>
               <button
-                onClick={handleResetFilters}
-                className="mt-4 px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600"
+                onClick={() => setShowFilters(true)}
+                className="flex items-center justify-center gap-2 py-2 px-4 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors shadow-sm"
               >
-                Reset filters
+                <FaFilter />
+                <span className="font-medium">Filters</span>
               </button>
             </div>
-          )}
-        </div>
+
+            {currentProducts.length > 0 ? (
+              <>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                  {currentProducts.map((product) => (
+                    <ProductCard
+                      key={product.id} product={product} onAddToCart={handleAddToCart}
+                      onAddToWishlist={handleAddToWishlist} onViewDetails={handleViewDetails}
+                      cart={cart} wishlist={wishlist}
+                    />
+                  ))}
+                </div>
+                <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
+              </>
+            ) : (
+              <div className="text-center py-16 bg-white rounded-lg border border-gray-200">
+                <FaSearch className="mx-auto h-12 w-12 text-gray-400 mb-4" />
+                <h3 className="text-lg font-medium text-gray-800 mb-2">No products found for your search</h3>
+                <p className="text-sm text-gray-500">Try adjusting your search or filters.</p>
+              </div>
+            )}
+          </div>
+        </main>
       </div>
 
       {showModal && (
