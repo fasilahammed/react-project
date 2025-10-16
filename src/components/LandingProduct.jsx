@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { FiShoppingBag, FiChevronRight } from 'react-icons/fi';
 import { FaStar, FaRegHeart, FaHeart as FaSolidHeart } from 'react-icons/fa';
 import { motion } from 'framer-motion';
+
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
 import { toast } from 'react-hot-toast';
